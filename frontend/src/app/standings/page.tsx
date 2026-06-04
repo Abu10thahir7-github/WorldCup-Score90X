@@ -10,7 +10,7 @@ export default function StandingsPage() {
 
   return (
     <div className="mx-auto max-w-7xl space-y-8">
-      <SectionTitle title="Standings" description="Live group tables and overall rankings." />
+       
       {isError && <ErrorMessage />}
       {isLoading ? (
         <div className="h-[420px] rounded-3xl bg-slate-800/80" />

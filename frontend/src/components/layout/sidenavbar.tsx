@@ -18,6 +18,7 @@ import {
   Settings,
   ArrowRight,
   LayoutGrid,
+  Shield,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -39,7 +40,7 @@ export default function SideNavBar() {
       id: 'live-matches',
       label: 'Live Matches',
       icon: <Clock size={20} />,
-      badge: "Soon",
+      badge: 'Soon',
       badgeColor: 'red',
       href: '/live-matches',
     },
@@ -49,24 +50,24 @@ export default function SideNavBar() {
       icon: <Calendar size={20} />,
       href: '/upcoming',
     },
+    // {
+    //   id: 'world-cup',
+    //   label: 'World Cup 2026',
+    //   icon: <Trophy size={20} />,
+    //   badge: 'HOT',
+    //   badgeColor: 'purple',
+    //   href: '/world-cup-2026',
+    // },
     {
-      id: 'world-cup',
-      label: 'World Cup 2026',
-      icon: <Trophy size={20} />,
-      badge: 'HOT',
-      badgeColor: 'purple',
-      href: '/world-cup-2026',
-    },
-    {
-      id: 'groups',
-      label: 'Groups',
-      icon: <LayoutGrid  size={20} />,
-      href: '/groups',
+      id: 'standings',
+      label: 'Standings',
+      icon: <LayoutGrid size={20} />,
+      href: '/standings',
     },
     {
       id: 'teams',
       label: 'Teams',
-      icon: <PersonStanding size={20} />,
+      icon: <Shield  size={20} />,
       href: '/teams',
     },
     {
@@ -125,25 +126,25 @@ export default function SideNavBar() {
       x: 0,
       transition: {
         duration: 0.4,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
-  };
+  } as const;
 
   const badgeVariants = {
     hidden: { scale: 0 },
     visible: {
       scale: 1,
       transition: {
-        type: 'spring',
+        type: 'spring' as const,
         stiffness: 200,
         damping: 10,
       },
     },
-  };
+  } as const;
 
   return (
-    <div className="w-60 min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border-r border-slate-800 flex flex-col overflow-hidden">
+    <div className="w-60 min-h-screen bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 border-r border-slate-800 flex flex-col overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl" />
@@ -159,8 +160,8 @@ export default function SideNavBar() {
       >
         <div className="  text-center  ">
           <span className="text-3xl font-black text-white tracking-tight">Score</span>
-          <span className="text-3xl font-black bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-          90X
+          <span className="text-3xl font-black bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+            90X
           </span>
         </div>
         <p className="text-[10px] text-center text-slate-400  ">WORLD CUP 2026</p>
@@ -175,20 +176,25 @@ export default function SideNavBar() {
       >
         {navItems.map((item) => (
           <motion.div key={item.id} variants={itemVariants}>
-            <Link href={item.href}>
-              <motion.button
-                onClick={() => setActiveItem(item.id)}
-                className={`w-full relative flex items-center gap-4 px-4 py-2.5 rounded-xl transition-all duration-300 group ${
-                  activeItem === item.id
-                    ? 'bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white shadow-lg shadow-blue-500/20'
-                    : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'
-                }`}
+            <Link
+              href={item.href}
+              onClick={() => setActiveItem(item.id)}
+              className={`w-full relative block rounded-xl transition-all duration-300 group ${
+                activeItem === item.id
+                  ? 'bg-linear-to-r from-blue-600 via-purple-600 to-blue-700 text-white shadow-lg shadow-blue-500/20'
+                  : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'
+              }`}
+            >
+              <motion.div
+                className="w-full flex items-center gap-4 px-4 py-2.5"
                 whileHover={{ x: 4 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <span
-                  className={`flex-shrink-0 ${
-                    activeItem === item.id ? 'text-white' : 'text-slate-400 group-hover:text-blue-400'
+                  className={`shrink-0 ${
+                    activeItem === item.id
+                      ? 'text-white'
+                      : 'text-slate-400 group-hover:text-blue-400'
                   } transition-colors`}
                 >
                   {item.icon}
@@ -200,7 +206,7 @@ export default function SideNavBar() {
                     variants={badgeVariants}
                     initial="hidden"
                     animate="visible"
-                    className={`flex-shrink-0 flex items-center justify-center min-w-7 h-4 rounded-full text-[10px]   ${
+                    className={`shrink-0 flex items-center justify-center min-w-7 h-4 rounded-full text-[10px] ${
                       item.badgeColor === 'red'
                         ? 'bg-red-500 text-white'
                         : 'bg-purple-500 text-white'
@@ -209,7 +215,7 @@ export default function SideNavBar() {
                     {item.badge}
                   </motion.div>
                 )}
-              </motion.button>
+              </motion.div>
             </Link>
           </motion.div>
         ))}
@@ -223,7 +229,7 @@ export default function SideNavBar() {
         transition={{ duration: 0.6, delay: 0.8 }}
       >
         {/* Background with gradient and noise */}
-        <div className="absolute inset-0 bg-gradient-to-br from-red-900/40 via-purple-900/30 to-red-950/40 border border-red-800/30 rounded-2xl" />
+        <div className="absolute inset-0 bg-linear-to-br from-red-900/40 via-purple-900/30 to-red-950/40 border border-red-800/30 rounded-2xl" />
         <div
           className="absolute inset-0 opacity-20 rounded-2xl"
           style={{
@@ -234,14 +240,14 @@ export default function SideNavBar() {
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center text-center">
-
           <div className="mb-3">
             <p className="text-yellow-300 text-sm font-bold mb-1">FIFA WORLD CUP</p>
             <p className="text-white text-2xl font-black">2026</p>
           </div>
 
           <p className="text-slate-300 text-xs leading-snug mb-4">
-            11 JUNE - 19 JULY<br />
+            11 JUNE - 19 JULY
+            <br />
             USA • CANADA • MEXICO
           </p>
 

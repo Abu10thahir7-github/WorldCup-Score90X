@@ -25,12 +25,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <SideNavBar />
               </div>
 
-
-              {/* Mobile Overlay */}
-
-              {/* Main Content */}
               <div className="flex-1 flex flex-col overflow-hidden">
-    <Navbar />
+                <Navbar />
 
                 {/* Content Area */}
                 <div className="flex-1 overflow-y-auto">{children}</div>
