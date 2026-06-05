@@ -2,7 +2,8 @@ import {
   getWorldCupMatchesRepo,
   getWorldCupStandingsRepo,
   getWorldCupTeamsRepo,
-  getMatchDetailsRepo
+  getMatchDetailsRepo,
+  getWorldCupSingleTeamsRepo
 } from './worldcup.repository';
 
 import { mapMatch } from './worldcup.mapper';
@@ -19,6 +20,10 @@ export async function getWorldCupStandingsService() {
 
 export async function getWorldCupTeamsService() {
   return await getWorldCupTeamsRepo();
+}
+export async function getWorldCupSingleTeamsService(id: string) {
+  const singleTeam = await getWorldCupSingleTeamsRepo(id);
+  return singleTeam;
 }
 
 export async function getMatchDetailsService(id: string) {

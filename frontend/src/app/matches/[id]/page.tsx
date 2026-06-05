@@ -2,15 +2,17 @@
 import { SectionTitle } from '@/components/shared/section-title';
 import { useMatch } from '@/hooks/use-match';
 import { ErrorMessage } from '@/components/shared/error-message';
+import React from 'react';
 
 interface MatchDetailsPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function MatchDetailsPage({ params }: MatchDetailsPageProps) {
-  const { data: match, isError, isLoading } = useMatch(params.id);
+  const { id } = React.use(params);
+  const { data: match, isError, isLoading } = useMatch(id);
 
   if (isError) {
     return <ErrorMessage />;

@@ -26,6 +26,14 @@ export async function getWorldCupTeamsRepo() {
 
   return response.data.teams;
 }
+export async function getWorldCupSingleTeamsRepo(id: string) {
+  const response = await footballClient.get(
+    (`/teams/${id}`)
+  );
+
+
+  return response.data;
+}
 export async function getMatchDetailsRepo(id: string) {
   const response = await footballClient.get(`/matches/${id}`);
 

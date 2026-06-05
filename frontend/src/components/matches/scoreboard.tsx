@@ -10,7 +10,7 @@ export function ScoreBoard({ matches }: ScoreBoardProps) {
 
   const chartData = safeMatches.slice(0, 6).map((match) => ({
     label: `${match.homeTeam.name} vs ${match.awayTeam.name}`,
-    total: (match.score?.fullTime?.home ?? 0) + (match.score?.fullTime?.away ?? 0),
+    total: (match.score?.home ?? 0) + (match.score?.away ?? 0),
   }));
 
   return (

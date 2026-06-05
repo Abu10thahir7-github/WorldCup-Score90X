@@ -5,7 +5,14 @@ import {
   getWorldCupStandingsService,
   getWorldCupTeamsService,
   getMatchDetailsService,
+  getWorldCupSingleTeamsService,
 } from './worldcup.service';
+
+function getErrorMessage(error: unknown, defaultMessage: string) {
+  const message = error instanceof Error ? error.message : defaultMessage;
+  console.error(defaultMessage, error);
+  return message;
+}
 
 export async function getMatchesController(req: Request, res: Response) {
   try {
@@ -18,7 +25,7 @@ export async function getMatchesController(req: Request, res: Response) {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch matches',
+      message: getErrorMessage(error, 'Failed to fetch matches'),
     });
   }
 }
@@ -34,7 +41,7 @@ export async function getStandingsController(req: Request, res: Response) {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch standings',
+      message: getErrorMessage(error, 'Failed to fetch standings'),
     });
   }
 }
@@ -50,7 +57,25 @@ export async function getTeamsController(req: Request, res: Response) {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch teams',
+      message: getErrorMessage(error, 'Failed to fetch teams'),
+    });
+  }
+}
+export async function getSingleTeamController(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+    const SingleTeamId = Array.isArray(id) ? id[0] : id;
+
+    const data = await getWorldCupSingleTeamsService(SingleTeamId);
+
+    res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: getErrorMessage(error, 'Failed to fetch Single team'),
     });
   }
 }
@@ -69,7 +94,7 @@ export async function getMatchDetailsController(req: Request, res: Response) {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch match details',
+      message: getErrorMessage(error, 'Failed to fetch match details'),
     });
   }
 }

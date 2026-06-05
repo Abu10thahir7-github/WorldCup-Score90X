@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:5000/api/worldcup';
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL
+  ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/worldcup`
+  : 'http://localhost:5000/api/worldcup';
 
 export const axiosClient = axios.create({
   baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  timeout: 20000,
 });
 
 axiosClient.interceptors.response.use(
