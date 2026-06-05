@@ -43,7 +43,7 @@ function MiniGroupOverview() {
                         <img
                           src={entry.team.crest}
                           alt={`${entry.team.name} crest`}
-                          className="w-6 h-6 rounded-full object-cover"
+                          className="w-6 h-6 border   rounded-full object-cover"
                           onError={(e) => {
                             const img = e.currentTarget as HTMLImageElement;
                             img.style.display = 'none';

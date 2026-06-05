@@ -7,7 +7,7 @@ import { ScoreBoard } from '@/components/matches/scoreboard';
 import { SectionTitle } from '@/components/shared/section-title';
 import { useLiveMatches } from '@/hooks/use-live-matches';
 import { useMatches } from '@/hooks/use-matches';
-import LiveNowBanner from '@/components/ui/LiveNowBanner';
+import LiveNowBanner from '@/components/OverView.tsx/LiveNowBanner';
 import OverView from '@/app/overView/page';
 
 export default function HomePage() {
@@ -15,9 +15,9 @@ export default function HomePage() {
   const { data: scheduleData } = useMatches();
 
   return (
-   <div>
-    {/* <LiveNowBanner /> */}
-    <OverView />
-   </div>
+    <div>
+      {/* <LiveNowBanner /> */}
+      <OverView />
+    </div>
   );
 }

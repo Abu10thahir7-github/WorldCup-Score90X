@@ -1,43 +1,34 @@
-import LiveNowBanner from "@/components/ui/LiveNowBanner";
-import LiveMatchesMIniOverView from "@/components/ui/liveMatchesMIniOverView";
-import MinNewsUpdates from "@/components/ui/minNewsUpdates";
-import MiniGroupOverview from "@/components/ui/miniGroupOverview";
+import LiveNowBanner from '@/components/OverView.tsx/LiveNowBanner';
+import LiveMatchScoreStatus from '@/components/OverView.tsx/liveMatchScoreStatus';
+import LiveMatchesMIniOverView from '@/components/OverView.tsx/liveMatchesMIniOverView';
+import MinNewsUpdates from '@/components/OverView.tsx/minNewsUpdates';
+import MiniGroupOverview from '@/components/OverView.tsx/miniGroupOverview';
 
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#030712] text-white">
-      <div className="mx-auto max-w-[1800px] p-5">
-
+      <div className="mx-auto max-w-[1800px] space-y-2 p-5">
         {/* HERO + RIGHT SIDEBAR */}
-        <section className="grid gap-5 lg:grid-cols-[2fr_380px]">
-          <div className="flex flex-col space-y-3">
-
-           <LiveNowBanner />
-   <LiveMatchesMIniOverView />
+        <section className="grid gap-2 lg:grid-cols-[2fr_380px]">
+          <div className="flex flex-col space-y-2">
+            <LiveNowBanner />
+            <LiveMatchesMIniOverView />
           </div>
-          <div className="space-y-5">
-            {/* <LiveMatchWidget />
-            <MatchStats />
-            <TopScorers /> */}
-            <p>live</p>
-            <p>match</p>
-            <p>Score</p>
+          <div className="space-y-2">
+
+           <LiveMatchScoreStatus />
+
           </div>
         </section>
 
-        {/* MATCHES */}
-        {/* <section className="mt-5">
 
-        </section> */}
 
         {/* GROUPS + NEWS */}
-        <section className="mt-5 grid gap-5 lg:grid-cols-[1.3fr_1fr]">
-          {/* <GroupsOverview />
-          <NewsUpdates /> */}
+        <section className=" grid gap-2 lg:grid-cols-[1.3fr_1fr]">
+
           <MiniGroupOverview />
           <MinNewsUpdates />
         </section>
-
       </div>
     </main>
   );
