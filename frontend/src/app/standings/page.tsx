@@ -10,8 +10,8 @@ export default function StandingsPage() {
 
   return (
     <div className="mx-auto max-w-7xl space-y-8">
-       
-      {isError && <ErrorMessage />}
+
+      {isError && <ErrorMessage  />}
       {isLoading ? (
         <div className="h-[420px] rounded-3xl bg-slate-800/80" />
       ) : (

@@ -6,6 +6,7 @@ import {
   getWorldCupTeamsService,
   getMatchDetailsService,
   getWorldCupSingleTeamsService,
+  getPersonService,
 } from './worldcup.service';
 
 function getErrorMessage(error: unknown, defaultMessage: string) {
@@ -67,6 +68,24 @@ export async function getSingleTeamController(req: Request, res: Response) {
     const SingleTeamId = Array.isArray(id) ? id[0] : id;
 
     const data = await getWorldCupSingleTeamsService(SingleTeamId);
+
+    res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: getErrorMessage(error, 'Failed to fetch Single team'),
+    });
+  }
+}
+export async function getPersonController(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+    const PersonId = Array.isArray(id) ? id[0] : id;
+
+    const data = await getPersonService(PersonId);
 
     res.status(200).json({
       success: true,

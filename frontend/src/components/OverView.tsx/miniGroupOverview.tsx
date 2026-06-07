@@ -9,8 +9,8 @@ import { useStandings } from '@/hooks/use-standings';
 function MiniGroupOverview() {
   const { data, isLoading, error } = useStandings();
 
-  if (isLoading) return <div>Loading groups...</div>;
-  if (error) return <div>Failed to load groups</div>;
+  if (isLoading) return <div className='bg-slate-900/50 overflow-hidden p-4 rounded-xl'>Loading groups...</div>;
+  if (error) return <div className='bg-slate-900/50 overflow-hidden p-4 rounded-xl'>Failed to load groups</div>;
 
   const groups = data ?? [];
 

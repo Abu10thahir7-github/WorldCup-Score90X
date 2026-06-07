@@ -1,5 +1,5 @@
 import { axiosClient } from '@/lib/axios';
-import type { Match, StandingGroup, Team, TopScorer } from '@/types';
+import type { Match, Person, StandingGroup, Team, TopScorer } from '@/types';
 
 export const worldcupApi = {
   getMatches: async (): Promise<Match[]> => {
@@ -23,6 +23,15 @@ export const worldcupApi = {
   },
   getTeamById: async (teamId: string): Promise<Team> => {
     const response = await axiosClient.get<{ success: boolean; data: Team }>(`/teams/${teamId}`);
+    return response.data.data;
+  },
+  getPersonById: async (personId: string): Promise<Person> => {
+    
+    const response = await axiosClient.get<{ success: boolean; data: Person }>(
+      `/persons/${personId}`,
+    );
+    console.log('getPersonById' + response.data);
+
     return response.data.data;
   },
   getStandings: async (): Promise<StandingGroup[]> => {

@@ -44,7 +44,7 @@ export default function TeamCard({ team }: { team: Team }) {
             <h4 className="font-semibold">{team.squad?.length || 0}</h4>
           </div>
         </div>
-        <button className="w-full border border-white/10 p-2 rounded-xl      !text-xs text-indigo-700 hover:bg-violet-500 hover:text-white transition">
+        <button className="w-full border border-white/10 p-2 rounded-xl      !text-xs text-indigo-700 hover:bg-indigo-700 hover:text-white transition">
           View Details →
         </button>
       </div>

@@ -8,6 +8,7 @@ import TeamBanner from '@/public/assets/Images/2026banner.png';
 
 export default async function TeamsPage() {
   const teams = await getTeams();
+  
 
   return (
     <section className="min-h-screen space-y-2 bg-[#020817] text-white p-4">

@@ -8,6 +8,7 @@ import { MobileNavbar } from '@/components/layout/mobile-navbar';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Live', href: '/live-matches' },
+  { label: 'Matches', href: '/matches' },
   { label: 'Teams', href: '/teams' },
   { label: 'Standings', href: '/standings' },
   { label: 'Top Scorers', href: '/top-scorers' },

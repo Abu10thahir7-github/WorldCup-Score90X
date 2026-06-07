@@ -8,7 +8,7 @@ export default function MinNewsUpdates() {
       <div className='flex mb-2 flex-row justify-between'>
         <h1 className="text-sm     text-white mb-2">News & Updates</h1>
          <Link className="text-sm text-blue-700 flex flex-row gap-2" href='/news'>
-          View All Groups <ArrowRight size={16} className="mt-0.5" />{' '}
+          View All News <ArrowRight size={16} className="mt-0.5" />{' '}
         </Link>
       </div>
       <div className='space-y-2'>

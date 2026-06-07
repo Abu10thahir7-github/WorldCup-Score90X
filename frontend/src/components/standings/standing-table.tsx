@@ -90,7 +90,7 @@ export function StandingTable({ entries }: StandingTableProps) {
 
   if (!normalizedEntries.length) {
     return (
-      <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-8 text-center text-slate-400">
+      <div className="  p-8 text-center text-slate-400">
         No standings available yet.
       </div>
     );
