@@ -22,8 +22,7 @@ function formatDate(date: string) {
 
 export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
   const team = player.currentTeam;
-  const imageSrc =
-    team.crest || 'https://i.pinimg.com/736x/a1/3d/eb/a13debf6026286cbc805a9ae0f7aa6db.jpg';
+  const imageSrc = team.crest || 'https://i.pinimg.com/736x/f8/ac/88/f8ac888d041ec047923567995f7444fc.jpg';
 
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-950/80 p-6 shadow-soft">
