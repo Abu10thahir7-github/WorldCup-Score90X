@@ -82,7 +82,7 @@ export default function TeamPlayers({ team }: { team: Team }) {
   };
 
   return (
-    <div className="rounded-2xl border border-color bg-navy-blue p-5">
+    <div className="rounded-2xl border border-color bg-navy-blue p-3">
       {/* Header */}
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center space-x-2">

@@ -1,16 +1,14 @@
 import Image from 'next/image';
 import type { Team } from '@/types';
-import { Calendar, ChevronDown,  User, Users } from 'lucide-react';
+import { Calendar, ChevronDown, User, Users } from 'lucide-react';
 import ClubColors from './ClubColors';
- 
 
 type Player = Team['squad'][number];
 
 export default function SingleTeam({ team }: { team?: Team | null }) {
   return (
     <div className="  flex flex-col gap-2 relative  border border-color rounded-xl bg-navy-blue ">
-
-    <div className="relative   h-56 w-full overflow-hidden ">
+      <div className="relative   h-56 w-full overflow-hidden ">
         {/* Image Background with Fade Effect */}
         {team?.crest && (
           <>
@@ -96,7 +94,6 @@ export default function SingleTeam({ team }: { team?: Team | null }) {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

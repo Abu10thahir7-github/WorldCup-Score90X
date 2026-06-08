@@ -19,7 +19,7 @@
 HEX: #081226
 RGB: rgb(8, 18, 38)
 HSL: hsl(221, 65%, 9%) */
-.border-color{
+.border-color {
   border-color: #31415880;
 }
 html {
@@ -420,4 +420,11 @@ img {
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
   font-style: italic;
+}
+
+.player-profile-bg {
+  background-image: url('../public/assets/Images/playerprofilebg.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

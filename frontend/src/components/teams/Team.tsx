@@ -9,10 +9,8 @@ import TeamBanner from '@/public/assets/Images/2026banner.png';
 export default async function TeamsPage() {
   const teams = await getTeams();
 
-
   return (
     <section className="min-h-screen space-y-2 bg-[#020817] text-white p-4">
-
       {teams.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-400">No teams found</p>
@@ -20,15 +18,13 @@ export default async function TeamsPage() {
       ) : (
         <div className="grid xl:grid-cols-[1fr_320px] gap-2">
           {/* T0eams Grid */}
-          <div className='space-y-2'>
-               <Banner
-        image={TeamBanner}
-        title="FIFA World Cup 2026"
-        subtitle="Explore all teams competing in FIFA World Cup."
-        height="h-[200px]"
-      >
-
-      </Banner>
+          <div className="space-y-2">
+            <Banner
+              image={TeamBanner}
+              title="FIFA World Cup 2026"
+              subtitle="Explore all teams competing in FIFA World Cup."
+              height="h-[200px]"
+            ></Banner>
             <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
               {teams.map((team: Team) => (
                 <TeamCard key={team.id} team={team} />
