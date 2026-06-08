@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Menu, Search, X } from 'lucide-react';
 import { useUIStore } from '@/store/ui-store';
 import { MobileNavbar } from '@/components/layout/mobile-navbar';
+import BackButton from '../ui/BackButton';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -20,6 +21,9 @@ export function Navbar() {
   return (
     <header className="border-b border-slate-800 bg-slate-950/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <div className=" ">
+        <BackButton />
+      </div>
         <div className="relative w-full max-w-xs">
           <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
 

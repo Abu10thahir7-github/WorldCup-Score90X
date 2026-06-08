@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { StaticImageData } from 'next/image';
-
+ 
 interface BannerProps {
   title: string;
   subtitle?: string;
@@ -24,6 +24,7 @@ export default function Banner({
   return (
     <section className={`relative w-full overflow-hidden ${height}`}>
       {/* Background Image */}
+
       <Image
         src={image}
         alt={title}

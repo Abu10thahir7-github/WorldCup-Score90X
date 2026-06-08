@@ -29,8 +29,8 @@ export default function TeamPlayers({ team }: { team: Team }) {
 
   const PlayerCard = ({ player }: any) => (
     <Link href={`/players/${player.id}`}>
- 
-    <div className="group rounded-xl border border-white/5 bg-navy p-3 transition-all duration-300 hover:border-blue-500/40 hover:bg-[#0D1A33]">
+
+    <div className="group rounded-xl border border-color bg-slate-950/90 p-3 transition-all duration-300 hover:border-blue-500/40 hover:bg-[#0D1A33]">
       <div className="flex items-center gap-3">
         {/* Player Image */}
         <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-800">
@@ -82,17 +82,17 @@ export default function TeamPlayers({ team }: { team: Team }) {
   };
 
   return (
-    <div className="rounded-2xl border border-white/5 bg-navy-blue p-5">
+    <div className="rounded-2xl border border-color bg-navy-blue p-5">
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <h2 className="text-lg   text-white">Squad</h2>
 
           <p className="text-sm text-slate-400">{team?.squad?.length || 0} Players</p>
         </div>
       </div>
-
-      <div className="space-y-2">
+  <hr className='h-0.5   border-color w-full'/>
+      <div className="space-y-2 mt-2">
         {/* Goalkeepers */}
         <Section title="Goalkeepers" players={groupedPlayers.goalkeepers} color="#FACC15" />
 

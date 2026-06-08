@@ -1,24 +1,26 @@
 import Image from 'next/image';
 import type { Team } from '@/types';
-import { Calendar, ChevronDown, User, Users } from 'lucide-react';
+import { Calendar, ChevronDown,  User, Users } from 'lucide-react';
 import ClubColors from './ClubColors';
+ 
 
 type Player = Team['squad'][number];
 
 export default function SingleTeam({ team }: { team?: Team | null }) {
   return (
-    <div className="  flex flex-col gap-2   ">
-      <div className="relative rounded-xl h-56 w-full overflow-hidden bg-navy-blue">
+    <div className="  flex flex-col gap-2 relative  border border-color rounded-xl bg-navy-blue ">
+
+    <div className="relative   h-56 w-full overflow-hidden ">
         {/* Image Background with Fade Effect */}
         {team?.crest && (
           <>
             {/* Image Container - Left Side with Fade */}
-            <div className="absolute inset-0 right-0 w-1/2">
+            <div className="absolute  inset-0 right-0 w-1/2">
               <Image
                 src={team.crest}
                 alt={team.shortName}
                 fill
-                className="object-cover object-center"
+                className="object-cover rounded-xl object-center"
                 unoptimized
                 priority
               />
@@ -72,19 +74,19 @@ export default function SingleTeam({ team }: { team?: Team | null }) {
           </div>
           <hr className="border-slate-700/50" />
           <div className=" grid grid-cols-1 sm:grid-cols-2  text-sm  flex-wrap gap-2 ">
-            <div className=" flex space-x-1  border border-slate-700/50 p-2 rounded-xl   items-center">
+            <div className=" flex space-x-1  border border-slate-700/50 bg-slate-950/90 p-2 rounded-xl   items-center">
               <Calendar className="text-indigo-600" size={16} />
               <p className="text-slate-500">Founded:</p>
               <span className="   ">({team?.founded})</span>
             </div>
 
-            <div className=" flex   space-x-1   border border-slate-700/50 p-2 rounded-xl items-center">
+            <div className=" flex  bg-slate-950/90 space-x-1   border border-slate-700/50 p-2 rounded-xl items-center">
               <User className="text-indigo-600" size={16} />
               <p className="text-slate-500">Coach:</p>
               <span className="   ">{team?.coach?.name}</span>
             </div>
 
-            <div className=" flex  space-x-1   border border-slate-700/50 p-2 rounded-xl  items-center">
+            <div className=" flex bg-slate-950/90 space-x-1   border border-slate-700/50 p-2 rounded-xl  items-center">
               <Users className="text-indigo-600" size={16} />
               <p className="text-slate-500">Squad Size:</p>
               <span className="   ">{team?.squad?.length || 0}</span>

@@ -4,7 +4,7 @@ import { StandingsGuide } from '../OverView.tsx/standingGuide';
 import { TournamentInfo } from '../ui/tournamentInfoCard';
 import { useMatches } from '@/hooks/use-matches';
 import { ArrowRight } from 'lucide-react';
-
+ 
 interface StandingTableProps {
   entries: StandingGroup[];
 }
@@ -89,16 +89,13 @@ export function StandingTable({ entries }: StandingTableProps) {
   );
 
   if (!normalizedEntries.length) {
-    return (
-      <div className="  p-8 text-center text-slate-400">
-        No standings available yet.
-      </div>
-    );
+    return <div className="  p-8 text-center text-slate-400">No standings available yet.</div>;
   }
 
   return (
     <div className="w-full flex gap-2 p-3.5">
       <div className="">
+
         <h3 className="text-2xl font-bold">Group Standing</h3>
         <p>FIFA World Cup 2026 </p>
         <div className="py-4 flex flex-wrap gap-3">
@@ -128,7 +125,9 @@ export function StandingTable({ entries }: StandingTableProps) {
                 <div className="border-b border-slate-800 bg-slate-950/90 px-6 py-4">
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-sm   text-white">{group.group}</p>
-                    <a className="text-xs flex align-middle items-center    gap-1  text-indigo-500">View Group  <ArrowRight size={13} /></a>
+                    <a className="text-xs flex align-middle items-center    gap-1  text-indigo-500">
+                      View Group <ArrowRight size={13} />
+                    </a>
                   </div>
                 </div>
 

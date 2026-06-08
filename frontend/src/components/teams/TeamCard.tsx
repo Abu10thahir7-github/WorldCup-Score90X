@@ -7,8 +7,8 @@ import { CalendarDays, CalendarDaysIcon, Users } from 'lucide-react';
 
 export default function TeamCard({ team }: { team: Team }) {
   return (
-    <Link href={`/teams/${team.id}`}>
-      <div className="rounded-2xl border border-white/10 bg-[#081226] p-5 hover:bg-slate-800/50  transition cursor-pointer h-full space-y-2 flex flex-col justify-between">
+
+      <div className="rounded-2xl border border-white/10 bg-[#081226] p-5 hover:bg-slate-800/50  transition   h-full space-y-2 flex flex-col justify-between">
 
           <div className="flex gap-4">
             {team.crest && (
@@ -30,7 +30,7 @@ export default function TeamCard({ team }: { team: Team }) {
             </div>
           </div>
 
-        <div className="flex   p-4   items-center justify-between">
+        <div className="flex  rounded-xl p-4   items-center justify-between">
           {team.founded && (
             <div className="flex flex-col items-center justify-center ">
               <CalendarDaysIcon className="text-indigo-600" size={23} />
@@ -44,10 +44,11 @@ export default function TeamCard({ team }: { team: Team }) {
             <h4 className="font-semibold">{team.squad?.length || 0}</h4>
           </div>
         </div>
-        <button className="w-full border border-white/10 p-2 rounded-xl      !text-xs text-indigo-700 hover:bg-indigo-700 hover:text-white transition">
+        <Link href={`/teams/${team.id}`}>
+        <button className="w-full border border-white/10 p-2 rounded-xl cursor-pointer bg-slate-950/90    !text-xs text-indigo-700 hover:bg-indigo-700 hover:text-white transition">
           View Details →
         </button>
+        </Link>
       </div>
-    </Link>
   );
 }
