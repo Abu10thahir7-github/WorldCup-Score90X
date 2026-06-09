@@ -119,7 +119,7 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
             <p className="uppercase mt-5 text-slate-500 flex gap-2 text-xs">
               <CircleAlertIcon size={15} /> Last updated: {formatLastUpdated(player.lastUpdated)}
             </p>
- 
+
           </div>
         </div>
       </div>{' '}

@@ -6,6 +6,7 @@ import { ErrorMessage } from '@/components/shared/error-message';
 import { usePerson } from '@/hooks/use-person';
 import PlayerProfileCard from '@/components/players/PlayerProfileCard';
 import PlayerCurrectTeam from '@/components/players/PlayerCurrectTeam';
+import PlayerInformation from '@/components/players/PlayerInformation';
 
 interface PlayerDetailsPageProps {
   params: {
@@ -16,7 +17,7 @@ interface PlayerDetailsPageProps {
 export default function PlayerDetailsPage({ params }: PlayerDetailsPageProps) {
   const { id } = React.use(params);
   const { data: player, isError, isLoading } = usePerson(id);
- 
+
   if (isError) {
     return <ErrorMessage />;
   }
@@ -34,6 +35,7 @@ export default function PlayerDetailsPage({ params }: PlayerDetailsPageProps) {
       <div className="w-[80%] space-y-2">
         <PlayerProfileCard player={player} />
         <PlayerCurrectTeam player={player} />
+        <PlayerInformation player={player} />
       </div>
       <div className="team-info space-y-2 h-fit top-2.5 sticky w-[25%]"></div>
     </div>
