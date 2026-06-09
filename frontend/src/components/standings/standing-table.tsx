@@ -4,7 +4,8 @@ import { StandingsGuide } from '../OverView.tsx/standingGuide';
 import { TournamentInfo } from '../ui/tournamentInfoCard';
 import { useMatches } from '@/hooks/use-matches';
 import { ArrowRight } from 'lucide-react';
- 
+import Link from 'next/link';
+
 interface StandingTableProps {
   entries: StandingGroup[];
 }
@@ -161,7 +162,10 @@ export function StandingTable({ entries }: StandingTableProps) {
                                 img.style.display = 'none';
                               }}
                             />
+                            <Link href={`/teams/${entry.team.id}`} className="underline">
+
                             <span className="truncate">{entry.team.name}</span>
+                            </Link>
                           </div>
                         </td>
                         <td className="px-2 py-4 text-slate-300">{entry.playedGames}</td>

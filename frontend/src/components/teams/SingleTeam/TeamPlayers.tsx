@@ -4,10 +4,9 @@ import Image from 'next/image';
 import { useMemo } from 'react';
 import type { Team } from '@/types';
 import Link from 'next/link';
+import { ChevronRight, User2Icon } from 'lucide-react';
 
 export default function TeamPlayers({ team }: { team: Team }) {
-
-
   const groupedPlayers = useMemo(() => {
     return {
       goalkeepers: team?.squad?.filter((p) => p.position?.toLowerCase() === 'goalkeeper'),
@@ -28,39 +27,36 @@ export default function TeamPlayers({ team }: { team: Team }) {
   }, [team]);
 
   const PlayerCard = ({ player }: any) => (
-    <Link href={`/players/${player.id}`}>
 
-    <div className="group rounded-xl border border-color bg-slate-950/90 p-3 transition-all duration-300 hover:border-blue-500/40 hover:bg-[#0D1A33]">
-      <div className="flex items-center gap-3">
-        {/* Player Image */}
-        <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-800">
-          <Image
-            src='https://i.pinimg.com/736x/a1/3d/eb/a13debf6026286cbc805a9ae0f7aa6db.jpg'
-            alt={player.name}
-            fill
-            className="object-cover"
-            unoptimized
-          />
-        </div>
+      <div className="group rounded-xl border border-color bg-slate-950/90 p-3 transition-all duration-300 hover:border-blue-500/40 hover:bg-[#0D1A33]">
+        <div className="flex items-center  gap-3">
+          {/* Player Image */}
+          <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-800">
+            <User2Icon className="text-slate-500 items-center justify-center w-full h-full" />
+          </div>
 
-        {/* Player Details */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start gap-2">
+          {/* Player Details */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start gap-2">
+              <div className="min-w-0">
+                <h4 className="truncate text-sm font-semibold text-white">{player.name}</h4>
 
+                <p className="text-xs text-slate-400">{player.dateOfBirth}</p>
+              </div>
+            </div>
 
-            <div className="min-w-0">
-              <h4 className="truncate text-sm font-semibold text-white">{player.name}</h4>
-
-              <p className="text-xs text-slate-400">{player.dateOfBirth}</p>
+            <div className="mt-2 flex items-center justify-between gap-2 text-xs text-slate-500">
+              <span>{player.nationality}</span>
+              <Link className='flex items-center' href={`/players/${player.id}`}>
+                <span className="text-indigo-500"> Profile</span>
+            <ChevronRight className="text-indigo-500" size={16} />
+          </Link>
             </div>
           </div>
 
-          <div className="mt-2 flex items-center gap-2 text-xs text-slate-500">
-            <span>{player.nationality}</span>
-          </div>
         </div>
       </div>
-    </div></Link>
+
   );
 
   const Section = ({ title, players, color }: { title: string; players: any[]; color: string }) => {
@@ -91,7 +87,7 @@ export default function TeamPlayers({ team }: { team: Team }) {
           <p className="text-sm text-slate-400">{team?.squad?.length || 0} Players</p>
         </div>
       </div>
-  <hr className='h-0.5   border-color w-full'/>
+      <hr className="h-0.5   border-color w-full" />
       <div className="space-y-2 mt-2">
         {/* Goalkeepers */}
         <Section title="Goalkeepers" players={groupedPlayers.goalkeepers} color="#FACC15" />
