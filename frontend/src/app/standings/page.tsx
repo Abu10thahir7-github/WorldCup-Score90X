@@ -7,6 +7,7 @@ import { ErrorMessage } from '@/components/shared/error-message';
 
 export default function StandingsPage() {
   const { data, isError, isLoading } = useStandings();
+console.log(data);
 
   return (
     <div className="mx-auto max-w-7xl space-y-8">

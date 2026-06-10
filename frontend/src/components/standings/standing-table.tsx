@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Match, StandingGroup } from '@/types';
+
 import { StandingsGuide } from '../OverView.tsx/standingGuide';
 import { TournamentInfo } from '../ui/tournamentInfoCard';
 import { useMatches } from '@/hooks/use-matches';
@@ -36,17 +37,16 @@ export function StandingTable({ entries }: StandingTableProps) {
     [normalizedEntries, selectedStage],
   );
 
-  const { data: matches = [] } = useMatches();
+  const { data: match = [] } = useMatches();
 
-  const matchesForStage = useMemo(
-    () =>
-      matches.filter((match) =>
-        String(match.round ?? '')
-          .toLowerCase()
-          .includes(String(selectedStage ?? '').toLowerCase()),
-      ),
-    [matches, selectedStage],
-  );
+  const matchesForStage = useMemo(() => {
+    // Backend /matches payload doesn't include round/events/venue; keep standings table safe.
+    // If a match already has round (later enhancements), we can filter by stage.
+    return match.filter((match: any) => {
+      const round = String(match?.round ?? '');
+      return round.toLowerCase().includes(String(selectedStage ?? '').toLowerCase());
+    });
+  }, [match, selectedStage]);
 
   const standingsStageStats = useMemo(() => {
     const totalPlayedGames = filteredEntries.reduce(
@@ -67,25 +67,39 @@ export function StandingTable({ entries }: StandingTableProps) {
     };
   }, [filteredEntries]);
 
-  const countCardEvents = (events: Match['events'], cardRegex: RegExp) =>
-    events?.reduce(
-      (count, event) =>
-        count + (cardRegex.test(event.type) || cardRegex.test(event.description) ? 1 : 0),
+  const countCardEvents = (
+    events: Match['score'] extends never ? never : any,
+    cardRegex: RegExp,
+  ) => {
+    if (!events || !Array.isArray(events)) return 0;
+    return events.reduce(
+      (count: number, event: any) =>
+        count +
+        (cardRegex.test(String(event?.type ?? '')) ||
+        cardRegex.test(String(event?.description ?? ''))
+          ? 1
+          : 0),
       0,
-    ) ?? 0;
+    );
+  };
 
   const matchesPlayed = matchesForStage.length || standingsStageStats.matchesPlayed;
   const goalsScored =
     matchesForStage.length > 0
-      ? matchesForStage.reduce((sum, match) => sum + match.score.home + match.score.away, 0)
+      ? matchesForStage.reduce(
+          (sum, match: any) =>
+            sum + (match?.score?.fullTime?.home ?? 0) + (match?.score?.fullTime?.away ?? 0),
+          0,
+        )
       : standingsStageStats.goalsScored;
+
   const avgGoalsPerMatch = matchesPlayed > 0 ? Number((goalsScored / matchesPlayed).toFixed(1)) : 0;
   const yellowCards = matchesForStage.reduce(
-    (sum, match) => sum + countCardEvents(match.events, /yellow/i),
+    (sum, match: any) => sum + countCardEvents(match?.events, /yellow/i),
     0,
   );
   const redCards = matchesForStage.reduce(
-    (sum, match) => sum + countCardEvents(match.events, /red/i),
+    (sum, match: any) => sum + countCardEvents(match?.events, /red/i),
     0,
   );
 
@@ -96,7 +110,6 @@ export function StandingTable({ entries }: StandingTableProps) {
   return (
     <div className="w-full flex gap-2 p-3.5">
       <div className="">
-
         <h3 className="text-2xl font-bold">Group Standing</h3>
         <p>FIFA World Cup 2026 </p>
         <div className="py-4 flex flex-wrap gap-3">
@@ -163,8 +176,7 @@ export function StandingTable({ entries }: StandingTableProps) {
                               }}
                             />
                             <Link href={`/teams/${entry.team.id}`} className="underline">
-
-                            <span className="truncate">{entry.team.name}</span>
+                              <span className="truncate">{entry.team.name}</span>
                             </Link>
                           </div>
                         </td>

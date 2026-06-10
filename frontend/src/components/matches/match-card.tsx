@@ -1,50 +1,110 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import type { Match } from '@/types';
+import Image from 'next/image';
+import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 interface MatchCardProps {
-  match: Match;
+  match: any;
 }
 
 export function MatchCard({ match }: MatchCardProps) {
+  const matchDate = new Date(match.utcDate);
+
+  const formattedDate = matchDate.toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+
+  const formattedTime = matchDate.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+
+  const homeScore = match.score?.fullTime?.home;
+  const awayScore = match.score?.fullTime?.away;
+
   return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 transition hover:border-brand-400/30 hover:shadow-soft">
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-400">{match.round}</p>
-          <h3 className="mt-3 text-xl font-semibold text-white">
-            {match.homeTeam.name} vs {match.awayTeam.name}
-          </h3>
-        </div>
-        <p className="rounded-2xl bg-slate-950 px-4 py-2 text-sm font-semibold text-slate-200">
-          {match.status === 'live' ? 'Live' : 'Upcoming'}
-        </p>
+   <Link href={`/matches/${match.id}`}>
+  <div className="grid grid-cols-[180px_1fr_140px] items-center gap-6 rounded-2xl border border-slate-800 bg-[#081226] p-5 hover:border-blue-500/30 transition-all">
+
+    {/* Date & Time */}
+    <div className="space-y-2">
+      <div className="flex items-center gap-2 text-sm text-slate-300">
+        <Calendar size={14} />
+        <span>{formattedDate}</span>
       </div>
-      <div className="mt-6 grid gap-3 rounded-3xl bg-slate-950/70 p-4 sm:grid-cols-2">
-        <div>
-          <p className="text-sm text-slate-400">Kick-off</p>
-          <p className="mt-2 text-base font-medium text-white">
-            {new Date(match.kickOff).toLocaleString()}
-          </p>
-        </div>
-        <div>
-          <p className="text-sm text-slate-400">Venue</p>
-          <p className="mt-2 text-base font-medium text-white">{match.venue}</p>
-        </div>
-      </div>
-      <div className="mt-6 flex items-center justify-between gap-4">
-        <Link
-          href={`/matches/${match.id}`}
-          className="inline-flex items-center gap-2 rounded-full bg-brand-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-brand-400"
-        >
-          Match details
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-        <div className="text-right text-sm text-slate-400">
-          <p>{match.homeTeam.name}</p>
-          <p>{match.awayTeam.name}</p>
-        </div>
+
+      <div className="flex items-center gap-2 text-sm text-slate-400">
+        <Clock size={14} />
+        <span>{formattedTime}</span>
       </div>
     </div>
+
+    {/* Teams */}
+    <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6">
+
+      {/* Home */}
+      <div className="flex items-center gap-3">
+        <Image
+          src={match.homeTeam.crest}
+          alt={match.homeTeam.name}
+          width={56}
+          height={56}
+          className="h-14 w-14 object-contain"
+          unoptimized
+        />
+
+        <h3 className="font-semibold text-white">
+          {match.homeTeam.name}
+        </h3>
+      </div>
+
+      {/* Score */}
+      <div className="text-center min-w-[90px]">
+        {homeScore !== null && awayScore !== null ? (
+          <>
+            <div className="text-3xl font-bold text-white">
+              {homeScore} : {awayScore}
+            </div>
+            <p className="text-xs text-slate-500">FULL TIME</p>
+          </>
+        ) : (
+          <>
+            <div className="text-2xl font-bold text-white">VS</div>
+            <p className="text-xs text-slate-500">Scheduled</p>
+          </>
+        )}
+      </div>
+
+      {/* Away */}
+      <div className="flex items-center justify-end gap-3">
+        <h3 className="text-right font-semibold text-white">
+          {match.awayTeam.name}
+        </h3>
+
+        <Image
+          src={match.awayTeam.crest}
+          alt={match.awayTeam.name}
+          width={56}
+          height={56}
+          className="h-14 w-14 object-contain"
+          unoptimized
+        />
+      </div>
+    </div>
+
+    {/* Details */}
+    <div className="flex justify-end">
+      <span className="flex items-center gap-2 text-sm font-medium text-blue-400">
+        Match Details
+        <ArrowRight
+          size={16}
+          className="transition-transform group-hover:translate-x-1"
+        />
+      </span>
+    </div>
+
+  </div>
+</Link>
   );
 }

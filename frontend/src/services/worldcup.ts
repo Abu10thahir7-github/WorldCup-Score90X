@@ -6,17 +6,18 @@ export const worldcupApi = {
     const response = await axiosClient.get<{ success: boolean; data: Match[] }>('/matches');
     return response.data.data;
   },
-  getLiveMatches: async (): Promise<Match[]> => {
-    const response = await axiosClient.get<{ success: boolean; data: Match[] }>('/matches/live');
-    return response.data.data;
-  },
 
-  getMatchById: async (matchId: string): Promise<Match> => {
-    const response = await axiosClient.get<{ success: boolean; data: Match }>(
-      `/matches/${matchId}`,
-    );
-    return response.data.data;
-  },
+  // getLiveMatches: async (): Promise<Match[]> => {
+  //   const response = await axiosClient.get<{ success: boolean; data: Match[] }>('/matches/live');
+  //   return response.data.data;
+  // },
+  // getMatchById: async (matchId: string): Promise<Match> => {
+  //   const response = await axiosClient.get<{ success: boolean; data: Match }>(
+  //     `/matches/${matchId}`,
+  //   );
+  //   return response.data.data;
+  // },
+
   getTeams: async (): Promise<Team[]> => {
     const response = await axiosClient.get<{ success: boolean; data: Team[] }>('/teams');
     return response.data.data;
@@ -26,7 +27,6 @@ export const worldcupApi = {
     return response.data.data;
   },
   getPersonById: async (personId: string): Promise<Person> => {
-    
     const response = await axiosClient.get<{ success: boolean; data: Person }>(
       `/persons/${personId}`,
     );
