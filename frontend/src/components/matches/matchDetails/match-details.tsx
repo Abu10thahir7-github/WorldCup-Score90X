@@ -1,5 +1,5 @@
 import MatchCountdown from '@/components/ui/CountDown';
-import { Calendar, Clock, Trophy, Flag, Users, MapPin } from 'lucide-react';
+import { Calendar, Clock, Trophy, Flag, Users, MapPin, ClipboardPen } from 'lucide-react';
 import Image from 'next/image';
 interface MatchDetailsProps {
   match: any;
@@ -17,18 +17,7 @@ export function MatchDetails({ match }: MatchDetailsProps) {
 
   const matchDate = new Date(match.utcDate);
 
-  const formattedDate = matchDate.toLocaleDateString('en-GB', {
-    weekday: 'short',
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  });
 
-  const formattedTime = matchDate.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
 
   const statusConfig = {
     TIMED: {
@@ -68,90 +57,13 @@ export function MatchDetails({ match }: MatchDetailsProps) {
   return (
     <div className="mx-auto max-w-7xl space-y-6">
       {/* HERO */}
-      <div className="overflow-hidden match-details-hero rounded-3xl border border-slate-800 bg-[#081226]">
-        <div className="py-6">
-          <div className=" gap-2  rounded-full bg-blue-600/20 px-4 py-2 text-xs font-medium text-blue-400 flex justify-center w-fit m-auto mb-3">
-            <p className="">{match.stage.replaceAll('_', ' ')}</p>•
-            <p className="  ">{match.group.replaceAll('_', ' ')}</p>•
-            <p className="  ">MATCH DAY {match.matchday}</p>
-          </div>
 
-          <div className="grid items-center gap-8 md:grid-cols-3">
-            {/* HOME */}
-            <div className="text-center">
-              <Image
-                src={match.homeTeam.crest}
-                alt={match.homeTeam.name}
-                width={120}
-                height={120}
-                className="mx-auto"
-                unoptimized
-              />
-
-              <h2 className="mt-4 text-2xl font-bold text-white">{match.homeTeam.name}</h2>
-
-              <p className="text-slate-400 text-sm">{match.homeTeam.shortName}</p>
-            </div>
-
-            {/* CENTER */}
-            <div className="text-center ">
-              <div className="text-center">
-                <p className=" text-sm text-white">{formattedDate}</p>
-
-                <div className=" ">
-                  <h1 className="text-2xl font-bold text-white tracking-tight">
-                    {formattedTime.split(' ')[0]} {formattedTime.split(' ')[1]}
-                  </h1>
-                </div>
-              </div>
-
-              <div className="">
-                {match.score.fullTime.home !== null ? (
-                  <h1 className="text-6xl font-black text-white">
-                    {match.score.fullTime.home}
-                    <span className="mx-4">:</span>
-                    {match.score.fullTime.away}
-                  </h1>
-                ) : (
-                  <h1 className="text-xl font-medium text-white">VS</h1>
-                )}
-              </div>
-
-              <span
-                className={`inline-flex items-center rounded-full px-4 py-1 text-xs font-semibold ${currentStatus?.className}`}
-              >
-                {currentStatus?.label || match.status}
-              </span>
-              <div className="opacity-70">
-                <MatchCountdown kickOff={match.utcDate} />
-              </div>
-            </div>
-
-            {/* AWAY */}
-            <div className="text-center">
-              <Image
-                src={match.awayTeam.crest}
-                alt={match.awayTeam.name}
-                width={120}
-                height={120}
-                className="mx-auto"
-                unoptimized
-              />
-
-              <h2 className="mt-4 text-2xl font-bold text-white">{match.awayTeam.name}</h2>
-
-              <p className="text-slate-400 text-sm">{match.awayTeam.shortName}</p>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* INFO GRID */}
       <div className="grid gap-2 lg:grid-cols-2">
         {/* MATCH INFO */}
-        <div className="rounded-xl border border-slate-800 bg-[#081226]  px-2">
-
-          <h3 className="mb-2 p-2 flex items-center gap-2 text-lg font-semibold text-white">
+        <div className="rounded-xl border border-slate-800 bg-navy-blue h-[100%]  px-2">
+          <h3 className="mb-2 p-2 flex items-center gap-2 text-lg font-medium text-white">
             <Flag size={17} />
             Match Information
           </h3>
@@ -168,128 +80,74 @@ export function MatchDetails({ match }: MatchDetailsProps) {
 
             <InfoRow label="Status" value={match.status} />
 
-            <InfoRow label="Updated" value={new Date(match.lastUpdated).toLocaleString()} />
+            <InfoRow label="Last Updated" value={new Date(match.lastUpdated).toLocaleString()} />
           </div>
         </div>
 
-        <div className="rounded-3xl border border-slate-800 bg-[#081226] p-6">
-          
-          <div>
-            <h3 className="mb-6 flex items-center gap-2 text-xl font-semibold text-white">
-              <Trophy size={20} />
+        <div className="rounded-xl space-y-1  ">
+          {/* SCORE */}
+          <div className="rounded-xl border border-slate-800 bg-navy-blue p-2 h-fit">
+            <h3 className=" p-1 flex items-center gap-2 text-lg font-medium text-white">
+              <ClipboardPen size={17} /> Score
+            </h3>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-2xl bg-slate-900 p-2 text-center">
+                <p className="text-slate-400 text-xs">Full Time</p>
+
+                <h2 className=" text-2xl font-bold text-white">
+                  {match.score.fullTime.home ?? '-'}:{match.score.fullTime.away ?? '-'}
+                </h2>
+              </div>
+
+              <div className="rounded-2xl bg-slate-900 p-2 text-center">
+                <p className="text-slate-400 text-xs">Half Time</p>
+
+                <h2 className=" text-2xl font-bold text-white">
+                  {match.score.halfTime.home ?? '-'}:{match.score.halfTime.away ?? '-'}
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div className="rounded-xl border border-slate-800 bg-navy-blue p-2 h-fit">
+            <h3 className=" p-1 flex items-center gap-2 text-lg font-medium text-white">
+              <Trophy size={17} />
               Competition Details
             </h3>
-            <div className="flex gap-5">
+
+            <div className="flex gap-5 ">
               <Image
                 src={match.competition.emblem}
                 alt={match.competition.name}
                 width={90}
                 height={90}
                 unoptimized
+                className="object-cover bg-white rounded-2xl p-2"
               />
 
-              <div>
-                <h4 className="text-2xl font-bold text-white">{match.competition.name}</h4>
+              <div className="w-full">
+                <h4 className="text-lg  font-medium text-white">{match.competition.name}</h4>
 
-                <p className="text-slate-400">Code: {match.competition.code}</p>
-
-                <p className="text-slate-400">Type: {match.competition.type}</p>
-
-                <p className="text-slate-400">Area: {match.area.name}</p>
-              </div>
-            </div>{' '}
-
-          </div>
-        </div>
-
-        {/* HOME TEAM */}
-        <div className="rounded-3xl border border-slate-800 bg-[#081226] p-6">
-          <h3 className="mb-5 text-xl font-semibold text-white">Home Team</h3>
-
-          <div className="flex items-center gap-4">
-            <Image
-              src={match.homeTeam.crest}
-              alt={match.homeTeam.name}
-              width={80}
-              height={80}
-              unoptimized
-            />
-
-            <div>
-              <h4 className="text-xl font-bold text-white">{match.homeTeam.name}</h4>
-
-              <p className="text-slate-400">{match.homeTeam.shortName}</p>
-
-              <p className="text-slate-400">{match.homeTeam.tla}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* AWAY TEAM */}
-        <div className="rounded-3xl border border-slate-800 bg-[#081226] p-6">
-          <h3 className="mb-5 text-xl font-semibold text-white">Away Team</h3>
-
-          <div className="flex items-center gap-4">
-            <Image
-              src={match.awayTeam.crest}
-              alt={match.awayTeam.name}
-              width={80}
-              height={80}
-              unoptimized
-            />
-
-            <div>
-              <h4 className="text-xl font-bold text-white">{match.awayTeam.name}</h4>
-
-              <p className="text-slate-400">{match.awayTeam.shortName}</p>
-
-              <p className="text-slate-400">{match.awayTeam.tla}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* SCORE */}
-        <div className="rounded-3xl border border-slate-800 bg-[#081226] p-6">
-          <h3 className="mb-6 text-xl font-semibold text-white">Score</h3>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="rounded-2xl bg-slate-900 p-5 text-center">
-              <p className="text-slate-400">Full Time</p>
-
-              <h2 className="mt-2 text-4xl font-bold text-white">
-                {match.score.fullTime.home ?? '-'}:{match.score.fullTime.away ?? '-'}
-              </h2>
-            </div>
-
-            <div className="rounded-2xl bg-slate-900 p-5 text-center">
-              <p className="text-slate-400">Half Time</p>
-
-              <h2 className="mt-2 text-4xl font-bold text-white">
-                {match.score.halfTime.home ?? '-'}:{match.score.halfTime.away ?? '-'}
-              </h2>
-            </div>
-          </div>
-        </div>
-
-        {/* REFEREES */}
-        <div className="rounded-3xl border border-slate-800 bg-[#081226] p-6">
-          <h3 className="mb-5 flex items-center gap-2 text-xl font-semibold text-white">
-            <Users size={20} />
-            Referees
-          </h3>
-
-          {match.referees?.length ? (
-            <div className="space-y-3">
-              {match.referees.map((ref: any, index: number) => (
-                <div key={index} className="rounded-xl bg-slate-900 p-3">
-                  {ref.name}
+                <div className="text-slate-400  border-b border-slate-800/70 text-sm  flex justify-between w-full p-1 ">
+                  <p className=" "> Code:</p>
+                  <p>{match.competition.code}</p>
                 </div>
-              ))}
+                <div className="text-slate-400  border-b border-slate-800/70 text-sm  flex justify-between w-full p-1 ">
+                  <p className=" "> Type:</p>
+                  <p> {match.competition.type}</p>
+                </div>
+                <div className="text-slate-400    text-sm  flex justify-between w-full p-1 ">
+                  <p className=" "> Area:</p>
+                  <p> {match.area.name}</p>
+                </div>
+              </div>
             </div>
-          ) : (
-            <p className="text-slate-400">Referees not assigned yet.</p>
-          )}
+          </div>
         </div>
+
+
+
+
       </div>
     </div>
   );
