@@ -9,9 +9,9 @@ import PlayerCurrectTeam from '@/components/players/PlayerCurrectTeam';
 import PlayerInformation from '@/components/players/PlayerInformation';
 
 interface PlayerDetailsPageProps {
-  params: {
+ params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function PlayerDetailsPage({ params }: PlayerDetailsPageProps) {
