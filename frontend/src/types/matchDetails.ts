@@ -1,8 +1,3 @@
-export interface MatchDetailsResponse {
-  success: boolean;
-  data: MatchDetails;
-}
-
 export interface MatchDetails {
   area: Area;
   competition: Competition;

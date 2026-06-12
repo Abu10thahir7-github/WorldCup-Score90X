@@ -1,6 +1,6 @@
 import { axiosClient } from '@/lib/axios';
 import type { Match, Person, StandingGroup, Team, TopScorer } from '@/types';
-import { MatchDetailsResponse } from '@/types/matchDetails';
+import { MatchDetails } from '@/types/matchDetails';
 
 export const worldcupApi = {
   getMatches: async (): Promise<Match[]> => {
@@ -12,11 +12,11 @@ export const worldcupApi = {
   //   const response = await axiosClient.get<{ success: boolean; data: Match[] }>('/matches/live');
   //   return response.data.data;
   // },
-  getMatchById: async (matchId: string): Promise<MatchDetailsResponse> => {
-    const response = await axiosClient.get<{ success: boolean; data: MatchDetailsResponse }>(
+  getMatchById: async (matchId: string): Promise<MatchDetails> => {
+    const response = await axiosClient.get<{ success: boolean; data: MatchDetails }>(
       `/matchesDetails/${matchId}`,
     );
-  
+
     return response.data.data;
   },
 

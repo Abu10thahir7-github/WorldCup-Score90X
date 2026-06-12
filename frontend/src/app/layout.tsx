@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
 
       </head>
-      <body className="min-h-screen bg-slate-950 text-slate-100 antialiased">
+      <body suppressHydrationWarning className="min-h-screen bg-slate-950 text-slate-100 antialiased">
         <QueryProvider>
           <ThemeProvider defaultTheme="dark">
             <div className="flex h-screen  bg-slate-950">
