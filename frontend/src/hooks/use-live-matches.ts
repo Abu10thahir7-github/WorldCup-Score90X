@@ -4,8 +4,8 @@ import type { Match } from '@/types';
 
 export function useLiveMatches() {
   return useQuery<Match[]>({
-    queryKey: ['matches', 'live'],
-    queryFn: worldcupApi.getLiveMatches,
+    queryKey: ['matches'],
+    queryFn: worldcupApi.getMatches,
     refetchInterval: 15000,
   });
 }

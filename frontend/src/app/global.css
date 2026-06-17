@@ -322,11 +322,12 @@ img {
 }
 
 .liveNowBanner {
-  background-image: url('../public/assets/Images/liveNowBannerImage.webp');
+  background-image: url('../public/assets/Images/liveNowBannerImage.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
+
 }
 
 /* Poppins weight utility classes */
