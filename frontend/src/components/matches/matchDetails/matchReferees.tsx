@@ -1,4 +1,4 @@
-import { Users } from 'lucide-react';
+import { Earth, Users } from 'lucide-react';
 import Image from 'next/image';
 import Whistle from '@/public/assets/Images/whistle.png';
 interface MatchDetailsProps {
@@ -27,11 +27,14 @@ export default function MatchReferees({ match }: MatchDetailsProps) {
         <div className='flex flex-col '>
           <p className='  text-sm text-slate-400'>Referees</p>
           {match.referees?.length ? (
-            <div className="space-y-3">
+            <div className="">
               {match.referees.map((ref: any, index: number) => (
+                <>
                 <div key={index} className="text-sm font-medium text-blue-400  ">
                   {ref.name}
                 </div>
+                <p className='text-sm text-slate-400 flex items-center gap-1'> <Earth size={16} />  {ref.nationality}</p>
+                </>
               ))}
             </div>
           ) : (

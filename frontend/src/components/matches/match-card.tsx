@@ -22,7 +22,41 @@ export function MatchCard({ match }: MatchCardProps) {
 
   const homeScore = match.score?.fullTime?.home;
   const awayScore = match.score?.fullTime?.away;
-
+  const statusConfig = {
+    TIMED: {
+      label: 'Scheduled',
+      className: 'bg-blue-500/15 text-blue-400 border border-blue-500/20',
+    },
+    IN_PLAY: {
+      label: 'Live',
+      className: 'bg-red-500/15 text-red-400 border border-red-500/20 animate-pulse',
+    },
+    PAUSED: {
+      label: 'Half Time',
+      className: 'bg-amber-500/15 text-amber-400 border border-amber-500/20',
+    },
+    FINISHED: {
+      label: 'Full Time',
+      className: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20',
+    },
+    POSTPONED: {
+      label: 'Postponed',
+      className: 'bg-orange-500/15 text-orange-400 border border-orange-500/20',
+    },
+    CANCELLED: {
+      label: 'Cancelled',
+      className: 'bg-slate-500/15 text-slate-400 border border-slate-500/20',
+    },
+    SUSPENDED: {
+      label: 'Suspended',
+      className: 'bg-purple-500/15 text-purple-400 border border-purple-500/20',
+    },
+    AWARDED: {
+      label: 'Awarded',
+      className: 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/20',
+    },
+  } as const;
+  const currentStatus = statusConfig[match.status as keyof typeof statusConfig];
   return (
     <Link href={`/matches/${match.id}`}>
       <div className="group rounded-2xl border border-slate-800 bg-navy-blue p-4 transition-all hover:border-blue-500/30">
@@ -66,13 +100,13 @@ export function MatchCard({ match }: MatchCardProps) {
                   <div className="text-xl sm:text-3xl font-bold text-white">
                     {homeScore} : {awayScore}
                   </div>
-                  <p className="text-xs text-slate-500">FULL TIME</p>
+                  <p className="text-xs text-slate-500"> {currentStatus?.label || match.status}</p>
                 </>
               ) : (
                 <>
                   <div className="text-base sm:text-sm  space-y-1 text-white">VS</div>
-                  <p className="text-[10px] sm:text-xs text-slate-500 bg-blue-900/30 rounded-full px-1 py-1">
-                    Scheduled
+                  <p className="text-xs text-slate-500">
+                    {currentStatus?.label || match.status}
                   </p>
                 </>
               )}

@@ -31,17 +31,14 @@ export default function ScoreSummary({
   match,
 }: ScoreSummaryProps) {
   return (
-    <div className="overflow-hidden rounded-xl border border-blue-900/40 bg-navy-blue">
-      {/* Header */}
-      <div className="border-b border-slate-800 px-5 py-4">
-        <h3 className="text-sm font-semibold text-white">
-          Score Summary
-        </h3>
-      </div>
+    <div className="overflow-hidden rounded-xl border border-slate-800 bg-navy-blue">
+
 
       {/* Column Headings */}
       <div className="grid grid-cols-[1fr_80px_80px_80px] border-b border-slate-800 px-5 py-3 text-[11px] uppercase tracking-wider text-slate-500">
-        <span></span>
+        <span>    <h3 className="text-sm font-semibold text-white">
+          Score Summary
+        </h3></span>
         <span className="text-center">1st Half</span>
         <span className="text-center">2nd Half</span>
         <span className="text-center">Full Time</span>
