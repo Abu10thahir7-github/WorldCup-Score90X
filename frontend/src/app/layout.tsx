@@ -39,7 +39,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <Navbar />
 
                 {/* Content Area */}
-                <div className="flex-1 overflow-y-auto">{children}</div>
+                <div className="flex-1 overflow-y-auto">{children}
+
+                <Footer />
+                </div>
               </div>
             </div>
           </ThemeProvider>

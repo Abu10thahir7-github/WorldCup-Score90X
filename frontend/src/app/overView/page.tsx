@@ -9,7 +9,17 @@ import { useMatches } from '@/hooks/use-matches';
 export default function HomePage() {
    const { data, isError, isLoading } = useMatches();
 
+  if (isLoading) {
+    return <div className="h-[420px] rounded-3xl bg-slate-800/80 m-5" />;
+  }
 
+  if (isError) {
+    return (
+      <div className="rounded-3xl border border-red-500/40 bg-red-950/30 p-6 text-red-200">
+        Failed to load matches.
+      </div>
+    );
+  }
   return (
     <main className="min-h-screen bg-[#030712] text-white">
       <div className="mx-auto max-w-[1800px] space-y-2 p-5">

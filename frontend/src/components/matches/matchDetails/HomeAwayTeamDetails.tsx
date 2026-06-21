@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { Home, Plane } from 'lucide-react';
+import { ArrowUpRight, Home, Plane } from 'lucide-react';
+import Link from 'next/link';
 
 interface MatchDetailsProps {
   match: any;
@@ -18,10 +19,14 @@ function TeamCard({
   return (
     <div className="relative overflow-hidden rounded-xl border border-slate-800 bg-navy-blue    p-2">
       {/* Header */}
+      <div className='flex  items-center justify-between'>
+
       <div className="mb-1 flex items-center ">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl  ">{icon}</div>
 
         <h3 className="  flex items-center gap-2 text-lg font-medium text-white">{title}</h3>
+      </div>
+      <Link className='text-sm flex items-center gap-1 text-indigo-700 underline' href={`/teams/${team.id}`}>View Team <ArrowUpRight size={18} /></Link>
       </div>
 
       <div className="flex flex-col gap-2 lg:flex-row">

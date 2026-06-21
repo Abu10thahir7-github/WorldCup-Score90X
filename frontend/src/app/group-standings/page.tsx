@@ -1,7 +1,7 @@
 'use client';
 
 import { SectionTitle } from '@/components/shared/section-title';
-import { StandingTable } from '@/components/standings/standing-table';
+import { StandingTable } from '@/components/standings/groupStanding-table';
 import { useStandings } from '@/hooks/use-standings';
 import { ErrorMessage } from '@/components/shared/error-message';
 

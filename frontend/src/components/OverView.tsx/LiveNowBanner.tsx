@@ -46,15 +46,14 @@ export default function LiveNowBanner({ data }: Props) {
     <div className=" liveNowBanner text-center relative h-[40vh] overflow-hidden rounded-xl bg-gradient-to-r from-[#071120] via-[#0c1730] to-[#071120]">
       <div className="flex mt-2 flex-col items-center justify-center">
         <h1 className="uppercase font-bold">Today's Matches</h1>
-         <p className="text-xl font-bold text-white">
-                {new Date(match.utcDate).toLocaleDateString([], {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
-                })}
-              </p>
+        <p className="text-xl font-bold text-white">
+          {new Date(match.utcDate).toLocaleDateString([], {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+          })}
+        </p>
       </div>
-
 
       {/* Previous */}
       <button
@@ -72,7 +71,6 @@ export default function LiveNowBanner({ data }: Props) {
         <ChevronRight size={22} />
       </button>
 
-
       {/* Live Badge */}
       <div className="flex justify-center ">
         <span
@@ -82,10 +80,10 @@ export default function LiveNowBanner({ data }: Props) {
 
       ${
         match.status === 'IN_PLAY'
-          ? 'bg-red-600 text-white animate-pulse'
+          ? 'bg-red-600  text-emerald-400 rounded-lg text-xs border  border-emerald-500/20 animate-pulse'
           : match.status === 'FINISHED'
-            ? 'bg-green-600 text-white'
-            : 'bg-blue-600 text-white'
+            ? 'bg-emerald-500/15 text-emerald-400 rounded-lg text-xs border  border-emerald-500/20'
+            : 'bg-blue-500/15 text-blue-400 border rounded-lg text-xs border-blue-500/20'
       }
     `}
         >
@@ -108,10 +106,8 @@ export default function LiveNowBanner({ data }: Props) {
         </div>
 
         <div className="text-center">
-
           {match.status === 'TIMED' ? (
             <>
-
               <p className="text-3xl font-semibold text-white">
                 {new Date(match.utcDate).toLocaleTimeString([], {
                   hour: '2-digit',
@@ -152,9 +148,14 @@ export default function LiveNowBanner({ data }: Props) {
 
           <h2 className=" uppercase text-xl font-semibold text-white">{match.awayTeam.name}</h2>
         </div>
-
       </div>
-       <Link className='text-center top-1 right-1 absolute bg-black/40 border border-slate-700/50 text-white py-1 px-2 rounded-xl     text-xs' href={`/matches/${match.id}`}> Match Details <ArrowRight size={14} className="inline-block items-center" /></Link>
+      <Link
+        className="text-center top-1 right-1 absolute bg-blue-500/15 text-blue-400 border   border-blue-500/20  py-1 px-2 rounded-xl  font-medium   text-xs"
+        href={`/matches/${match.id}`}
+      >
+        {' '}
+        Match Details <ArrowRight size={14} className="inline-block items-center" />
+      </Link>
 
       {/* Dots */}
       <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">

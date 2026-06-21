@@ -329,6 +329,13 @@ img {
   height: 100%;
 
 }
+.sidenavbar-banner{
+  background-image: url('../public/assets/Images/sidenavbarBanner.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
 
 /* Poppins weight utility classes */
 .poppins-thin {
