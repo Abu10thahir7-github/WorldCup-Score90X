@@ -9,23 +9,26 @@ export default function TeamInfo({ team }: { team: Team }) {
   return (
     <>
 
-      <div className="rounded-3xl bg-slate-900/80 p-6">
-        <h3 className="text-xl font-semibold text-white">Team information</h3>
-        <ul className="mt-4 space-y-3 text-slate-300">
+      <div className="rounded-3xl bg-slate-900/80 border border-color p-3">
+        <h3 className="text-sm  font-semibold text-white">Team information</h3>
+        <ul className="mt-2 space-y-2 text-sm text-slate-300">
           <li>
-            <span className="font-medium text-slate-100">Country:</span> {team.area?.name}
+            <span className="font-medium text-slate-500">Country:</span> {team.area?.name || 'N/A'}
           </li>
+   <hr className='h-0.5   border-color w-full'/>
           <li>
-            <span className="font-medium text-slate-100">Coach:</span> {team.coach?.name || 'N/A'}
+            <span className="font-medium text-slate-500">Coach:</span> {team.coach?.name || 'N/A'}
           </li>
+     <hr className='h-0.5   border-color w-full'/>
           {team.founded && (
             <li>
-              <span className="font-medium text-slate-100">Founded:</span> {team.founded}
+              <span className="font-medium text-slate-500">Founded:</span> {team.founded}
             </li>
           )}
+        <hr className='h-0.5   border-color w-full'/>
           {team.website && (
             <li>
-              <span className="font-medium text-slate-100">Website:</span>{' '}
+              <span className="font-medium text-slate-500">Website:</span>{' '}
               <a
                 href={team.website}
                 target="_blank"
@@ -36,34 +39,36 @@ export default function TeamInfo({ team }: { team: Team }) {
               </a>
             </li>
           )}
+          <hr className='h-0.5   border-color w-full'/>
           {team.address && (
             <li>
-              <span className="font-medium text-slate-100">Address:</span> {team.address}
+              <span className="font-medium text-slate-500">Address:</span> {team.address}
             </li>
           )}
+
         </ul>
       </div>
-        <aside className="rounded-3xl bg-slate-900/80 p-2">
-          <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Squad composition</p>
-          <div className="mt-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <span className="text-slate-300">Goalkeepers</span>
+        <aside className="rounded-3xl border border-color bg-slate-900/80 p-3">
+          <p className="text-sm  font-semibold text-white ">Squad composition</p>
+          <div className="mt-2 text-sm space-y-4">
+            <div className="flex   justify-between items-center">
+              <span className="text-slate-500">Goalkeepers</span>
               <span className="font-semibold text-slate-100">{goalkeepers}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-300">Defenders</span>
+              <span className="text-slate-500">Defenders</span>
               <span className="font-semibold text-slate-100">{defenders}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-300">Midfielders</span>
+              <span className="text-slate-500">Midfielders</span>
               <span className="font-semibold text-slate-100">{midfielders}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-300">Forwards</span>
+              <span className="text-slate-500">Forwards</span>
               <span className="font-semibold text-slate-100">{forwards}</span>
             </div>
             <div className="border-t border-slate-700 pt-4 flex justify-between items-center">
-              <span className="text-slate-300">Total Squad</span>
+              <span className="text-slate-500">Total Squad</span>
               <span className="font-semibold text-slate-100">{team?.squad?.length || 0}</span>
             </div>
           </div>

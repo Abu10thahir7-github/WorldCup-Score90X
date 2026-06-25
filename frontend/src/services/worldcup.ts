@@ -1,32 +1,71 @@
 import { axiosClient } from '@/lib/axios';
+import { getCache, setCache } from '@/lib/cache';
 import type { Match, Person, StandingGroup, Team, TopScorer } from '@/types';
+import { MatchDetails } from '@/types/matchDetails';
 
 export const worldcupApi = {
   getMatches: async (): Promise<Match[]> => {
-    const response = await axiosClient.get<{ success: boolean; data: Match[] }>('/matches');
-    return response.data.data;
-  },
-  getLiveMatches: async (): Promise<Match[]> => {
-    const response = await axiosClient.get<{ success: boolean; data: Match[] }>('/matches/live');
+    const cacheKey = 'matches';
+
+    const cached = getCache(cacheKey);
+
+    if (cached) return cached;
+
+    const response = await axiosClient.get('/matches');
+
+    setCache(cacheKey, response.data.data);
+
     return response.data.data;
   },
 
-  getMatchById: async (matchId: string): Promise<Match> => {
-    const response = await axiosClient.get<{ success: boolean; data: Match }>(
-      `/matches/${matchId}`,
-    );
+  // getLiveMatches: async (): Promise<Match[]> => {
+  //   const response = await axiosClient.get<{ success: boolean; data: Match[] }>('/matches/live');
+  //   return response.data.data;
+  // },
+  getMatchById: async (matchId: string) => {
+    const cacheKey = `match-${matchId}`;
+
+    const cached = getCache(cacheKey);
+
+    if (cached) return cached;
+
+    const response = await axiosClient.get(`/matchesDetails/${matchId}`);
+
+    setCache(cacheKey, response.data.data);
+
     return response.data.data;
   },
-  getTeams: async (): Promise<Team[]> => {
-    const response = await axiosClient.get<{ success: boolean; data: Team[] }>('/teams');
+
+ 
+
+    getTeams: async (): Promise<Team[]> => {
+    const cacheKey = 'teams';
+
+    const cached = getCache(cacheKey);
+
+    if (cached) return cached;
+
+    const response = await axiosClient.get('/teams');
+
+    setCache(cacheKey, response.data.data);
+
     return response.data.data;
   },
-  getTeamById: async (teamId: string): Promise<Team> => {
-    const response = await axiosClient.get<{ success: boolean; data: Team }>(`/teams/${teamId}`);
+
+  getTeamById: async (teamId: string) => {
+    const cacheKey = `team-${teamId}`;
+
+    const cached = getCache(cacheKey);
+
+    if (cached) return cached;
+
+    const response = await axiosClient.get(`/teams/${teamId}`);
+
+    setCache(cacheKey, response.data.data);
+
     return response.data.data;
   },
   getPersonById: async (personId: string): Promise<Person> => {
-    
     const response = await axiosClient.get<{ success: boolean; data: Person }>(
       `/persons/${personId}`,
     );

@@ -1,70 +1,122 @@
 'use client';
 
-import { ArrowRight, ArrowRightCircle, ArrowRightCircleIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
 import { ROUTES } from '@/constants/routes';
 import { useStandings } from '@/hooks/use-standings';
 
-function MiniGroupOverview() {
+export default function MiniGroupOverview() {
   const { data, isLoading, error } = useStandings();
 
-  if (isLoading) return <div className='bg-slate-900/50 overflow-hidden p-4 rounded-xl'>Loading groups...</div>;
-  if (error) return <div className='bg-slate-900/50 overflow-hidden p-4 rounded-xl'>Failed to load groups</div>;
+  if (isLoading) {
+    return (
+      <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-5">
+        Loading groups...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-3xl border border-red-500/20 bg-red-500/10 p-5">
+        Failed to load groups
+      </div>
+    );
+  }
 
   const groups = data ?? [];
 
   return (
-    <div className=" miniOverView bg-slate-900/50 overflow-hidden p-4 rounded-xl ">
-      <div className="flex mb-2 flex-row justify-between ">
-        <h1 className="text-sm">Groups OverView</h1>
-        <Link className="text-sm text-blue-700 flex flex-row gap-2" href={ROUTES.standings}>
-          View All Groups <ArrowRight size={16} className="mt-0.5" />{' '}
+    <div className="overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-slate-800 px-5 py-2">
+        <div>
+          <h2 className="text-sm font-medium text-white">Group Standings</h2>
+
+          <p className="text-xs text-slate-400">FIFA World Cup 2026</p>
+        </div>
+
+        <Link
+          href={ROUTES.standings}
+          className="flex items-center gap-2 !text-sm text-blue-400 hover:text-blue-300"
+        >
+          View All
+          <ArrowRight size={16} />
         </Link>
       </div>
-      <div className="Allgroups flex gap-2 overflow-auto">
-        {groups.slice(0, 4).map((group) => (
+
+      {/* Groups */}
+      <div className="flex gap-3 overflow-x-auto p-2 scrollbar-hide">
+        {groups.slice(0, 6).map((group) => (
           <div
             key={`${group.stage}-${group.group}`}
-            className="group w-62 h-52 flex-shrink-0 rounded-2xl border p-3 border-slate-800/50  bg-slate-950/70 "
+            className="
+              min-w-[280px]
+              rounded-2xl
+              border
+              border-slate-800
+              bg-slate-900/80
+              p-2
+              transition-all
+              duration-300
+              hover:border-blue-500/40
+              hover:bg-slate-800
+            "
           >
-            <table className="h-full w-full">
-              <thead>
-                <tr className="">
-                  <th className="text-left text-sm font-light ">{group.group}</th>
+            {/* Group Header */}
+            <div className="mb-2 flex items-center justify-between">
+              <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+                {group.group}
+              </span>
+            </div>
 
-                  <th className="text-xs text-center opacity-50 font-light">PTS</th>
-                </tr>
-              </thead>
-              <tbody className="text-xs">
-                {group.table.map((entry) => (
-                  <tr key={entry.team.id} className="">
-                    <td className="  text-white">
-                      <div className="flex items-center gap-3">
-                        <span className=" ">{entry.position}</span>
-                        <img
-                          src={entry.team.crest}
-                          alt={`${entry.team.name} crest`}
-                          className="w-6 h-6 border   rounded-full object-cover"
-                          onError={(e) => {
-                            const img = e.currentTarget as HTMLImageElement;
-                            img.style.display = 'none';
-                          }}
-                        />
-                        <span className="truncate">{entry.team.name}</span>
-                      </div>
-                    </td>
+            {/* Teams */}
+            <div className="space-y-1">
+              {group.table.map((entry, index) => (
+                <div
+                  key={entry.team.id}
+                  className={`
+                    flex items-center justify-between
+                    rounded-xl
+                    px-3 py-2
+                    transition
+                    ${index < 2 ? 'bg-green-500/10' : 'bg-slate-950/50'}
+                  `}
+                >
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`
+                        w-5 text-center text-xs font-bold
+                        ${index < 2 ? 'text-green-400' : 'text-slate-500'}
+                      `}
+                    >
+                      {entry.position}
+                    </span>
 
-                    <td className=" text-center   text-white">{entry.points}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    <img
+                      src={entry.team.crest}
+                      alt={entry.team.name}
+                      className="h-7 w-7 rounded-full object-cover"
+                    />
+
+                    <div>
+                      <p className="text-sm font-medium text-white">{entry.team.tla}</p>
+
+                      <p className="text-[10px] text-slate-500">{entry.team.name}</p>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <p className="font-bold text-white">{entry.points}</p>
+
+                    <p className="text-[10px] text-slate-500">pts</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
 }
-
-export default MiniGroupOverview;

@@ -15,8 +15,8 @@ export interface Match {
   status: 'scheduled' | 'live' | 'finished';
   kickOff: string;
   venue: string;
+  utcDate: string;
   homeTeam: TeamSummary;
   awayTeam: TeamSummary;
   score: ScoreSummary;
-  events?: Array<{ time: string; description: string; type: string }>;
 }

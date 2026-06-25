@@ -1,12 +1,13 @@
 'use client';
 
 import { SectionTitle } from '@/components/shared/section-title';
-import { StandingTable } from '@/components/standings/standing-table';
+import { StandingTable } from '@/components/standings/groupStanding-table';
 import { useStandings } from '@/hooks/use-standings';
 import { ErrorMessage } from '@/components/shared/error-message';
 
 export default function StandingsPage() {
   const { data, isError, isLoading } = useStandings();
+console.log(data);
 
   return (
     <div className="mx-auto max-w-7xl space-y-8">

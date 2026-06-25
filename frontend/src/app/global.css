@@ -19,7 +19,7 @@
 HEX: #081226
 RGB: rgb(8, 18, 38)
 HSL: hsl(221, 65%, 9%) */
-.border-color{
+.border-color {
   border-color: #31415880;
 }
 html {
@@ -32,7 +32,23 @@ body {
     radial-gradient(circle at top, rgba(99, 102, 241, 0.16), transparent 28%),
     radial-gradient(circle at 20% 10%, rgba(56, 189, 248, 0.08), transparent 20%), #020617;
 }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+}
 
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2564eb7c;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
 ::selection {
   background-color: rgba(99, 102, 241, 0.32);
   color: #f8fafc;
@@ -306,7 +322,15 @@ img {
 }
 
 .liveNowBanner {
-  background-image: url('../public/assets/Images/liveNowBannerImage.webp');
+  background-image: url('../public/assets/Images/liveNowBannerImage.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+
+}
+.sidenavbar-banner{
+  background-image: url('../public/assets/Images/sidenavbarBanner.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -420,4 +444,18 @@ img {
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
   font-style: italic;
+}
+
+.player-profile-bg {
+  background-image: url('../public/assets/Images/playerprofilebg.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.match-details-hero{
+    background-image: url('../public/assets/Images/match-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

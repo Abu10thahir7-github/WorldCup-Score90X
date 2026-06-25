@@ -19,6 +19,6 @@ router.get('/teams', getTeamsController);
 router.get('/teams/:id', getSingleTeamController);
 router.get('/persons/:id', getPersonController);
 
-router.get('/matches/:id', getMatchDetailsController);
+router.get('/matchesDetails/:id', getMatchDetailsController);
 
 export default router;

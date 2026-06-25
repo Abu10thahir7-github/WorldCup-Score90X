@@ -4,35 +4,69 @@ import {
   getWorldCupTeamsRepo,
   getMatchDetailsRepo,
   getWorldCupSingleTeamsRepo,
-  getPersonRepo
+  getPersonRepo,
 } from './worldcup.repository';
 
 import { mapMatch } from './worldcup.mapper';
+import { getCachedData } from '../utils/cache';
 
 export async function getWorldCupMatchesService() {
-  const matches = await getWorldCupMatchesRepo();
-
-  return matches.map(mapMatch);
+  return getCachedData(
+    'wc-matches',
+    async () => {
+      const matches = await getWorldCupMatchesRepo();
+      return matches.map(mapMatch);
+    },
+    1000 * 60 * 5 // 5 minutes
+  );
 }
 
 export async function getWorldCupStandingsService() {
-  return await getWorldCupStandingsRepo();
+  return getCachedData(
+    'wc-standings',
+    async () => {
+      return await getWorldCupStandingsRepo();
+    },
+    1000 * 60 * 10 // 10 minutes
+  );
 }
 
 export async function getWorldCupTeamsService() {
-  return await getWorldCupTeamsRepo();
+  return getCachedData(
+    'wc-teams',
+    async () => {
+      return await getWorldCupTeamsRepo();
+    },
+    1000 * 60 * 60 // 1 hour
+  );
 }
+
 export async function getWorldCupSingleTeamsService(id: string) {
-  const singleTeam = await getWorldCupSingleTeamsRepo(id);
-  return singleTeam;
+  return getCachedData(
+    `team-${id}`,
+    async () => {
+      return await getWorldCupSingleTeamsRepo(id);
+    },
+    1000 * 60 * 60 // 1 hour
+  );
 }
+
 export async function getPersonService(id: string) {
-  const person = await getPersonRepo(id);
-  return person;
+  return getCachedData(
+    `person-${id}`,
+    async () => {
+      return await getPersonRepo(id);
+    },
+    1000 * 60 * 60 // 1 hour
+  );
 }
 
 export async function getMatchDetailsService(id: string) {
-  const match = await getMatchDetailsRepo(id);
-
-  return match;
+  return getCachedData(
+    `match-${id}`,
+    async () => {
+      return await getMatchDetailsRepo(id);
+    },
+    1000 * 60 * 5 // 5 minutes
+  );
 }

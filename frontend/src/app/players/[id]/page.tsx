@@ -5,18 +5,21 @@ import { SectionTitle } from '@/components/shared/section-title';
 import { ErrorMessage } from '@/components/shared/error-message';
 import { usePerson } from '@/hooks/use-person';
 import PlayerProfileCard from '@/components/players/PlayerProfileCard';
+import PlayerCurrectTeam from '@/components/players/PlayerCurrectTeam';
+import PlayerInformation from '@/components/players/PlayerInformation';
 
 interface PlayerDetailsPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function PlayerDetailsPage({ params }: PlayerDetailsPageProps) {
-  const { id } = React.use(params);
-  const { data: player, isError, isLoading } = usePerson(id);
+export default function PlayerDetailsPage({
+  params,
+}: PlayerDetailsPageProps) {
+  const { id } = React.use<{ id: string }>(params);
 
-  console.log('id' + id);
+  const { data: player, isError, isLoading } = usePerson(id);
 
   if (isError) {
     return <ErrorMessage />;
@@ -31,12 +34,13 @@ export default function PlayerDetailsPage({ params }: PlayerDetailsPageProps) {
   }
 
   return (
-    <div className="mx-auto max-w-5xl space-y-8">
-      <SectionTitle
-        title="Player profile"
-        description={`${player.name} · ${player.currentTeam.name}`}
-      />
-      <PlayerProfileCard player={player} />
+    <div className="flex space-x-2 sp m-2">
+      <div className="w-[80%] space-y-2">
+        <PlayerProfileCard player={player} />
+        <PlayerCurrectTeam player={player} />
+        <PlayerInformation player={player} />
+      </div>
+      <div className="team-info space-y-2 h-fit top-2.5 sticky w-[25%]"></div>
     </div>
   );
 }

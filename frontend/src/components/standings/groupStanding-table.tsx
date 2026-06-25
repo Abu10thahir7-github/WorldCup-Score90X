@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Match, StandingGroup } from '@/types';
+
 import { StandingsGuide } from '../OverView.tsx/standingGuide';
 import { TournamentInfo } from '../ui/tournamentInfoCard';
 import { useMatches } from '@/hooks/use-matches';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface StandingTableProps {
   entries: StandingGroup[];
@@ -35,17 +37,16 @@ export function StandingTable({ entries }: StandingTableProps) {
     [normalizedEntries, selectedStage],
   );
 
-  const { data: matches = [] } = useMatches();
+  const { data: match = [] } = useMatches();
 
-  const matchesForStage = useMemo(
-    () =>
-      matches.filter((match) =>
-        String(match.round ?? '')
-          .toLowerCase()
-          .includes(String(selectedStage ?? '').toLowerCase()),
-      ),
-    [matches, selectedStage],
-  );
+  const matchesForStage = useMemo(() => {
+    // Backend /matches payload doesn't include round/events/venue; keep standings table safe.
+    // If a match already has round (later enhancements), we can filter by stage.
+    return match.filter((match: any) => {
+      const round = String(match?.round ?? '');
+      return round.toLowerCase().includes(String(selectedStage ?? '').toLowerCase());
+    });
+  }, [match, selectedStage]);
 
   const standingsStageStats = useMemo(() => {
     const totalPlayedGames = filteredEntries.reduce(
@@ -66,34 +67,44 @@ export function StandingTable({ entries }: StandingTableProps) {
     };
   }, [filteredEntries]);
 
-  const countCardEvents = (events: Match['events'], cardRegex: RegExp) =>
-    events?.reduce(
-      (count, event) =>
-        count + (cardRegex.test(event.type) || cardRegex.test(event.description) ? 1 : 0),
+  const countCardEvents = (
+    events: Match['score'] extends never ? never : any,
+    cardRegex: RegExp,
+  ) => {
+    if (!events || !Array.isArray(events)) return 0;
+    return events.reduce(
+      (count: number, event: any) =>
+        count +
+        (cardRegex.test(String(event?.type ?? '')) ||
+        cardRegex.test(String(event?.description ?? ''))
+          ? 1
+          : 0),
       0,
-    ) ?? 0;
+    );
+  };
 
   const matchesPlayed = matchesForStage.length || standingsStageStats.matchesPlayed;
   const goalsScored =
     matchesForStage.length > 0
-      ? matchesForStage.reduce((sum, match) => sum + match.score.home + match.score.away, 0)
+      ? matchesForStage.reduce(
+          (sum, match: any) =>
+            sum + (match?.score?.fullTime?.home ?? 0) + (match?.score?.fullTime?.away ?? 0),
+          0,
+        )
       : standingsStageStats.goalsScored;
+
   const avgGoalsPerMatch = matchesPlayed > 0 ? Number((goalsScored / matchesPlayed).toFixed(1)) : 0;
   const yellowCards = matchesForStage.reduce(
-    (sum, match) => sum + countCardEvents(match.events, /yellow/i),
+    (sum, match: any) => sum + countCardEvents(match?.events, /yellow/i),
     0,
   );
   const redCards = matchesForStage.reduce(
-    (sum, match) => sum + countCardEvents(match.events, /red/i),
+    (sum, match: any) => sum + countCardEvents(match?.events, /red/i),
     0,
   );
 
   if (!normalizedEntries.length) {
-    return (
-      <div className="  p-8 text-center text-slate-400">
-        No standings available yet.
-      </div>
-    );
+    return <div className="  p-8 text-center text-slate-400">No standings available yet.</div>;
   }
 
   return (
@@ -128,7 +139,9 @@ export function StandingTable({ entries }: StandingTableProps) {
                 <div className="border-b border-slate-800 bg-slate-950/90 px-6 py-4">
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-sm   text-white">{group.group}</p>
-                    <a className="text-xs flex align-middle items-center    gap-1  text-indigo-500">View Group  <ArrowRight size={13} /></a>
+                    <a className="text-xs flex align-middle items-center    gap-1  text-indigo-500">
+                      View Group <ArrowRight size={13} />
+                    </a>
                   </div>
                 </div>
 
@@ -145,10 +158,11 @@ export function StandingTable({ entries }: StandingTableProps) {
                     </tr>
                   </thead>
                   <tbody className="text-xs">
-                    {group.table.map((entry) => (
+                    {group.table.map((entry, index) => (
                       <tr
                         key={entry.team.id}
-                        className="border-t border-slate-800 hover:bg-slate-950/70"
+                        className={`border-t border-slate-800 hover:bg-slate-950/70   ${index < 2 ? 'bg-green-500/10' : 'bg-slate-950/50'}`}
+
                       >
                         <td className="px-4 py-4 text-white">
                           <div className="flex items-center gap-3">
@@ -162,7 +176,9 @@ export function StandingTable({ entries }: StandingTableProps) {
                                 img.style.display = 'none';
                               }}
                             />
-                            <span className="truncate">{entry.team.name}</span>
+                            <Link href={`/teams/${entry.team.id}`} className="underline">
+                              <span className="truncate">{entry.team.name}</span>
+                            </Link>
                           </div>
                         </td>
                         <td className="px-2 py-4 text-slate-300">{entry.playedGames}</td>

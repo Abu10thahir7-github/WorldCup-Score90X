@@ -24,7 +24,7 @@ export default function ClubColors({ clubColors }: ClubColorsProps) {
   const colors = clubColors.split('/').map((c) => c.trim());
 
   return (
-    <div className="rounded-xl space-x-1 flex border border-slate-800   p-2">
+    <div className="rounded-xl space-x-1 flex bg-slate-950/90 border border-slate-800   p-2">
               <Palette className="text-indigo-600" size={16} />
       <p className=" text-slate-500 text-sm">
         Club Colors:
