@@ -1,14 +1,16 @@
 import TeamsPage from "@/components/teams/Team";
+import { getTeams } from "@/services/teamService";
 
 
 
-export default function TeamsLayout() {
+export default async function TeamsLayout() {
+   const teams = await getTeams();
   return (
     <main className="min-h-screen bg-[#030712] text-white">
 
 
-        <TeamsPage/>
-    
+        <TeamsPage teams={teams}/>
+
     </main>
   );
 }

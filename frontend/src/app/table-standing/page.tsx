@@ -1,6 +1,7 @@
 'use client';
 
 import MiniGroupOverview from '@/components/OverView.tsx/miniGroupOverview';
+import MinNewsUpdates from '@/components/OverView.tsx/minNewsUpdates';
 import StandingColumnInfo from '@/components/standings/StandingColumnInfo';
 import { TableStanding } from '@/components/standings/tableStanding';
 import { useStandings } from '@/hooks/use-standings';
@@ -26,6 +27,7 @@ export default function TableStandingPage() {
       <div className="space-y-1 h-fit   top-2.5 sticky w-[25%]">
         <StandingColumnInfo />
         <MiniGroupOverview />
+        <MinNewsUpdates />
       </div>
     </div>
   );

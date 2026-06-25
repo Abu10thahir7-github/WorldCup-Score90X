@@ -43,18 +43,18 @@ export default function StandingColumnInfo() {
   ];
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/50   p-4">
-      <h3 className="mb-3 text-sm font-semibold text-white">
+    <div className="rounded-2xl border border-slate-800 bg-slate-900/50   p-3">
+      <h3 className="mb-1 text-sm   text-white">
         Table Guide
       </h3>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-1">
         {columns.map((item) => (
           <div
             key={item.short}
-            className="flex items-center justify-between rounded-lg bg-slate-800/50 px-3 py-2"
+            className="flex items-center justify-between rounded-lg bg-slate-800/50 px-2 py-2"
           >
-            <span className="font-bold text-indigo-400">
+            <span className="font-bold text-sm text-indigo-400">
               {item.short}
             </span>
 

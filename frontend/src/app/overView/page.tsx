@@ -4,6 +4,7 @@ import LiveMatchesMIniOverView from '@/components/OverView.tsx/liveMatchesMIniOv
 import MinNewsUpdates from '@/components/OverView.tsx/minNewsUpdates';
 import MiniGroupOverview from '@/components/OverView.tsx/miniGroupOverview';
 import WorldCupNews from '@/components/OverView.tsx/new';
+import MiniTeamSection from '@/components/ui/MiniTeamSection';
 import { useMatches } from '@/hooks/use-matches';
 
 export default function HomePage() {
@@ -31,7 +32,7 @@ export default function HomePage() {
           </div>
           <div className="space-y-2">
 
-           <LiveMatchScoreStatus />
+           <MiniTeamSection />
 
           </div>
         </section>

@@ -20,30 +20,30 @@ const navLinks = [
 
 export function Navbar() {
   const { mobileMenuOpen, setMobileMenuOpen } = useUIStore();
-const router = useRouter();
-const [search, setSearch] = useState('');
+  const router = useRouter();
+  const [search, setSearch] = useState('');
   return (
     <header className="border-b border-slate-800 bg-slate-950/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <div className=" ">
           <BackButton />
         </div>
-        <div className="relative w-full max-w-xs">
+        {/* <div className="relative w-full max-w-xs">
           <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
 
-         <input
-  type="text"
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-  onKeyDown={(e) => {
-    if (e.key === 'Enter' && search.trim()) {
-      router.push(`/search?q=${search}`);
-    }
-  }}
-  placeholder="Search players, teams, matches"
-  className="..."
-/>
-        </div>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && search.trim()) {
+                router.push(`/search?q=${search}`);
+              }
+            }}
+            placeholder="Search players, teams, matches"
+            className="..."
+          />
+        </div> */}
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((item) => (

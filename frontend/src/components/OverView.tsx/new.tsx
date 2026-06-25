@@ -1,6 +1,6 @@
 'use client';
 
-import { Newspaper, Clock } from 'lucide-react';
+import { Newspaper, Clock, ArrowUpRight } from 'lucide-react';
 
 interface NewsItem {
   pageid: number;
@@ -15,52 +15,99 @@ interface Props {
 
 export default function WorldCupNews({ news }: Props) {
   return (
-    <div className="rounded-xl   p-4">
+    <div className="overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950">
       {/* Header */}
+      <div className="flex items-center justify-between border-b border-slate-800 px-5 py-2">
+        <div>
+          <h2 className="flex items-center gap-2 text-sm font-medium text-white">
+            News & Updates
+          </h2>
 
-      <h1 className="text-sm     text-white mb-2">News & Updates</h1>
+          <p className="text-xs text-slate-400">
+            Latest FIFA World Cup headlines
+          </p>
+        </div>
 
+        <div className="rounded-full bg-blue-500/10 px-3 py-1 text-xs text-blue-400">
+          {news.length} Articles
+        </div>
+      </div>
 
       {/* News List */}
-      <div className="space-y-1  h-[27vh] overflow-auto   pr-1">
-        {news.map((item) => (
-          <div
+      <div className=" h-[290px] space-y-1 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+        {news.map((item, index) => (
+          <a
             key={item.pageid}
-            className="group relative overflow-hidden rounded-xl border px-3 py-2 border-slate-800/50  bg-slate-950/70   transition-all hover:border-blue-500/50 hover:bg-slate-900"
+            href={`https://en.wikipedia.org/?curid=${item.pageid}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              group
+              block
+              overflow-hidden
+              rounded-2xl
+              border
+              border-slate-800
+              bg-slate-900/70
+              p-2
+              transition-all
+              duration-300
+              hover:border-blue-500/40
+              hover:bg-slate-800
+              hover:shadow-lg
+              hover:shadow-blue-500/10
+            "
           >
+            {/* Top Row */}
+            <div className="mb-1 flex items-center justify-between">
+              <span className="rounded-full bg-blue-500/10 px-2.5 py-1 text-[11px] font-medium text-blue-400">
+                Breaking News #{index + 1}
+              </span>
 
-            <div className="relative z-10">
-              <h3 className="font-semibold text-white line-clamp-2">
-                {item.title}
-              </h3>
-
-              <p
-                className=" text-sm text-slate-400 line-clamp-3"
-                dangerouslySetInnerHTML={{
-                  __html: item.snippet.replace(
-                    /<\/?span[^>]*>/g,
-                    '',
-                  ),
-                }}
+              <ArrowUpRight
+                size={16}
+                className="text-slate-500 transition group-hover:text-blue-400"
               />
-
-              <div className="mt-2 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs text-slate-500">
-                  <Clock size={12} />
-                  {new Date(item.timestamp).toLocaleString()}
-                </div>
-
-                <a
-                  href={`https://en.wikipedia.org/?curid=${item.pageid}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-medium text-blue-400 hover:text-blue-300"
-                >
-                  Read More →
-                </a>
-              </div>
             </div>
-          </div>
+
+            {/* Title */}
+            <h3
+              className="
+                line-clamp-2
+                !text-sm
+                font-semibold
+                text-white
+                transition
+                group-hover:text-blue-300
+              "
+            >
+              {item.title}
+            </h3>
+
+            {/* Snippet */}
+            <p
+              className="mt-2 line-clamp-3 text-xs leading-6 text-slate-400"
+              dangerouslySetInnerHTML={{
+                __html: item.snippet.replace(/<\/?span[^>]*>/g, ''),
+              }}
+            />
+
+            {/* Footer */}
+            <div className=" flex items-center justify-between border-t border-slate-800 pt-2">
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <Clock size={12} />
+                {new Date(item.timestamp).toLocaleDateString('en-GB', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                })}
+              </div>
+
+              <span className="text-xs font-medium text-blue-400 transition group-hover:text-blue-300">
+                Read Story →
+              </span>
+            </div>
+          </a>
         ))}
       </div>
     </div>

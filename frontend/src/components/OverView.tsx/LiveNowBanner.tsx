@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import MatchCountdown from '../ui/CountDown';
 
 interface Props {
   data: any[];
@@ -116,6 +117,7 @@ export default function LiveNowBanner({ data }: Props) {
               </p>
 
               <p className="  text-xs text-slate-400">Kick Off</p>
+                  <MatchCountdown kickOff={match.utcDate} />
             </>
           ) : (
             <>

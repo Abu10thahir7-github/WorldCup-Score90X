@@ -14,8 +14,16 @@ export const axiosClient = axios.create({
 
 axiosClient.interceptors.response.use(
   (response) => response,
-  (error) => {
-    const message = error?.response?.data?.message ?? error.message ?? 'Unknown API error';
-    return Promise.reject(new Error(message));
-  },
+  async (error) => {
+    if (error.response?.status === 429) {
+      const retryAfter =
+        Number(error.response.headers['retry-after']) || 60;
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, retryAfter * 1000)
+      );
+    }
+
+    return Promise.reject(error);
+  }
 );

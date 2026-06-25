@@ -6,7 +6,7 @@ import { useWorldCupNews } from '@/hooks/use-worldcup-news';
 export default function MinNewsUpdates() {
     const { data: news = [] } = useWorldCupNews();
   return (
-    <div className='bg-slate-900/50    rounded-xl'>
+    <div className=''>
     <WorldCupNews news={news} />
     </div>
   );

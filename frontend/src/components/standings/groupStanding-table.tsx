@@ -158,10 +158,11 @@ export function StandingTable({ entries }: StandingTableProps) {
                     </tr>
                   </thead>
                   <tbody className="text-xs">
-                    {group.table.map((entry) => (
+                    {group.table.map((entry, index) => (
                       <tr
                         key={entry.team.id}
-                        className="border-t border-slate-800 hover:bg-slate-950/70"
+                        className={`border-t border-slate-800 hover:bg-slate-950/70   ${index < 2 ? 'bg-green-500/10' : 'bg-slate-950/50'}`}
+
                       >
                         <td className="px-4 py-4 text-white">
                           <div className="flex items-center gap-3">

@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { MatchCard } from '@/components/matches/match-card';
 import { useMatches } from '@/hooks/use-matches';
+import MiniGroupOverview from '@/components/OverView.tsx/miniGroupOverview';
+import MiniTeamSection from '@/components/ui/MiniTeamSection';
+import MinNewsUpdates from '@/components/OverView.tsx/minNewsUpdates';
 
 export default function Matches() {
   const { data, isError, isLoading } = useMatches();
@@ -28,10 +31,9 @@ export default function Matches() {
     new Set(matches.map((match) => new Date(match.utcDate).toLocaleDateString('en-CA'))),
   ).sort();
 
-const filteredMatches = matches.filter(
-  (match) =>
-    new Date(match.utcDate).toLocaleDateString('en-CA') === selectedDate
-);
+  const filteredMatches = matches.filter(
+    (match) => new Date(match.utcDate).toLocaleDateString('en-CA') === selectedDate,
+  );
   return (
     <div className="m-2 lg:m-4">
       <div className="flex flex-col lg:flex-row gap-4">
@@ -103,10 +105,9 @@ const filteredMatches = matches.filter(
 
             <p className="mt-2 text-sm text-slate-400">FIFA World Cup 2026</p>
           </div>
-
-          <div className="rounded-2xl border border-slate-800 bg-[#081226] p-4">
-            <h3 className="font-semibold text-white">Quick Stats</h3>
-          </div>
+          <MiniGroupOverview />
+          <MiniTeamSection />
+          <MinNewsUpdates />
         </aside>
       </div>
     </div>

@@ -9,13 +9,16 @@ import PlayerCurrectTeam from '@/components/players/PlayerCurrectTeam';
 import PlayerInformation from '@/components/players/PlayerInformation';
 
 interface PlayerDetailsPageProps {
- params: Promise<{
+  params: Promise<{
     id: string;
   }>;
 }
 
-export default function PlayerDetailsPage({ params }: PlayerDetailsPageProps) {
-  const { id } = React.use(params);
+export default function PlayerDetailsPage({
+  params,
+}: PlayerDetailsPageProps) {
+  const { id } = React.use<{ id: string }>(params);
+
   const { data: player, isError, isLoading } = usePerson(id);
 
   if (isError) {

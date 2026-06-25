@@ -35,7 +35,7 @@ export default function MatchCountdown({ kickOff }: CountdownProps) {
   if (!timeLeft) {
     return (
       <div className="rounded-2xl bg-green-500/10 text-center text-green-400">
-        
+
       </div>
     );
   }
@@ -68,7 +68,7 @@ function TimeBox({
 }) {
   return (
     <div className=''>
-      <div className="text-lg font-bold text-white">
+      <div className="text-sm font-bold text-white">
         {value}
       </div>
 

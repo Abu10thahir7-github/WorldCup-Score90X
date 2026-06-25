@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Calendar } from 'lucide-react';
 import Link from 'next/link';
+import MatchCountdown from '../ui/CountDown';
 
 interface Props {
   data: any[];
@@ -129,7 +130,9 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
 
                     <div className="mx-6 text-center">
                       {match.status === 'TIMED' ? (
-                        <p className="text-sm text-slate-400">VS</p>
+                        <p className="text-sm text-slate-400">VS
+                          <MatchCountdown kickOff={match.utcDate} /></p>
+
                       ) : (
                         <div className="text-lg font-bold text-white">
                           {match.score?.fullTime?.home ?? 0}
