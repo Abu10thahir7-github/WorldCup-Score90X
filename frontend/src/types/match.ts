@@ -1,18 +1,28 @@
 export interface TeamSummary {
   id: string;
   name: string;
-  flagUrl: string;
+  crest: string;
 }
 
 export interface ScoreSummary {
-  home: number;
-  away: number;
+  winner: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null;
+  duration: string;
+
+  fullTime: {
+    home: number | null;
+    away: number | null;
+  };
+
+  halfTime: {
+    home: number | null;
+    away: number | null;
+  };
 }
 
 export interface Match {
   id: string;
   round: string;
-  status: 'scheduled' | 'live' | 'finished';
+  status: string;
   kickOff: string;
   venue: string;
   utcDate: string;

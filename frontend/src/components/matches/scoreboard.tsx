@@ -8,11 +8,12 @@ interface ScoreBoardProps {
 export function ScoreBoard({ matches }: ScoreBoardProps) {
   const safeMatches = Array.isArray(matches) ? matches : [];
 
-  const chartData = safeMatches.slice(0, 6).map((match) => ({
-    label: `${match.homeTeam.name} vs ${match.awayTeam.name}`,
-    total: (match.score?.home ?? 0) + (match.score?.away ?? 0),
-  }));
-
+const chartData = safeMatches.slice(0, 6).map((match) => ({
+  label: `${match.homeTeam.name} vs ${match.awayTeam.name}`,
+  total:
+    (match.score?.fullTime?.home ?? 0) +
+    (match.score?.fullTime?.away ?? 0),
+}));
   return (
     <div className="h-[320px] rounded-3xl border border-slate-800 bg-slate-950/80 p-5 shadow-soft">
       <div className="mb-4 flex items-center justify-between gap-3">
