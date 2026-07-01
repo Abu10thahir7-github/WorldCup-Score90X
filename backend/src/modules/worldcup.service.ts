@@ -5,6 +5,7 @@ import {
   getMatchDetailsRepo,
   getWorldCupSingleTeamsRepo,
   getPersonRepo,
+  getWorldCupTopScorersRepo,
 } from './worldcup.repository';
 
 import { mapMatch } from './worldcup.mapper';
@@ -16,6 +17,16 @@ export async function getWorldCupMatchesService() {
     async () => {
       const matches = await getWorldCupMatchesRepo();
       return matches.map(mapMatch);
+    },
+    1000 * 60 * 5 // 5 minutes
+  );
+}
+export async function getTopScorersService() {
+  return getCachedData(
+    'wc-top-scorers',
+    async () => {
+      return await getWorldCupTopScorersRepo();
+
     },
     1000 * 60 * 5 // 5 minutes
   );

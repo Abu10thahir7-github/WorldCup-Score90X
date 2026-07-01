@@ -1,23 +1,36 @@
 export function mapMatch(match: any) {
   return {
-    id: match.id,
+     id: match.id,
 
-    status: match.status,
+  status: match.status,
 
-    utcDate: match.utcDate,
+  utcDate: match.utcDate,
 
-    homeTeam: {
-      id: match.homeTeam.id,
-      name: match.homeTeam.name,
-      crest: match.homeTeam.crest,
-    },
+  // ✅ ADD THESE
+  stage: match.stage,
 
-    awayTeam: {
-      id: match.awayTeam.id,
-      name: match.awayTeam.name,
-      crest: match.awayTeam.crest,
-    },
+  group: match.group,
 
-    score: match.score,
+  matchday: match.matchday,
+
+  lastUpdated: match.lastUpdated,
+
+  homeTeam: {
+    id: match.homeTeam.id,
+    name: match.homeTeam.name,
+    shortName: match.homeTeam.shortName,
+    tla: match.homeTeam.tla,
+    crest: match.homeTeam.crest,
+  },
+
+  awayTeam: {
+    id: match.awayTeam.id,
+    name: match.awayTeam.name,
+    shortName: match.awayTeam.shortName,
+    tla: match.awayTeam.tla,
+    crest: match.awayTeam.crest,
+  },
+
+  score: match.score,
   };
 }

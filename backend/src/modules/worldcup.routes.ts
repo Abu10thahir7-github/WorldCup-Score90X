@@ -7,6 +7,7 @@ import {
   getMatchDetailsController,
   getSingleTeamController,
   getPersonController,
+  getTopScorersController,
 } from './worldcup.controller';
 
 const router = Router();
@@ -20,5 +21,6 @@ router.get('/teams/:id', getSingleTeamController);
 router.get('/persons/:id', getPersonController);
 
 router.get('/matchesDetails/:id', getMatchDetailsController);
+router.get('/scorers', getTopScorersController);
 
 export default router;

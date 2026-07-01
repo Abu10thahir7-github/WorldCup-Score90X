@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMatchesController = getMatchesController;
+exports.getTopScorersController = getTopScorersController;
 exports.getStandingsController = getStandingsController;
 exports.getTeamsController = getTeamsController;
 exports.getSingleTeamController = getSingleTeamController;
@@ -15,6 +16,21 @@ function getErrorMessage(error, defaultMessage) {
 async function getMatchesController(req, res) {
     try {
         const data = await (0, worldcup_service_1.getWorldCupMatchesService)();
+        res.status(200).json({
+            success: true,
+            data,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: getErrorMessage(error, 'Failed to fetch matches'),
+        });
+    }
+}
+async function getTopScorersController(req, res) {
+    try {
+        const data = await (0, worldcup_service_1.getTopScorersService)();
         res.status(200).json({
             success: true,
             data,

@@ -7,6 +7,7 @@ import MiniGroupOverview from '@/components/OverView.tsx/miniGroupOverview';
 import MiniTeamSection from '@/components/ui/MiniTeamSection';
 import MinNewsUpdates from '@/components/OverView.tsx/minNewsUpdates';
 
+
 export default function Matches() {
   const { data, isError, isLoading } = useMatches();
   console.log(data);
@@ -86,6 +87,7 @@ export default function Matches() {
             {filteredMatches.map((match) => (
               <MatchCard key={match.id} match={match} />
             ))}
+
           </div>
         </div>
 

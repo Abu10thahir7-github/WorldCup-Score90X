@@ -54,12 +54,15 @@ export default function MatchLiveScoreBanner( {match}:MatchDetailsProps) {
     },
   } as const;
   const currentStatus = statusConfig[match.status as keyof typeof statusConfig];
+
+  console.log(match);
+
   return (
    <div className="overflow-hidden match-details-hero rounded-xl border border-slate-800 bg-[#081226]">
         <div className="py-6">
           <div className=" gap-2  rounded-full bg-blue-600/20 px-4 py-2 text-xs font-medium text-blue-400 flex justify-center w-fit m-auto mb-3">
-            <p className="">{match.stage.replaceAll('_', ' ')}</p>•
-            <p className="  ">{match.group.replaceAll('_', ' ')}</p>•
+            <p className="">{match.stage?.replaceAll('_', ' ') ?? 'TBA'}</p>•
+            <p className="  ">{match.group?.replaceAll('_', ' ') ?? 'TBA'}</p>•
             <p className="  ">MATCH DAY {match.matchday}</p>
           </div>
 

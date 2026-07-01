@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Person } from '@/types';
 import { CircleAlertIcon } from 'lucide-react';
+import { getPlayerImage } from '@/services/playersImage';
+import { useState } from 'react';
 
 interface PlayerProfileCardProps {
   player: Person;
@@ -33,8 +35,10 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
   const imageSrc =
     team.crest || 'https://i.pinimg.com/736x/f8/ac/88/f8ac888d041ec047923567995f7444fc.jpg';
 
-
-
+  const [image, setImage] = useState('/player-placeholder.png');
+  getPlayerImage(player.name).then((img) => {
+    if (img) setImage(img);
+  });
   function generatePlayerAbout(player: Person) {
     const age = player.dateOfBirth
       ? Math.floor(
@@ -58,8 +62,14 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
     <div>
       <div className="rounded-3x player-profile-bg border border-slate-800 rounded-xl   p-6 shadow-soft">
         <div className="grid gap-6 lg:grid-cols-[30%_1fr]">
-          <div className="relative  overflow-hidden rounded-3xl   p-4 text-center">
-            <p className="mt-4 text-sm uppercase tracking-[0.35em] text-slate-400"> </p>
+          <div className="    text-center">
+            <Image
+              src={image}
+              alt={player.name}
+              width={200}
+              height={200}
+              className="rounded-3xl object-contain w-full h-full"
+            />
           </div>
 
           <div className="space-y-2">
@@ -119,7 +129,6 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
             <p className="uppercase mt-5 text-slate-500 flex gap-2 text-xs">
               <CircleAlertIcon size={15} /> Last updated: {formatLastUpdated(player.lastUpdated)}
             </p>
-
           </div>
         </div>
       </div>{' '}

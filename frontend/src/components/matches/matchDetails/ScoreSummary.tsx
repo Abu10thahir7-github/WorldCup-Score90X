@@ -2,50 +2,88 @@
 
 import Image from 'next/image';
 
-interface ScoreSummaryProps {
-  match: {
-    homeTeam: {
-      name: string;
-      tla: string;
-      crest: string;
-    };
-    awayTeam: {
-      name: string;
-      tla: string;
-      crest: string;
-    };
-    score: {
-      halfTime: {
-        home: number | null;
-        away: number | null;
-      };
-      fullTime: {
-        home: number | null;
-        away: number | null;
-      };
-    };
-  };
+export interface MatchDetailsProps {
+  match: any;
 }
 
-export default function ScoreSummary({
-  match,
-}: ScoreSummaryProps) {
+export default function ScoreSummary({ match }: MatchDetailsProps) {
+  const score = match?.score ?? {};
+
+  const isKnockout =
+    score.duration === 'EXTRA_TIME' ||
+    score.duration === 'PENALTY_SHOOTOUT';
+
+  const halfTime = score.halfTime ?? {
+    home: null,
+    away: null,
+  };
+
+  const regularTime = score.regularTime ?? score.fullTime ?? {
+    home: null,
+    away: null,
+  };
+
+  const extraTime = score.extraTime ?? {
+    home: null,
+    away: null,
+  };
+
+  const penalties = score.penalties ?? {
+    home: null,
+    away: null,
+  };
+
+  const fullTime = score.fullTime ?? {
+    home: null,
+    away: null,
+  };
+
+  const secondHalfHome =
+    regularTime.home != null && halfTime.home != null
+      ? regularTime.home - halfTime.home
+      : '-';
+
+  const secondHalfAway =
+    regularTime.away != null && halfTime.away != null
+      ? regularTime.away - halfTime.away
+      : '-';
+
   return (
     <div className="overflow-hidden rounded-xl border border-slate-800 bg-navy-blue">
 
-
-      {/* Column Headings */}
-      <div className="grid grid-cols-[1fr_80px_80px_80px] border-b border-slate-800 px-5 py-3 text-[11px] uppercase tracking-wider text-slate-500">
-        <span>    <h3 className="text-sm font-semibold text-white">
+      {/* Header */}
+      <div
+        className={`grid ${
+          isKnockout
+            ? 'grid-cols-[1fr_80px_80px_80px_80px_80px]'
+            : 'grid-cols-[1fr_80px_80px_80px]'
+        } border-b border-slate-800 px-5 py-3 text-[11px] uppercase tracking-wider text-slate-500`}
+      >
+        <span className="text-sm font-semibold text-white">
           Score Summary
-        </h3></span>
-        <span className="text-center">1st Half</span>
-        <span className="text-center">2nd Half</span>
-        <span className="text-center">Full Time</span>
+        </span>
+
+        <span className="text-center">1st</span>
+        <span className="text-center">2nd</span>
+
+        {isKnockout && (
+          <>
+            <span className="text-center">ET</span>
+            <span className="text-center">Pens</span>
+          </>
+        )}
+
+        <span className="text-center">FT</span>
       </div>
 
-      {/* Home Team */}
-      <div className="grid grid-cols-[1fr_80px_80px_80px] items-center border-b border-slate-800 px-5 py-4">
+      {/* Home */}
+      <div
+        className={`grid ${
+          isKnockout
+            ? 'grid-cols-[1fr_80px_80px_80px_80px_80px]'
+            : 'grid-cols-[1fr_80px_80px_80px]'
+        } items-center border-b border-slate-800 px-5 py-4`}
+      >
         <div className="flex items-center gap-3">
           <Image
             src={match.homeTeam.crest}
@@ -66,22 +104,35 @@ export default function ScoreSummary({
           </div>
         </div>
 
-        <div className="text-center font-semibold text-white">
-          {match.score.halfTime.home ?? '-'}
-        </div>
+        <div className="text-center">{halfTime.home ?? '-'}</div>
 
-        <div className="text-center font-semibold text-white">
-          {(match.score.fullTime.home ?? 0) -
-            (match.score.halfTime.home ?? 0)}
-        </div>
+        <div className="text-center">{secondHalfHome}</div>
 
-        <div className="text-center text-lg font-bold text-green-400">
-          {match.score.fullTime.home ?? '-'}
+        {isKnockout && (
+          <>
+            <div className="text-center">
+              {extraTime.home ?? '-'}
+            </div>
+
+            <div className="text-center">
+              {penalties.home ?? '-'}
+            </div>
+          </>
+        )}
+
+        <div className="text-center font-bold text-green-400">
+          {fullTime.home ?? '-'}
         </div>
       </div>
 
-      {/* Away Team */}
-      <div className="grid grid-cols-[1fr_80px_80px_80px] items-center px-5 py-4">
+      {/* Away */}
+      <div
+        className={`grid ${
+          isKnockout
+            ? 'grid-cols-[1fr_80px_80px_80px_80px_80px]'
+            : 'grid-cols-[1fr_80px_80px_80px]'
+        } items-center px-5 py-4`}
+      >
         <div className="flex items-center gap-3">
           <Image
             src={match.awayTeam.crest}
@@ -102,17 +153,24 @@ export default function ScoreSummary({
           </div>
         </div>
 
-        <div className="text-center font-semibold text-white">
-          {match.score.halfTime.away ?? '-'}
-        </div>
+        <div className="text-center">{halfTime.away ?? '-'}</div>
 
-        <div className="text-center font-semibold text-white">
-          {(match.score.fullTime.away ?? 0) -
-            (match.score.halfTime.away ?? 0)}
-        </div>
+        <div className="text-center">{secondHalfAway}</div>
 
-        <div className="text-center text-lg font-bold text-green-400">
-          {match.score.fullTime.away ?? '-'}
+        {isKnockout && (
+          <>
+            <div className="text-center">
+              {extraTime.away ?? '-'}
+            </div>
+
+            <div className="text-center">
+              {penalties.away ?? '-'}
+            </div>
+          </>
+        )}
+
+        <div className="text-center font-bold text-green-400">
+          {fullTime.away ?? '-'}
         </div>
       </div>
     </div>

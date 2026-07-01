@@ -13,6 +13,7 @@ const navLinks = [
   { label: 'Live', href: '/live-matches' },
   { label: 'Matches', href: '/matches' },
   { label: 'Teams', href: '/teams' },
+  { label: 'Bracket', href: '/bracket' },
   { label: 'Table Standings', href: '/table-standing' },
   { label: 'Group Standings', href: '/group-standings' },
   { label: 'Top Scorers', href: '/top-scorers' },

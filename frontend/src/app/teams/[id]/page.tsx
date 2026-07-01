@@ -7,6 +7,7 @@ import React from 'react';
 import SingleTeam from '@/components/teams/SingleTeam/TeamProfileBanner';
 import TeamInfo from '@/components/teams/SingleTeam/TeamInfo';
 import TeamPlayers from '@/components/teams/SingleTeam/TeamPlayers';
+import CoachCard from '@/components/teams/SingleTeam/CoachCard';
 
 interface TeamDetailsPageProps {
   params: Promise<{
@@ -31,8 +32,7 @@ interface TeamDetailsPageProps {
 export default function TeamDetailsPage({ params }: TeamDetailsPageProps) {
   const { id } = React.use(params);
   const { data: team, isError, isLoading } = useTeam(id);
- console.log("team ID "+ id);
- 
+  console.log('team ID ' + id);
 
   if (isError) {
     return <ErrorMessage />;
@@ -51,12 +51,14 @@ export default function TeamDetailsPage({ params }: TeamDetailsPageProps) {
       {isLoading ? (
         <div className="h-72 rounded-3xl bg-slate-800/80" />
       ) : (
-        <div className='flex space-x-2 sp m-2'>
-          <div className='w-[80%] space-y-2'>
+        <div className="flex space-x-2 sp m-2">
+          <div className="w-[80%] space-y-2">
             <SingleTeam team={team} />
+            <CoachCard coach={team.coach} />
+
             <TeamPlayers team={team} />
           </div>
-          <div className='team-info space-y-2 h-fit top-2.5 sticky w-[25%]'>
+          <div className="team-info space-y-2 h-fit top-2.5 sticky w-[25%]">
             <TeamInfo team={team} />
           </div>
         </div>

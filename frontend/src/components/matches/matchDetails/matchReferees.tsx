@@ -24,17 +24,27 @@ export default function MatchReferees({ match }: MatchDetailsProps) {
             }}
           />
         </div>
-        <div className='flex flex-col '>
-          <p className='  text-sm text-slate-400'>Referees</p>
-          {match.referees?.length ? (
-            <div className="">
+        <div className="flex flex-col ">
+           {match.referees?.length ? (
+            <div className="space-y-3">
               {match.referees.map((ref: any, index: number) => (
-                <>
-                <div key={index} className="text-sm font-medium text-blue-400  ">
-                  {ref.name}
+                <div
+                  key={ref.id ?? `${ref.name}-${index}`}
+                  className=" "
+                >
+                  <p className="font-semibold text-blue-400">{ref.name}</p>
+
+                  <p className="mt-1 flex items-center gap-1 text-sm text-slate-400">
+                    <Earth size={15} />
+                    {ref.nationality || 'Unknown'}
+                  </p>
+
+                  {ref.type && (
+                    <p className="mt-1 text-xs uppercase tracking-wide text-slate-500">
+                      {ref.type}
+                    </p>
+                  )}
                 </div>
-                <p className='text-sm text-slate-400 flex items-center gap-1'> <Earth size={16} />  {ref.nationality}</p>
-                </>
               ))}
             </div>
           ) : (
