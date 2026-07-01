@@ -9,7 +9,7 @@ export interface MatchDetails {
   venue: string | null;
   matchday: number;
   stage: string;
-  group: string;
+  group: string | null;
   lastUpdated: string;
 
   homeTeam: Team;
@@ -19,14 +19,12 @@ export interface MatchDetails {
   odds: Odds;
   referees: Referee[];
 }
-
 export interface Area {
   id: number;
   name: string;
   code: string;
   flag: string | null;
 }
-
 export interface Competition {
   id: number;
   name: string;
@@ -34,13 +32,12 @@ export interface Competition {
   type: string;
   emblem: string;
 }
-
 export interface Season {
   id: number;
   startDate: string;
   endDate: string;
   currentMatchday: number;
-  winner: unknown | null;
+  winner: Team | null;
 }
 
 export interface Team {
@@ -51,17 +48,20 @@ export interface Team {
   crest: string;
 }
 
+export interface ScoreResult {
+  home: number | null;
+  away: number | null;
+}
+
 export interface Score {
   winner: string | null;
   duration: string;
 
-  fullTime: ScoreResult;
   halfTime: ScoreResult;
-}
-
-export interface ScoreResult {
-  home: number | null;
-  away: number | null;
+  regularTime?: ScoreResult;
+  extraTime?: ScoreResult;
+  penalties?: ScoreResult;
+  fullTime: ScoreResult;
 }
 
 export interface Odds {

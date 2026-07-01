@@ -59,12 +59,17 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
 
       return dateMatch && statusMatch;
     }) || [];
+  const statusColors = {
+    IN_PLAY: 'text-red-500',
+    TIMED: 'text-blue-500',
+    FINISHED: 'text-green-500',
+  };
 
   return (
     <div className="bg-slate-900/50 p-2 rounded-xl">
       <div>
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex  items-center justify-between">
           <div className="flex gap-3 overflow-x-auto">
             {TABS.map((tab) => (
               <button
@@ -95,18 +100,27 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
         </div>
 
         {/* Matches */}
-        <div className="mt-2 space-y-1 px-2 h-[27vh] w-full overflow-auto">
+        <div className="mt-2 space-y-1 px-2 h-fit w-full overflow-auto">
           {filteredMatches.length === 0 ? (
             <div className="flex h-28 items-center justify-center rounded-xl border border-slate-700/30">
               <p className="text-sm text-slate-400">No matches found for {selectedDate}</p>
             </div>
           ) : (
             filteredMatches.map((match) => (
-              <div key={match.id} className="group border border-slate-700/20  rounded-xl px-3 py-2">
+              <div
+                key={match.id}
+                className="group border border-slate-700/20  rounded-xl px-3 py-2"
+              >
                 <div className="flex items-center justify-between gap-4">
                   {/* Status */}
                   <div className="min-w-fit">
-                    <div className="text-xs font-bold text-red-400">{match.status}</div>
+                    <div
+                      className={`rounded-full   text-xs font-bold   ${
+                        statusColors[match.status as keyof typeof statusColors] || 'text-slate-500'
+                      }`}
+                    >
+                      {match.status}
+                    </div>
 
                     <p className="text-xs text-gray-500">
                       {new Date(match.utcDate).toLocaleTimeString([], {
@@ -130,9 +144,10 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
 
                     <div className="mx-6 text-center">
                       {match.status === 'TIMED' ? (
-                        <p className="text-sm text-slate-400">VS
-                          <MatchCountdown kickOff={match.utcDate} /></p>
 
+
+                          <MatchCountdown kickOff={match.utcDate} />
+                      
                       ) : (
                         <div className="text-lg font-bold text-white">
                           {match.score?.fullTime?.home ?? 0}

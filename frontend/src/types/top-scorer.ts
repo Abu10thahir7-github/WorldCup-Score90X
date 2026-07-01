@@ -1,7 +1,19 @@
 export interface TopScorer {
-  playerId: string;
-  playerName: string;
-  teamName: string;
+  player: {
+    id: number;
+    name: string;
+    nationality: string;
+  };
+
+  team: {
+    id: number;
+    name: string;
+    crest: string;
+    tla: string;
+  };
+
   goals: number;
-  assists: number;
+  assists: number | null;
+  penalties: number | null;
+  playedMatches: number;
 }

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getWorldCupMatchesService = getWorldCupMatchesService;
+exports.getTopScorersService = getTopScorersService;
 exports.getWorldCupStandingsService = getWorldCupStandingsService;
 exports.getWorldCupTeamsService = getWorldCupTeamsService;
 exports.getWorldCupSingleTeamsService = getWorldCupSingleTeamsService;
@@ -13,6 +14,12 @@ async function getWorldCupMatchesService() {
     return (0, cache_1.getCachedData)('wc-matches', async () => {
         const matches = await (0, worldcup_repository_1.getWorldCupMatchesRepo)();
         return matches.map(worldcup_mapper_1.mapMatch);
+    }, 1000 * 60 * 5 // 5 minutes
+    );
+}
+async function getTopScorersService() {
+    return (0, cache_1.getCachedData)('wc-top-scorers', async () => {
+        return await (0, worldcup_repository_1.getWorldCupTopScorersRepo)();
     }, 1000 * 60 * 5 // 5 minutes
     );
 }

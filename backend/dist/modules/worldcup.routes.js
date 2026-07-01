@@ -9,4 +9,5 @@ router.get('/teams', worldcup_controller_1.getTeamsController);
 router.get('/teams/:id', worldcup_controller_1.getSingleTeamController);
 router.get('/persons/:id', worldcup_controller_1.getPersonController);
 router.get('/matchesDetails/:id', worldcup_controller_1.getMatchDetailsController);
+router.get('/scorers', worldcup_controller_1.getTopScorersController);
 exports.default = router;

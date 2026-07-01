@@ -9,6 +9,13 @@ export async function getWorldCupMatchesRepo() {
 
   return response.data.matches;
 }
+export async function getWorldCupTopScorersRepo() {
+  const response = await footballClient.get(
+    "/competitions/WC/scorers"
+  );
+
+  return response.data.scorers;
+}
 
 
 export async function getWorldCupStandingsRepo() {

@@ -1,3 +1,4 @@
+
 import { ROUTES } from '@/constants/routes';
 import { getTeams } from '@/services/teamService';
 import { ArrowRight, Shield } from 'lucide-react';

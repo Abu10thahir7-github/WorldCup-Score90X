@@ -1,6 +1,7 @@
 import { axiosClient } from '@/lib/axios';
 import { getCache, setCache } from '@/lib/cache';
-import type { Match, Person, StandingGroup, Team, TopScorer } from '@/types';
+import type { Match, Person, StandingGroup, Team, TopScorer, } from '@/types';
+import { BracketMatch } from '@/types/bracket';
 import { MatchDetails } from '@/types/matchDetails';
 
 export const worldcupApi = {
@@ -21,6 +22,7 @@ export const worldcupApi = {
     return response.data.data;
   },
 
+ 
   // getLiveMatches: async (): Promise<Match[]> => {
   //   const response = await axiosClient.get<{ success: boolean; data: Match[] }>('/matches/live');
   //   return response.data.data;
@@ -104,8 +106,10 @@ export const worldcupApi = {
 
     const cached = getCache(cacheKey);
     if (cached) return cached;
-
-    const response = await axiosClient.get('/top-scorers');
+    const response = await axiosClient.get<{
+      success: boolean;
+      data: TopScorer[];
+    }>('/scorers');
 
     setCache(cacheKey, response.data.data);
 

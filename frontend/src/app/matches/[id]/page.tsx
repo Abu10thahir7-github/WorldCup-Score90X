@@ -27,13 +27,15 @@ export default function MatchDetailsPage({ params }: MatchDetailsPageProps) {
 
   console.log(match);
 
+  
+  if (isLoading) {
+    return <div className="h-96 animate-pulse rounded-3xl bg-slate-800/70" />;
+  }
+
   if (!match) {
     return <ErrorMessage message="Match data unavailable" />;
   }
 
-  if (isLoading) {
-    return <div className="h-96 animate-pulse rounded-3xl bg-slate-800/70" />;
-  }
 
   return (
     <>

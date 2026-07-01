@@ -7,6 +7,7 @@ import {
   getMatchDetailsService,
   getWorldCupSingleTeamsService,
   getPersonService,
+  getTopScorersService,
 } from './worldcup.service';
 
 function getErrorMessage(error: unknown, defaultMessage: string) {
@@ -18,6 +19,21 @@ function getErrorMessage(error: unknown, defaultMessage: string) {
 export async function getMatchesController(req: Request, res: Response) {
   try {
     const data = await getWorldCupMatchesService();
+
+    res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: getErrorMessage(error, 'Failed to fetch matches'),
+    });
+  }
+}
+export async function getTopScorersController(req: Request, res: Response) {
+  try {
+    const data = await getTopScorersService();
 
     res.status(200).json({
       success: true,

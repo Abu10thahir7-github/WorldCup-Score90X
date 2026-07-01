@@ -2,6 +2,7 @@ export interface TeamSummary {
   id: string;
   name: string;
   crest: string;
+  tla: string;
 }
 
 export interface ScoreSummary {
@@ -21,12 +22,22 @@ export interface ScoreSummary {
 
 export interface Match {
   id: string;
-  round: string;
+
   status: string;
-  kickOff: string;
-  venue: string;
+
   utcDate: string;
+
+  stage: string;
+
+  group: string | null;
+
+  matchday: number | null;
+
+  lastUpdated: string;
+
   homeTeam: TeamSummary;
+
   awayTeam: TeamSummary;
+
   score: ScoreSummary;
 }

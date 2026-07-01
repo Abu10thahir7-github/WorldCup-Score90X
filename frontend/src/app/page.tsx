@@ -3,7 +3,7 @@
 import { ArrowRight } from 'lucide-react';
 import { LiveMatchCard } from '@/components/matches/live-match-card';
 import { MatchCard } from '@/components/matches/match-card';
-import { ScoreBoard } from '@/components/matches/scoreboard';
+ 
 import { SectionTitle } from '@/components/shared/section-title';
 import { useLiveMatches } from '@/hooks/use-live-matches';
 import { useMatches } from '@/hooks/use-matches';
