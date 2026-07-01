@@ -10,23 +10,61 @@ export async function getCachedData<T>(
   fetcher: () => Promise<T>,
   ttl = 5 * 60 * 1000,
 ): Promise<T> {
+  const now = Date.now();
   const cached = cache.get(key);
 
-  if (cached && Date.now() - cached.timestamp < ttl) {
-    console.log(`🟢 CACHE HIT: ${key}`);
-    return cached.data;
+  if (cached) {
+    const age = now - cached.timestamp;
+
+    if (age < ttl) {
+      console.log(`
+================ CACHE HIT ================
+Key          : ${key}
+Age          : ${(age / 1000).toFixed(1)} sec
+Expires In   : ${((ttl - age) / 1000).toFixed(1)} sec
+Cache Size   : ${cache.size}
+===========================================
+`);
+
+      return cached.data;
+    }
+
+    console.log(`
+============= CACHE EXPIRED ==============
+Key          : ${key}
+Expired After: ${(age / 1000).toFixed(1)} sec
+==========================================
+`);
+
+    cache.delete(key);
   }
 
-  console.log(`🔴 CACHE MISS: ${key}`);
+  console.log(`
+================ CACHE MISS ===============
+Key          : ${key}
+Fetching fresh data from API...
+===========================================
+`);
 
-  console.log(`Cache Miss: ${key}`);
+  const start = Date.now();
 
   const data = await fetcher();
 
+  const fetchTime = Date.now() - start;
+
   cache.set(key, {
     data,
-    timestamp: Date.now(),
+    timestamp: now,
   });
+
+  console.log(`
+================ CACHE SAVED ==============
+Key          : ${key}
+Fetch Time   : ${fetchTime} ms
+TTL          : ${ttl / 1000} sec
+Cache Size   : ${cache.size}
+===========================================
+`);
 
   return data;
 }

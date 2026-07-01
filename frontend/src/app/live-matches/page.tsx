@@ -25,7 +25,7 @@ export default function LiveMatchesPage() {
   );
 
   const finishedMatches = todayMatches.filter(
-    (match) => match.status === 'FINISHED'
+    (match) => match.status === 'finished'
   );
 
   const upcomingMatches = todayMatches.filter((match) =>

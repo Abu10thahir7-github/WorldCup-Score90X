@@ -11,7 +11,10 @@ export const worldcupApi = {
 
     if (cached) return cached;
 
-    const response = await axiosClient.get('/matches');
+    const response = await axiosClient.get<{
+      success: boolean;
+      data: Match[];
+    }>('/matches');
 
     setCache(cacheKey, response.data.data);
 
@@ -28,25 +31,26 @@ export const worldcupApi = {
     const cached = getCache(cacheKey);
 
     if (cached) return cached;
-
-    const response = await axiosClient.get(`/matchesDetails/${matchId}`);
+    const response = await axiosClient.get<{
+      success: boolean;
+      data: MatchDetails;
+    }>(`/matchesDetails/${matchId}`);
 
     setCache(cacheKey, response.data.data);
 
     return response.data.data;
   },
 
- 
-
-    getTeams: async (): Promise<Team[]> => {
+  getTeams: async (): Promise<Team[]> => {
     const cacheKey = 'teams';
 
     const cached = getCache(cacheKey);
 
     if (cached) return cached;
-
-    const response = await axiosClient.get('/teams');
-
+    const response = await axiosClient.get<{
+      success: boolean;
+      data: Team[];
+    }>('/teams');
     setCache(cacheKey, response.data.data);
 
     return response.data.data;
@@ -58,29 +62,53 @@ export const worldcupApi = {
     const cached = getCache(cacheKey);
 
     if (cached) return cached;
-
-    const response = await axiosClient.get(`/teams/${teamId}`);
+    const response = await axiosClient.get<{
+      success: boolean;
+      data: Team;
+    }>(`/teams/${teamId}`);
 
     setCache(cacheKey, response.data.data);
 
     return response.data.data;
   },
   getPersonById: async (personId: string): Promise<Person> => {
-    const response = await axiosClient.get<{ success: boolean; data: Person }>(
-      `/persons/${personId}`,
-    );
-    console.log('getPersonById' + response.data);
+    const cacheKey = `person-${personId}`;
+
+    const cached = getCache(cacheKey);
+    if (cached) return cached;
+    const response = await axiosClient.get<{
+      success: boolean;
+      data: Person;
+    }>(`/persons/${personId}`);
+
+    setCache(cacheKey, response.data.data);
 
     return response.data.data;
   },
   getStandings: async (): Promise<StandingGroup[]> => {
-    const response = await axiosClient.get<{ success: boolean; data: StandingGroup[] }>(
-      '/standings',
-    );
+    const cacheKey = 'standings';
+
+    const cached = getCache(cacheKey);
+    if (cached) return cached;
+    const response = await axiosClient.get<{
+      success: boolean;
+      data: StandingGroup[];
+    }>('/standings');
+
+    setCache(cacheKey, response.data.data);
+
     return response.data.data;
   },
   getTopScorers: async (): Promise<TopScorer[]> => {
-    const response = await axiosClient.get<{ success: boolean; data: TopScorer[] }>('/top-scorers');
+    const cacheKey = 'top-scorers';
+
+    const cached = getCache(cacheKey);
+    if (cached) return cached;
+
+    const response = await axiosClient.get('/top-scorers');
+
+    setCache(cacheKey, response.data.data);
+
     return response.data.data;
   },
 };

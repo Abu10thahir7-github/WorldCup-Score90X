@@ -1,17 +1,19 @@
+'use client';
+
 import LiveNowBanner from '@/components/OverView.tsx/LiveNowBanner';
-import LiveMatchScoreStatus from '@/components/OverView.tsx/liveMatchScoreStatus';
 import LiveMatchesMIniOverView from '@/components/OverView.tsx/liveMatchesMIniOverView';
-import MinNewsUpdates from '@/components/OverView.tsx/minNewsUpdates';
 import MiniGroupOverview from '@/components/OverView.tsx/miniGroupOverview';
-import WorldCupNews from '@/components/OverView.tsx/new';
 import MiniTeamSection from '@/components/ui/MiniTeamSection';
+import MinNewsUpdates from '@/components/OverView.tsx/minNewsUpdates';
 import { useMatches } from '@/hooks/use-matches';
 
-export default function HomePage() {
-   const { data, isError, isLoading } = useMatches();
+export default function OverViewClient() {
+  const { data = [], isLoading, isError } = useMatches();
 
   if (isLoading) {
-    return <div className="h-[420px] rounded-3xl bg-slate-800/80 m-5" />;
+    return (
+      <div className="h-[420px] rounded-3xl bg-slate-800/80 m-5" />
+    );
   }
 
   if (isError) {
@@ -21,27 +23,23 @@ export default function HomePage() {
       </div>
     );
   }
+
   return (
     <main className="min-h-screen bg-[#030712] text-white">
       <div className="mx-auto max-w-[1800px] space-y-2 p-5">
-        {/* HERO + RIGHT SIDEBAR */}
+
         <section className="grid gap-2 lg:grid-cols-[2fr_380px]">
           <div className="flex flex-col space-y-2">
-           <LiveNowBanner data={data } />
+            <LiveNowBanner data={data} />
             <LiveMatchesMIniOverView data={data} />
           </div>
+
           <div className="space-y-2">
-
-           <MiniTeamSection />
-
+            <MiniTeamSection />
           </div>
         </section>
 
-
-
-        {/* GROUPS + NEWS */}
-        <section className=" grid gap-2 lg:grid-cols-[1.3fr_1fr]">
-
+        <section className="grid gap-2 lg:grid-cols-[1.3fr_1fr]">
           <MiniGroupOverview />
           <MinNewsUpdates />
         </section>
