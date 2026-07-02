@@ -64,13 +64,13 @@ export function MatchCard({ match }: MatchCardProps) {
           {/* Date & Time */}
 
           <div className="flex justify-between lg:block space-y-1">
-            <div className="flex items-center gap-2 text-xs text-white">
-              <Calendar className="text-green-500" size={14} />
+            <div className="flex items-center gap-2 text-sm text-white">
+              <Calendar className="text-green-500" size={16} />
               <span>{formattedDate}</span>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-white">
-              <Clock className="text-green-500" size={14} />
+            <div className="flex items-center gap-2 text-sm text-white">
+              <Clock className="text-green-500" size={16} />
               <span>{formattedTime}</span>
             </div>
           </div>
@@ -89,7 +89,7 @@ export function MatchCard({ match }: MatchCardProps) {
               />
 
               <h3 className="text-center sm:text-left text-sm font-medium text-white">
-                {match.homeTeam.name}
+                {match.homeTeam.tla}
               </h3>
             </div>
 
@@ -97,7 +97,7 @@ export function MatchCard({ match }: MatchCardProps) {
             <div className="text-center min-w-[70px] sm:min-w-[90px]">
               {homeScore !== null && awayScore !== null ? (
                 <>
-                  <div className="text-xl sm:text-3xl font-bold text-white">
+                  <div className="text-2xl sm:text-3xl font-bold text-white">
                     {homeScore} : {awayScore}
                   </div>
                   <p className={currentStatus.className}> {currentStatus?.label || match.status}</p>
@@ -115,7 +115,7 @@ export function MatchCard({ match }: MatchCardProps) {
             {/* Away */}
             <div className="flex flex-col-reverse sm:flex-row items-center justify-end gap-2 sm:gap-3">
               <h3 className="text-center sm:text-right text-sm font-medium font-semibold text-white">
-                {match.awayTeam.name}
+                {match.awayTeam.tla}
               </h3>
 
               <Image

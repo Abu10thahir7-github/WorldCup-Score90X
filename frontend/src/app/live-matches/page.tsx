@@ -28,73 +28,101 @@ export default function LiveMatchesPage() {
   );
 
   return (
-    <div className="w-full   flex gap-2 p-3.5">
-      <div className="w-full">
-        <SectionTitle
-          title="Today's Matches"
-          description="Follow all FIFA World Cup 2026 matches happening today."
-        />
+  <div className="mx-auto flex   flex-col gap-6 p-4 lg:flex-row lg:items-start">
 
-        {isError && <ErrorMessage />}
+    {/* Main Content */}
+    <main className="w-full lg:flex-1">
+      <SectionTitle
+        title="Today's Matches"
+        description="Follow all FIFA World Cup 2026 matches happening today."
+      />
 
-        {isLoading ? (
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="h-64 rounded-3xl bg-slate-800/80 animate-pulse" />
-            <div className="h-64 rounded-3xl bg-slate-800/80 animate-pulse" />
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {/* Live Matches */}
-            <section className="border border-red-600/50 bg-red-600/20 p-3 rounded-xl ">
-              <h2 className="mb-4 flex items-center gap-2 text-sm font-medium text-red-500">
-                <Radio size={18} /> Live Matches ({liveMatches.length})
-              </h2>
+      {isError && <ErrorMessage />}
 
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {liveMatches.length > 0 ? (
-                  liveMatches.map((match) => <LiveMatchCard key={match.id} match={match} />)
-                ) : (
-                  <p className="text-slate-400">No live matches right now.</p>
-                )}
-              </div>
-            </section>
+      {isLoading ? (
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="h-64 animate-pulse rounded-3xl bg-slate-800/80" />
+          <div className="h-64 animate-pulse rounded-3xl bg-slate-800/80" />
+          <div className="hidden xl:block h-64 animate-pulse rounded-3xl bg-slate-800/80" />
+        </div>
+      ) : (
+        <div className="space-y-8">
 
-            {/* Upcoming Matches */}
-            <section>
-              <h2 className="mb-4 text-sm flex items-center gap-2 font-medium text-yellow-400">
-                <ClockFadingIcon size={18} /> Upcoming Matches ({upcomingMatches.length})
-              </h2>
+          {/* Live */}
+          <section className="rounded-2xl ">
+            <h2 className="mb-5 flex items-center gap-2 text-lg font-semibold text-red-400">
+              <Radio size={18} />
+              Live Matches ({liveMatches.length})
+            </h2>
 
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {upcomingMatches.length > 0 ? (
-                  upcomingMatches.map((match) => <LiveMatchCard key={match.id} match={match} />)
-                ) : (
-                  <p className="text-slate-400">No upcoming matches today.</p>
-                )}
-              </div>
-            </section>
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {liveMatches.length ? (
+                liveMatches.map((match) => (
+                  <div className='border border-red-500/30 bg-red-500/10 p-2'>
 
-            {/* Finished Matches */}
-            <section>
-              <h2 className="mb-4 text-sm flex items-center gap-2 font-medium text-green-500">
-                <ClipboardCheck size={18} /> Finished Matches ({finishedMatches.length})
-              </h2>
+                  <LiveMatchCard key={match.id} match={match} />
+                  </div>
+                ))
+              ) : (
+                <p className="text-slate-400">
+                  No live matches right now.
+                </p>
+              )}
+            </div>
+          </section>
 
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {finishedMatches.length > 0 ? (
-                  finishedMatches.map((match) => <LiveMatchCard key={match.id} match={match} />)
-                ) : (
-                  <p className="text-slate-400">No finished matches today.</p>
-                )}
-              </div>
-            </section>
-          </div>
-        )}
-      </div>
-      <div className="space-y-1 h-fit   top-2.5 sticky w-[25%]">
+          {/* Upcoming */}
+          <section>
+            <h2 className="mb-5 flex items-center gap-2 text-lg font-semibold text-yellow-400">
+              <ClockFadingIcon size={18} />
+              Upcoming Matches ({upcomingMatches.length})
+            </h2>
+
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {upcomingMatches.length ? (
+                upcomingMatches.map((match) => (
+                  <LiveMatchCard key={match.id} match={match} />
+                ))
+              ) : (
+                <p className="text-slate-400">
+                  No upcoming matches today.
+                </p>
+              )}
+            </div>
+          </section>
+
+          {/* Finished */}
+          <section>
+            <h2 className="mb-5 flex items-center gap-2 text-lg font-semibold text-green-400">
+              <ClipboardCheck size={18} />
+              Finished Matches ({finishedMatches.length})
+            </h2>
+
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {finishedMatches.length ? (
+                finishedMatches.map((match) => (
+                  <LiveMatchCard key={match.id} match={match} />
+                ))
+              ) : (
+                <p className="text-slate-400">
+                  No finished matches today.
+                </p>
+              )}
+            </div>
+          </section>
+
+        </div>
+      )}
+    </main>
+
+    {/* Sidebar */}
+    <aside className="w-full lg:sticky lg:top-4 lg:w-[320px] lg:flex-shrink-0">
+      <div className="space-y-4">
         <MiniGroupOverview />
         <MiniTeamSection />
       </div>
-    </div>
-  );
+    </aside>
+
+  </div>
+);
 }

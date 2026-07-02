@@ -25,6 +25,7 @@ export default function TeamCard({ team }: { team: Team }) {
 
             <div className="flex flex-col justify-center">
               <h3 className="text-sm  font-semibold">{team.name}</h3>
+              <p>{team.tla}</p>
 
 
             </div>

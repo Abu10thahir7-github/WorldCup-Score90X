@@ -44,7 +44,7 @@ export default function StandingColumnInfo() {
 
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-900/50   p-3">
-      <h3 className="mb-1 text-sm   text-white">
+      <h3 className="mb-1 text-lg font-medium   text-white">
         Table Guide
       </h3>
 
@@ -58,7 +58,7 @@ export default function StandingColumnInfo() {
               {item.short}
             </span>
 
-            <span className="text-xs text-slate-300">
+            <span className="text-sm text-slate-300">
               {item.full}
             </span>
           </div>
