@@ -1,67 +1,53 @@
-import { Shield, Trophy } from 'lucide-react';
+import { Facebook, Instagram, Shield, Trophy, Twitter, Youtube } from 'lucide-react';
 import Link from 'next/link';
-
+import Logo from '@/public/logos/transparant-logo.png';
+import Image from 'next/image';
 export function Footer() {
   return (
-      <footer className="border-t border-slate-800 bg-[#030712] text-white">
-      <div className="mx-auto max-w-[1800px] px-6 py-12">
+    <footer className="border-t border-slate-800 bg-[#030712] text-white">
+      <div className="mx-auto max-w-[1800px]  py-5">
         {/* Top */}
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
-          <div className="space-y-5">
+          <div className="space-y-1">
+            <Link href="/" className="flex items-center ">
+              <Image
+                src={Logo}
+                alt="Score90X Logo"
+                className="w-full h-full"
+                width={150}
+                height={150}
+              />
+            </Link>
+
             <div>
-              <h2 className="text-4xl font-black">
-                SCORE<span className="text-purple-500">90X</span>
-              </h2>
+              <h3 className="mb-1 text-center font-semibold">Follow Us</h3>
 
-              <p className="mt-1 text-xs tracking-[4px] text-slate-400">LIVE • SCORES • NEWS</p>
-            </div>
-
-            <p className="max-w-sm text-sm leading-7 text-slate-400">
-              Your ultimate destination for live scores, match updates, World Cup news, stats and
-              everything football.
-            </p>
-
-            <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-              <div className="flex items-center gap-3">
-                <Trophy className="text-purple-500" size={24} />
-
-                <div>
-                  <h3 className="font-semibold">FIFA World Cup 2026</h3>
-
-                  <p className="text-xs text-slate-400">Live • Exclusive • Unstoppable</p>
-                </div>
-              </div>
-            </div>
-
-            {/* <div>
-              <h3 className="mb-3 font-semibold">Follow Us</h3>
-
-              <div className="flex gap-3">
-                <div className="rounded-full border border-slate-700 p-2">
+              <div className="flex gap-3 justify-center">
+                <div className="rounded-full  border-slate-700 border hover:bg-indigo-700 hover:border-slate-300/50 transition-all duration-300 group p-2">
                   <Facebook size={18} />
                 </div>
 
-                <div className="rounded-full border border-slate-700 p-2">
+                <div className="rounded-full  border-slate-700 border hover:bg-indigo-700 hover:border-slate-300/50 transition-all duration-300 group p-2">
                   <Twitter size={18} />
                 </div>
 
-                <div className="rounded-full border border-slate-700 p-2">
+                <div className="rounded-full  border-slate-700 border hover:bg-indigo-700 hover:border-slate-300/50 transition-all duration-300 group p-2">
                   <Instagram size={18} />
                 </div>
 
-                <div className="rounded-full border border-slate-700 p-2">
+                <div className="rounded-full  border-slate-700 border hover:bg-indigo-700 hover:border-slate-300/50 transition-all duration-300 group p-2">
                   <Youtube size={18} />
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
 
           {/* Explore */}
           <div>
-            <h3 className="mb-5 text-lg font-bold">Explore</h3>
+            <h3 className="mb-2 underline text-lg font-bold">Explore</h3>
 
-            <ul className="space-y-4 text-slate-400">
+            <ul className="space-y-2 text-sm text-slate-400">
               <li>
                 <Link href="#">Live Matches</Link>
               </li>
@@ -85,9 +71,9 @@ export function Footer() {
 
           {/* World Cup */}
           <div>
-            <h3 className="mb-5 text-lg font-bold">World Cup 2026</h3>
+            <h3 className="mb-2 underline text-lg font-bold">World Cup 2026</h3>
 
-            <ul className="space-y-4 text-slate-400">
+            <ul className="space-y-2 text-sm text-slate-400">
               <li>
                 <Link href="#">Groups</Link>
               </li>
@@ -111,9 +97,9 @@ export function Footer() {
 
           {/* Account */}
           <div>
-            <h3 className="mb-5 text-lg font-bold">Account</h3>
+            <h3 className="mb-2 underline text-lg font-bold">Account</h3>
 
-            <ul className="space-y-4 text-slate-400">
+            <ul className="space-y-2 text-sm text-slate-400">
               <li>
                 <Link href="#">My Profile</Link>
               </li>
@@ -134,9 +120,9 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="mb-5 text-lg font-bold">Company</h3>
+            <h3 className="mb-2 underline text-lg font-bold">Company</h3>
 
-            <ul className="space-y-4 text-slate-400">
+            <ul className="space-y-2 text-sm text-slate-400">
               <li>
                 <Link href="#">About Us</Link>
               </li>
@@ -154,7 +140,7 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-10 flex flex-col gap-4 border-t border-slate-800 pt-6 md:flex-row md:items-center md:justify-between">
+        <div className="mt-3 px-5 flex flex-col gap-4 border-t border-slate-800 pt-3 md:flex-row md:items-center md:justify-between">
           <div className="text-sm text-slate-500">© 2026 Score90X. All rights reserved.</div>
 
           <div className="flex items-center gap-2 text-slate-400">

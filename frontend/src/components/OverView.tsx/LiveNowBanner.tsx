@@ -44,7 +44,7 @@ export default function LiveNowBanner({ data }: Props) {
   console.log(match);
 
   return (
-    <div className=" liveNowBanner text-center relative h-[40vh] overflow-hidden rounded-xl bg-gradient-to-r from-[#071120] via-[#0c1730] to-[#071120]">
+    <div className=" liveNowBanner text-center relative !h-[40vh] overflow-hidden rounded-xl bg-gradient-to-r from-[#071120] via-[#0c1730] to-[#071120]">
       <div className="flex mt-2 flex-col items-center justify-center">
         <h1 className="uppercase font-bold">Today's Matches</h1>
         <p className="text-xl font-bold text-white">

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Logo from '@/public/logos/navlogo-removebg.png';
 import {
   Home,
   Clock,
@@ -40,8 +41,6 @@ export default function SideNavBar() {
       id: 'live-matches',
       label: 'Live Matches',
       icon: <Clock size={20} />,
-      badge: 'Soon',
-      badgeColor: 'red',
       href: '/live-matches',
     },
     {
@@ -86,6 +85,8 @@ export default function SideNavBar() {
       id: 'news',
       label: 'News',
       icon: <Newspaper size={20} />,
+      badgeColor: 'red',
+      badge: 'Soon',
       href: '/news',
     },
     // {
@@ -147,17 +148,20 @@ export default function SideNavBar() {
     <div className="w-60 min-h-screen   border-r border-slate-800 flex flex-col overflow-hidden">
       {/* Header */}
       <motion.div
-        className="relative py-4  "
+        className="relative p-4  "
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="  text-center  ">
-          <span className="text-3xl font-black text-white tracking-tight">Score</span>
+        <Link href='/' className="  text-center  flex items-center justify-center ">
+          <span className="text-3xl flex justify-center items-center font-black text-white tracking-tight">
+            <Image src={Logo} alt="Score90X Logo" width={50} height={50} />
+            Score
+          </span>
           <span className="text-3xl font-black bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             90X
           </span>
-        </div>
+        </Link>
         <p className="text-[10px] text-center text-slate-400  ">WORLD CUP 2026</p>
       </motion.div>
 
