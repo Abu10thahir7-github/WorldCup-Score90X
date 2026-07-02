@@ -66,7 +66,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
   };
 
   return (
-    <div className="bg-slate-900/50 p-2 rounded-xl">
+    <div className="bg-navy-blue p-2 rounded-xl border border-slate-800">
       <div>
         {/* Header */}
         <div className="flex  items-center justify-between">
@@ -75,7 +75,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-lg font-medium !text-xs transition-all whitespace-nowrap ${
+                className={`px-4 py-2 rounded-lg font-medium !text-xs sm:!text-sm transition-all whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'bg-purple-600 text-white'
                     : 'bg-slate-950/70 text-gray-400 hover:bg-slate-900'
@@ -100,7 +100,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
         </div>
 
         {/* Matches */}
-        <div className="mt-2 space-y-1 px-2 h-fit w-full overflow-auto">
+        <div className="mt-2 space-y-1  h-fit w-full overflow-auto">
           {filteredMatches.length === 0 ? (
             <div className="flex h-28 items-center justify-center rounded-xl border border-slate-700/30">
               <p className="text-sm text-slate-400">No matches found for {selectedDate}</p>
@@ -115,14 +115,14 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
                   {/* Status */}
                   <div className="min-w-fit">
                     <div
-                      className={`rounded-full   text-xs font-bold   ${
+                      className={`rounded-full   text-xs sm:text-sm font-bold   ${
                         statusColors[match.status as keyof typeof statusColors] || 'text-slate-500'
                       }`}
                     >
                       {match.status}
                     </div>
 
-                    <p className="text-xs text-gray-500">
+                    <p className="text-sm   text-gray-500">
                       {new Date(match.utcDate).toLocaleTimeString([], {
                         hour: '2-digit',
                         minute: '2-digit',
@@ -139,7 +139,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
                         className="h-8 w-8"
                       />
 
-                      <span className="text-white font-medium text-xs">{match.homeTeam.name}</span>
+                      <span className="text-white font-medium text-xs sm:text-sm">{match.homeTeam.tla}</span>
                     </div>
 
                     <div className="mx-6 text-center">
@@ -147,7 +147,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
 
 
                           <MatchCountdown kickOff={match.utcDate} />
-                      
+
                       ) : (
                         <div className="text-lg font-bold text-white">
                           {match.score?.fullTime?.home ?? 0}
@@ -158,7 +158,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
                     </div>
 
                     <div className="flex items-center gap-3 flex-1 justify-end">
-                      <span className="text-white font-medium text-xs">{match.awayTeam.name}</span>
+                      <span className="text-white font-medium text-xs sm:text-sm">{match.awayTeam.tla}</span>
 
                       <img
                         src={match.awayTeam.crest}
@@ -177,7 +177,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
         <div className="flex  justify-center mt-2">
           <Link
             href={'/matches'}
-            className="border p-2 rounded-lg border-slate-700/50 bg-slate-950/70 text-blue-700 hover:text-purple-300 font-medium !text-xs transition-colors flex items-center gap-2"
+            className="border p-2 rounded-lg border-slate-700/50 bg-slate-950/70 text-blue-700 hover:text-purple-300 font-medium text-xs sm:text-sm transition-colors flex items-center gap-2"
           >
             <Calendar size={15} className="text-white/50" />
             View Full Schedule

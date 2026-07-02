@@ -33,54 +33,36 @@ export default function MatchCountdown({ kickOff }: CountdownProps) {
   }, [kickOff]);
 
   if (!timeLeft) {
-    return (
-      <div className="rounded-2xl bg-green-500/10 text-center text-green-400">
-
-      </div>
-    );
+    return <div className="rounded-2xl bg-green-500/10 text-center text-green-400"></div>;
   }
 
   return (
-    <div className="text-center ">
-
-
-
-        <div className="flex   rounded-2xl items-center justify-between p-2 text-center">
-          <TimeBox value={timeLeft.days} label="days" />
-          <Dot />
-          <TimeBox value={timeLeft.hours} label="hrs" />
-          <Dot />
-          <TimeBox value={timeLeft.minutes} label="min" />
-          <Dot />
-          <TimeBox value={timeLeft.seconds} label="sec" />
-        </div>
-
+    <div className=" flex items-center rounded-xl border border-slate-700/50 bg-slate-900/60 px-1 py-2 backdrop-blur-md justify-center gap-2 sm:gap-3">
+      <TimeBox value={timeLeft.days} label="D" />
+      <Dot />
+      <TimeBox value={timeLeft.hours} label="H" />
+      <Dot />
+      <TimeBox value={timeLeft.minutes} label="M" />
+      <Dot />
+      <TimeBox value={timeLeft.seconds} label="S" />
     </div>
   );
 }
 
-function TimeBox({
-  value,
-  label,
-}: {
-  value: number;
-  label: string;
-}) {
+function TimeBox({ value, label }: { value: number; label: string }) {
   return (
-    <div className=''>
-      <div className="text-sm font-bold text-white">
-        {value}
-      </div>
+    <div className="flex  sm:min-w-[52px] flex-col items-center ">
+      <span className="text-sm sm:text-lg font-medium leading-none text-white tabular-nums">
+        {String(value).padStart(2, '0')}
+      </span>
 
-      <div className="text-xs text-white">
+      <span className="mt-0.5 text-[10px] sm:text-xs uppercase tracking-wider text-slate-400">
         {label}
-      </div>
+      </span>
     </div>
   );
 }
 
 function Dot() {
-  return (
-    <div className="h-1 w-1 rounded-full bg-white" />
-  );
+  return <div className="h-1 w-1 rounded-full bg-white/50" />;
 }

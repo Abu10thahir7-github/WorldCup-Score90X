@@ -19,11 +19,11 @@ export default function WorldCupNews({ news }: Props) {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 px-5 py-2">
         <div>
-          <h2 className="flex items-center gap-2 text-sm font-medium text-white">
+          <h2 className="flex items-center gap-2 text-lg font-medium text-white">
             News & Updates
           </h2>
 
-          <p className="text-xs text-slate-400">
+          <p className="text-sm text-slate-400">
             Latest FIFA World Cup headlines
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function WorldCupNews({ news }: Props) {
       </div>
 
       {/* News List */}
-      <div className=" h-[290px] space-y-1 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+      <div className="h-[400px] md:h-[290px]  space-y-1 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
         {news.map((item, index) => (
           <a
             key={item.pageid}
@@ -60,7 +60,7 @@ export default function WorldCupNews({ news }: Props) {
           >
             {/* Top Row */}
             <div className="mb-1 flex items-center justify-between">
-              <span className="rounded-full bg-blue-500/10 px-2.5 py-1 text-[11px] font-medium text-blue-400">
+              <span className="rounded-full bg-blue-500/10 px-2.5 py-1 text-sm font-medium text-blue-400">
                 Breaking News #{index + 1}
               </span>
 
@@ -86,7 +86,7 @@ export default function WorldCupNews({ news }: Props) {
 
             {/* Snippet */}
             <p
-              className="mt-2 line-clamp-3 text-xs leading-6 text-slate-400"
+              className="mt-2 line-clamp-3 text-sm leading-6 text-slate-400"
               dangerouslySetInnerHTML={{
                 __html: item.snippet.replace(/<\/?span[^>]*>/g, ''),
               }}
@@ -94,8 +94,8 @@ export default function WorldCupNews({ news }: Props) {
 
             {/* Footer */}
             <div className=" flex items-center justify-between border-t border-slate-800 pt-2">
-              <div className="flex items-center gap-2 text-xs text-slate-500">
-                <Clock size={12} />
+              <div className="flex items-center gap-2 text-sm text-slate-500">
+                <Clock size={14} />
                 {new Date(item.timestamp).toLocaleDateString('en-GB', {
                   day: 'numeric',
                   month: 'short',
@@ -103,7 +103,7 @@ export default function WorldCupNews({ news }: Props) {
                 })}
               </div>
 
-              <span className="text-xs font-medium text-blue-400 transition group-hover:text-blue-300">
+              <span className="text-sm font-medium text-blue-400 transition group-hover:text-blue-300">
                 Read Story →
               </span>
             </div>

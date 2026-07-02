@@ -25,7 +25,7 @@ export default function OverViewClient() {
   }
 
   return (
-    <main className="min-h-screen bg-[#030712] text-white">
+    <main className="min-h-screen text-white">
       <div className="mx-auto max-w-[1800px] space-y-2 p-5">
 
         <section className="grid gap-2 lg:grid-cols-[2fr_380px]">

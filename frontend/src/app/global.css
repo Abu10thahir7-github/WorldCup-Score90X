@@ -10,6 +10,7 @@
   font-style: normal;
   background-color: #020617;
   color: #e2e8f0;
+   font-size: 14px;
 }
 /* Midnight Navy Blue */
 .bg-navy-blue {
@@ -327,6 +328,7 @@ img {
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
+  backdrop-filter: blur(4px);
 
 }
 .sidenavbar-banner{

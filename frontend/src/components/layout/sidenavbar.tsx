@@ -8,15 +8,8 @@ import {
   Home,
   Clock,
   Calendar,
-  Trophy,
-  Users,
-  PersonStanding,
   User,
-  Target,
   Newspaper,
-  TrendingUp,
-  Star,
-  Settings,
   ArrowRight,
   LayoutGrid,
   Shield,
@@ -153,7 +146,7 @@ export default function SideNavBar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <Link href='/' className="  text-center  flex items-center justify-center ">
+        <Link href="/" className="  text-center  flex items-center justify-center ">
           <span className="text-3xl flex justify-center items-center font-black text-white tracking-tight">
             <Image src={Logo} alt="Score90X Logo" width={50} height={50} />
             Score
@@ -197,14 +190,14 @@ export default function SideNavBar() {
                 >
                   {item.icon}
                 </span>
-                <span className="flex-1 text-left font-medium text-xs">{item.label}</span>
+                <span className="flex-1 text-left font-medium text-sm">{item.label}</span>
 
                 {item.badge && (
                   <motion.div
                     variants={badgeVariants}
                     initial="hidden"
                     animate="visible"
-                    className={`shrink-0 flex items-center justify-center min-w-7 h-4 rounded-full text-[10px] ${
+                    className={`shrink-0 flex items-center justify-center px-2  rounded-full text-xs ${
                       item.badgeColor === 'red'
                         ? 'bg-red-500 text-white'
                         : 'bg-purple-500 text-white'
@@ -227,13 +220,13 @@ export default function SideNavBar() {
         transition={{ duration: 0.6, delay: 0.8 }}
       >
         {/* Content */}
-        <div className="relative z-10 flex flex-col justify-between h-full items-center text-center">
-          <div className="mb-3 poppins-light-italic">
-            <p className="text-yellow-300 text-sm font-bold mb-1">FIFA WORLD CUP</p>
+        <div className="relative z-10 flex flex-col justify-between h-full items-center text-start">
+          <div className="mb-3  ">
+            <p className="text-yellow-300 text-lg font-bold mb-1">FIFA WORLD CUP</p>
             <p className="text-white text-2xl font-black">2026</p>
           </div>
 
-          <p className="text-white font-medium text-xs leading-snug mb-4">
+          <p className="text-white font-medium text-sm leading-snug mb-4">
             11 JUNE - 19 JULY
             <br />
             USA • CANADA • MEXICO

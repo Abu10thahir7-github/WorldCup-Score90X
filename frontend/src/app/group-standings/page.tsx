@@ -10,7 +10,7 @@ export default function StandingsPage() {
 console.log(data);
 
   return (
-    <div className="mx-auto max-w-7xl space-y-8">
+    <div className="">
 
       {isError && <ErrorMessage  />}
       {isLoading ? (

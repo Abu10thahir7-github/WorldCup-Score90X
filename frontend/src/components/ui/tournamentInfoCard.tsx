@@ -25,7 +25,7 @@ export function TournamentInfo({
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-3 shadow-soft backdrop-blur-sm">
-      <h3 className="mb-5 text-sm font-semibold text-white">
+      <h3 className="mb-5 text-lg font-medium text-white">
         Tournament Info
       </h3>
 
@@ -35,11 +35,11 @@ export function TournamentInfo({
             key={stat.label}
             className="flex items-center justify-between border-b border-slate-800 pb-3 last:border-0 last:pb-0"
           >
-            <span className="text-xs text-slate-400">
+            <span className="text-sm text-slate-400">
               {stat.label}
             </span>
 
-            <span className="text-xs text-white">
+            <span className="text-sm text-white">
               {stat.value}
             </span>
           </div>

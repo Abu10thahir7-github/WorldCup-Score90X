@@ -27,13 +27,13 @@ export default function MiniGroupOverview() {
   const groups = data ?? [];
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950">
+    <div className="overflow-hidden rounded-3xl border border-slate-800 bg-navy-blue">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 px-5 py-2">
         <div>
-          <h2 className="text-sm font-medium text-white">Group Standings</h2>
+          <h2 className=" text-lg font-medium text-white">Group Standings</h2>
 
-          <p className="text-xs text-slate-400">FIFA World Cup 2026</p>
+          <p className="text-sm text-slate-400">FIFA World Cup 2026</p>
         </div>
 
         <Link
@@ -65,7 +65,7 @@ export default function MiniGroupOverview() {
           >
             {/* Group Header */}
             <div className="mb-2 flex items-center justify-between">
-              <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+              <span className="rounded-full bg-blue-500/10 px-3 py-1 text-sm font-medium text-blue-400">
                 {group.group}
               </span>
             </div>
@@ -86,7 +86,7 @@ export default function MiniGroupOverview() {
                   <div className="flex items-center gap-3">
                     <span
                       className={`
-                        w-5 text-center text-xs font-bold
+                        w-5 text-center text-sm font-bold
                         ${index < 2 ? 'text-green-400' : 'text-slate-500'}
                       `}
                     >
@@ -102,14 +102,14 @@ export default function MiniGroupOverview() {
                     <div>
                       <p className="text-sm font-medium text-white">{entry.team.tla}</p>
 
-                      <p className="text-[10px] text-slate-500">{entry.team.name}</p>
+                      <p className="text-sm text-slate-500">{entry.team.name}</p>
                     </div>
                   </div>
 
-                  <div className="text-right">
-                    <p className="font-bold text-white">{entry.points}</p>
+                  <div className="text-center">
+                    <p className="font-bold text-white text-sm">{entry.points}</p>
 
-                    <p className="text-[10px] text-slate-500">pts</p>
+                    <p className="text-sm text-slate-500">pts</p>
                   </div>
                 </div>
               ))}
