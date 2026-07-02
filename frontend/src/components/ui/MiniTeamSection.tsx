@@ -13,10 +13,10 @@ export default async function MiniTeamSection() {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
         <div>
-          <h3 className="text-sm font-medium text-white">
+          <h3 className="text-lg font-medium text-white">
             Featured Teams
           </h3>
-          <p className="text-xs text-slate-400">
+          <p className="text-sm text-slate-400">
             FIFA World Cup 2026 Participants
           </p>
         </div>
@@ -67,8 +67,8 @@ export default async function MiniTeamSection() {
                 {team.name}
               </h4>
 
-              <p className="text-xs text-slate-500">
-                National Team
+              <p className="text-sm text-slate-500">
+               {team.tla}
               </p>
             </div>
 

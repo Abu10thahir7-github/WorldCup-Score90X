@@ -44,10 +44,11 @@ export default function LiveNowBanner({ data }: Props) {
   console.log(match);
 
   return (
-    <div className=" liveNowBanner text-center relative !h-[40vh] overflow-hidden rounded-xl bg-gradient-to-r from-[#071120] via-[#0c1730] to-[#071120]">
-      <div className="flex mt-2 flex-col items-center justify-center">
-        <h1 className="uppercase font-bold">Today's Matches</h1>
-        <p className="text-xl font-bold text-white">
+    <div className="liveNowBanner relative min-h-[250px] sm:min-h-[360px] md:h-[40vh] overflow-hidden rounded-xl bg-gradient-to-r from-[#071120] via-[#0c1730] to-[#071120] px-2 sm:px-4">
+      <div className="my-2 flex flex-col items-center justify-center">
+        <h1 className=" text-lg font-bold uppercase">Today's Matches</h1>
+
+        <p className="text-sm sm:text-base md:text-lg font-bold uppercase">
           {new Date(match.utcDate).toLocaleDateString([], {
             day: 'numeric',
             month: 'short',
@@ -59,7 +60,7 @@ export default function LiveNowBanner({ data }: Props) {
       {/* Previous */}
       <button
         onClick={() => setCurrent(current === 0 ? matches.length - 1 : current - 1)}
-        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/10 p-3 backdrop-blur"
+        className="absolute h-fit left-4 bottom-0 md:top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/10 p-3 backdrop-blur"
       >
         <ChevronLeft size={22} />
       </button>
@@ -67,7 +68,7 @@ export default function LiveNowBanner({ data }: Props) {
       {/* Next */}
       <button
         onClick={() => setCurrent(current === matches.length - 1 ? 0 : current + 1)}
-        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/10 p-3 backdrop-blur"
+        className="absolute right-4 bottom-0 md:top-1/2 h-fit z-20 -translate-y-1/2 rounded-full bg-white/10 p-3 backdrop-blur"
       >
         <ChevronRight size={22} />
       </button>
@@ -77,7 +78,7 @@ export default function LiveNowBanner({ data }: Props) {
         <span
           className={`
       px-3 py-1 rounded-full
-      text-xs font-semibold uppercase
+      text-xs sm:text-sm mb-3 font-bold uppercase font-semibold uppercase
 
       ${
         match.status === 'IN_PLAY'
@@ -91,7 +92,7 @@ export default function LiveNowBanner({ data }: Props) {
           {match.status}
         </span>
       </div>
-      <div className="flex h-fit items-center justify-center gap-5">
+      <div className="flex h-fit items-center justify-center gap-2">
         {/* Home Team */}
         <div className=" flex flex-col items-center text-center">
           <Image
@@ -100,10 +101,10 @@ export default function LiveNowBanner({ data }: Props) {
             width={120}
             height={120}
             unoptimized
-            className="w-[100px] h-[100px] object-contain"
+            className="w-[100px] h-[70px] object-cover"
           />
 
-          <h2 className="  text-xl uppercase font-semibold text-white">{match.homeTeam.name}</h2>
+          <h2 className="  text-sm sm:text-base md:text-lg font-bold uppercase">{match.homeTeam.tla}</h2>
         </div>
 
         <div className="text-center">
@@ -117,7 +118,7 @@ export default function LiveNowBanner({ data }: Props) {
               </p>
 
               <p className="  text-xs text-slate-400">Kick Off</p>
-                  <MatchCountdown kickOff={match.utcDate} />
+              <MatchCountdown kickOff={match.utcDate} />
             </>
           ) : (
             <>
@@ -145,18 +146,21 @@ export default function LiveNowBanner({ data }: Props) {
             width={120}
             height={120}
             unoptimized
-            className="w-[100px] h-[100px] object-contain"
+            className="w-[100px] h-[70px] object-cover"
           />
 
-          <h2 className=" uppercase text-xl font-semibold text-white">{match.awayTeam.name}</h2>
+          <h2 className=" text-sm sm:text-base md:text-lg font-bold uppercase">{match.awayTeam.tla}</h2>
         </div>
       </div>
       <Link
-        className="text-center top-1 right-1 absolute bg-blue-500/15 text-blue-400 border   border-blue-500/20  py-1 px-2 rounded-xl  font-medium   text-xs"
+        className="text-center top-1 right-1 absolute bg-blue-500/15 text-blue-400 border   border-blue-500/20  py-1 px-2 rounded-xl  font-medium  flex text-xs"
         href={`/matches/${match.id}`}
       >
         {' '}
-        Match Details <ArrowRight size={14} className="inline-block items-center" />
+       <span className='hidden sm:block'>
+         Match Details
+        </span>
+         <ArrowRight size={14} className="inline-block items-center" />
       </Link>
 
       {/* Dots */}
