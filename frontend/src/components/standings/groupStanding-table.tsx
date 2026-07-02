@@ -108,7 +108,7 @@ export function StandingTable({ entries }: StandingTableProps) {
   }
 
   return (
-    <div className="w-full flex gap-2 p-3.5">
+    <div className="w-full flex flex-col md:flex-row gap-2 p-3.5">
       <div className="">
         <h3 className="text-2xl font-bold">Group Standing</h3>
         <p>FIFA World Cup 2026 </p>
@@ -130,62 +130,64 @@ export function StandingTable({ entries }: StandingTableProps) {
         </div>
 
         {filteredEntries.length ? (
-          <div className="grid pt-2 grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 gap-2 pt-4 md:grid-cols-2 2xl:grid-cols-3">
             {filteredEntries.map((group) => (
               <div
                 key={`${group.stage}-${group.group}`}
-                className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-soft"
+                className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg"
               >
                 <div className="border-b border-slate-800 bg-slate-950/90 px-6 py-4">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-sm   text-white">{group.group}</p>
-                    <a className="text-xs flex align-middle items-center    gap-1  text-indigo-500">
+                  <div className="flex   gap-2   justify-between">
+                    <p className="rounded-full bg-blue-500/10 px-3 py-1 text-sm font-medium text-blue-400">{group.group}</p>
+                    <a className="text-sm flex align-middle items-center    gap-1  text-indigo-500">
                       View Group <ArrowRight size={13} />
                     </a>
                   </div>
                 </div>
 
                 <table className="min-w-full border-collapse text-xs">
-                  <thead className="bg-slate-950/90 text-left text-slate-400">
+                  <thead className="bg-slate-950/90 text-left text-slate-400 text-sm">
                     <tr>
-                      <th className="px-2 py-4">Team</th>
-                      <th className="px-2 py-4">P</th>
-                      <th className="px-2 py-4">W</th>
-                      <th className="px-2 py-4">D</th>
-                      <th className="px-2 py-4">L</th>
-                      <th className="px-2 py-4">GD</th>
-                      <th className="px-2 py-4">Pts</th>
+                      <th className="px-3 py-3 text-left">Team</th>
+
+                      <th className="w-10 px-2 py-3 text-center">P</th>
+                      <th className="w-10 px-2 py-3 text-center">W</th>
+                      <th className="w-10 px-2 py-3 text-center">D</th>
+                      <th className="w-10 px-2 py-3 text-center">L</th>
+                      <th className="w-12 px-2 py-3 text-center">GD</th>
+                      <th className="w-12 px-2 py-3 text-center">Pts</th>
                     </tr>
                   </thead>
-                  <tbody className="text-xs">
+                  <tbody className="text-sm">
                     {group.table.map((entry, index) => (
                       <tr
                         key={entry.team.id}
                         className={`border-t border-slate-800 hover:bg-slate-950/70   ${index < 2 ? 'bg-green-500/10' : 'bg-slate-950/50'}`}
-
                       >
-                        <td className="px-4 py-4 text-white">
+                        <td className="px-2 py-3   text-slate-300">
                           <div className="flex items-center gap-3">
                             <span className="font-semibold">{entry.position}.</span>
                             <img
                               src={entry.team.crest}
                               alt={`${entry.team.name} crest`}
-                              className="w-6 h-6 border rounded-full object-cover"
+                          className="h-7 w-7 shrink-0 rounded-full object-cover"
                               onError={(e) => {
                                 const img = e.currentTarget as HTMLImageElement;
                                 img.style.display = 'none';
                               }}
                             />
-                            <Link href={`/teams/${entry.team.id}`} className="underline">
-                              <span className="truncate">{entry.team.name}</span>
+                            <Link href={`/teams/${entry.team.id}`} className="min-w-0">
+
+
+                              <span className="text-sm underline text-white font-medium">{entry.team.tla}</span>
                             </Link>
                           </div>
                         </td>
-                        <td className="px-2 py-4 text-slate-300">{entry.playedGames}</td>
-                        <td className="px-2 py-4 text-slate-300">{entry.won}</td>
-                        <td className="px-2 py-4 text-slate-300">{entry.draw}</td>
-                        <td className="px-2 py-4 text-slate-300">{entry.lost}</td>
-                        <td className="px-2 py-4 text-slate-300">{entry.goalDifference}</td>
+                        <td className="px-2 py-3 text-center text-slate-300">{entry.playedGames}</td>
+                        <td className="px-2 py-3 text-center text-slate-300">{entry.won}</td>
+                        <td className="px-2 py-3 text-center text-slate-300">{entry.draw}</td>
+                        <td className="px-2 py-3 text-center text-slate-300">{entry.lost}</td>
+                        <td className="px-2 py-3 text-center text-slate-300">{entry.goalDifference}</td>
                         <td className="px-4 py-4 font-semibold text-white">{entry.points}</td>
                       </tr>
                     ))}
@@ -200,7 +202,7 @@ export function StandingTable({ entries }: StandingTableProps) {
           </div>
         )}
       </div>
-      <div className="space-y-2 h-fit top-2.5 sticky w-[25%]">
+      <div className="space-y-2 h-fit top-2.5 sticky md:w-[25%]">
         <StandingsGuide />
         <TournamentInfo
           matchesPlayed={matchesPlayed}

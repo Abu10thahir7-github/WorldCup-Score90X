@@ -19,7 +19,7 @@ export function StandingsGuide() {
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-4 shadow-lg backdrop-blur-sm">
-      <h3 className="mb-3 text-sm font-bold text-white">
+      <h3 className="mb-3 text-lg font-medium text-white">
         Standings Guide
       </h3>
 
@@ -30,10 +30,10 @@ export function StandingsGuide() {
               className={`mt-1 h-3 w-3 rounded-full ${item.color}`}
             />
             <div>
-              <p className="font-medium tracking-wider text-xs up text-white">
+              <p className="font-medium   text-sm up text-white">
                 {item.title}
               </p>
-              <p className="text-xs text-slate-400">
+              <p className="text-sm text-slate-400">
                 {item.description}
               </p>
             </div>
