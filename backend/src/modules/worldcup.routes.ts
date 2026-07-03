@@ -8,6 +8,7 @@ import {
   getSingleTeamController,
   getPersonController,
   getTopScorersController,
+  getPlayerImageController,
 } from './worldcup.controller';
 
 const router = Router();
@@ -22,5 +23,6 @@ router.get('/persons/:id', getPersonController);
 
 router.get('/matchesDetails/:id', getMatchDetailsController);
 router.get('/scorers', getTopScorersController);
+router.get('/player-image', getPlayerImageController);
 
 export default router;

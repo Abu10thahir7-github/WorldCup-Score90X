@@ -8,6 +8,7 @@ import {
   getWorldCupSingleTeamsService,
   getPersonService,
   getTopScorersService,
+  getPlayerImageService,
 } from './worldcup.service';
 
 function getErrorMessage(error: unknown, defaultMessage: string) {
@@ -43,6 +44,31 @@ export async function getTopScorersController(req: Request, res: Response) {
     res.status(500).json({
       success: false,
       message: getErrorMessage(error, 'Failed to fetch matches'),
+    });
+  }
+}
+
+export async function getPlayerImageController(req: Request, res: Response) {
+  try {
+    const playerName = typeof req.query.name === 'string' ? req.query.name : '';
+
+    if (!playerName.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Player name is required',
+      });
+    }
+
+    const data = await getPlayerImageService(playerName);
+
+    return res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: getErrorMessage(error, 'Failed to fetch player image'),
     });
   }
 }

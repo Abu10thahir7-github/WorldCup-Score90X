@@ -1,4 +1,5 @@
 const cache = new Map();
+const inFlightRequests = new Map<string, Promise<unknown>>();
 
 export const getCache = (key: string) => {
   const item = cache.get(key);
@@ -22,4 +23,20 @@ export const setCache = (
     data,
     expiry: Date.now() + ttl,
   });
+};
+
+export const getOrSetInFlightRequest = <T>(key: string, request: () => Promise<T>) => {
+  const existing = inFlightRequests.get(key);
+
+  if (existing) {
+    return existing as Promise<T>;
+  }
+
+  const promise = request().finally(() => {
+    inFlightRequests.delete(key);
+  });
+
+  inFlightRequests.set(key, promise as Promise<unknown>);
+
+  return promise;
 };

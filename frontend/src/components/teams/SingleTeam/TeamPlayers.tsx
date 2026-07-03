@@ -30,7 +30,7 @@ export default function TeamPlayers({ team }: { team: Team }) {
 
 
   const PlayerCard = ({ player }: any) => {
-  const [image, setImage] = useState('/player-placeholder.png');
+  const [image, setImage] = useState('null');
 
   useEffect(() => {
     async function loadImage() {
@@ -110,7 +110,7 @@ export default function TeamPlayers({ team }: { team: Team }) {
       <div>
         <h1>Coach</h1>
         <div>
-          
+
         </div>
       </div>
       <div className="mb-2 flex items-center justify-between">

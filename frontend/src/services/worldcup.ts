@@ -1,5 +1,5 @@
 import { axiosClient } from '@/lib/axios';
-import { getCache, setCache } from '@/lib/cache';
+import { getCache, getOrSetInFlightRequest, setCache } from '@/lib/cache';
 import type { Match, Person, StandingGroup, Team, TopScorer, } from '@/types';
 import { BracketMatch } from '@/types/bracket';
 import { MatchDetails } from '@/types/matchDetails';
@@ -64,28 +64,34 @@ export const worldcupApi = {
     const cached = getCache(cacheKey);
 
     if (cached) return cached;
-    const response = await axiosClient.get<{
-      success: boolean;
-      data: Team;
-    }>(`/teams/${teamId}`);
 
-    setCache(cacheKey, response.data.data);
+    return getOrSetInFlightRequest(cacheKey, async () => {
+      const response = await axiosClient.get<{
+        success: boolean;
+        data: Team;
+      }>(`/teams/${teamId}`);
 
-    return response.data.data;
+      setCache(cacheKey, response.data.data);
+
+      return response.data.data;
+    });
   },
   getPersonById: async (personId: string): Promise<Person> => {
     const cacheKey = `person-${personId}`;
 
     const cached = getCache(cacheKey);
     if (cached) return cached;
-    const response = await axiosClient.get<{
-      success: boolean;
-      data: Person;
-    }>(`/persons/${personId}`);
 
-    setCache(cacheKey, response.data.data);
+    return getOrSetInFlightRequest(cacheKey, async () => {
+      const response = await axiosClient.get<{
+        success: boolean;
+        data: Person;
+      }>(`/persons/${personId}`);
 
-    return response.data.data;
+      setCache(cacheKey, response.data.data);
+
+      return response.data.data;
+    });
   },
   getStandings: async (): Promise<StandingGroup[]> => {
     const cacheKey = 'standings';

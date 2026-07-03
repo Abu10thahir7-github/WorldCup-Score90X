@@ -14,6 +14,15 @@ export function usePerson(personId: string) {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,
-    retry: 1,
+    retry: (failureCount, error: unknown) => {
+      const status = (error as { response?: { status?: number } })?.response?.status;
+
+      if (status === 429) {
+        return failureCount < 2;
+      }
+
+      return failureCount < 1;
+    },
+    retryDelay: 1000,
   });
 }

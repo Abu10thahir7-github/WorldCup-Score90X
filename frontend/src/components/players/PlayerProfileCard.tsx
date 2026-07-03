@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { Person } from '@/types';
 import { CircleAlertIcon } from 'lucide-react';
 import { getPlayerImage } from '@/services/playersImage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface PlayerProfileCardProps {
   player: Person;
@@ -35,10 +35,29 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
   const imageSrc =
     team.crest || 'https://i.pinimg.com/736x/f8/ac/88/f8ac888d041ec047923567995f7444fc.jpg';
 
-  const [image, setImage] = useState('/player-placeholder.png');
-  getPlayerImage(player.name).then((img) => {
-    if (img) setImage(img);
-  });
+  const [image, setImage] = useState<string>(imageSrc);
+
+  useEffect(() => {
+    let isActive = true;
+
+    setImage(imageSrc);
+
+    getPlayerImage(player.name)
+      .then((img) => {
+        if (isActive) {
+          setImage(img || imageSrc);
+        }
+      })
+      .catch(() => {
+        if (isActive) {
+          setImage(imageSrc);
+        }
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, [player.name, imageSrc]);
   function generatePlayerAbout(player: Person) {
     const age = player.dateOfBirth
       ? Math.floor(
@@ -69,6 +88,7 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
               width={200}
               height={200}
               className="rounded-3xl object-contain w-full h-full"
+              
             />
           </div>
 
