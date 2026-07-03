@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Search, X } from 'lucide-react';
+import { Info, Menu, Search, X } from 'lucide-react';
 import { useUIStore } from '@/store/ui-store';
 import { MobileNavbar } from '@/components/layout/mobile-navbar';
 import BackButton from '../ui/BackButton';
@@ -42,11 +42,11 @@ const navLinks = [
     href: "/teams",
     icon: <Users size={18} />,
   },
-  {
-    label: "Bracket",
-    href: "/bracket",
-    icon: <Trophy size={18} />,
-  },
+  // {
+  //   label: "Bracket",
+  //   href: "/bracket",
+  //   icon: <Trophy size={18} />,
+  // },
   {
     label: "Table Standings",
     href: "/table-standing",
@@ -61,6 +61,11 @@ const navLinks = [
     label: "Top Scorers",
     href: "/top-scorers",
     icon: <Goal size={18} />,
+  },
+  {
+    label: "About",
+    href: "/about",
+    icon: <Info size={18} />,
   },
 
 ];

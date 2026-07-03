@@ -19,81 +19,98 @@ export default function PlayerCurrectTeam({ player }: PlayerProfileCardProps) {
     team.crest || 'https://i.pinimg.com/736x/f8/ac/88/f8ac888d041ec047923567995f7444fc.jpg';
   return (
     <div className="rounded-3xl border border-color bg-navy-blue  p-2  ">
-      <h3 className=" text-sm font-medium mb-1 uppercase ">Current Team</h3>
-      <div className="grid grid-cols-2 gap-2">
+      <h3 className=" text-lg p-2 font-medium mb-1 uppercase ">Current Team</h3>
+      <div className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
         <div>
           <div className=" flex items-start bg-slate-950/90  rounded-2xl py-3 px-2 h-full  gap-3">
-            <Image
-              src={imageSrc}
-              alt={team.name || team.name}
-              width={150}
-              height={150}
-              className="object-contain "
-              unoptimized
-            />
+            <div className="flex-1">
+              <div className='flex items-center gap-5 sm:gap-10 p-2'>
+                <Image
+                  src={imageSrc}
+                  alt={team.name || team.name}
+                  width={150}
+                  height={150}
+                  className="w-20 h-20 sm:h-30 sm:w-30 object-contain "
+                  unoptimized
+                />
+                {/* Header */}
+                <div className="">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h2 className="text-2xl font-semibold text-white">{team.name}</h2>
 
-            <div className="text-sm space-y-2">
-              <span className="flex items-center gap-2">
-                <h1 className="text-lg font-medium">{player.currentTeam.name} </h1>
-                <p className="border border-color py-0.5 px-2 rounded-full text-slate-500 text-xs">
-                  {player.currentTeam.tla}
-                </p>
-              </span>
-
-              <div className="space-y-3">
-                <div className="grid grid-cols-[35%_1fr] items-center gap-4">
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <Calendar className="text-slate-500" size={16} />
-                    <span>Founded</span>
+                    <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+                      {team.tla}
+                    </span>
                   </div>
-                  <p>{player.currentTeam.founded}</p>
+
+                  <p className="mt-2 text-sm text-slate-400">Professional Football Club</p>
+                </div>
+              </div>
+
+              {/* Information */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                {/* Founded */}
+                <div className="rounded-2xl bg-slate-900/60 p-4">
+                  <div className="mb-2 flex items-center gap-2 text-slate-400">
+                    <Calendar size={16} />
+                    <span className="text-xs uppercase tracking-wider">Founded</span>
+                  </div>
+
+                  <p className="text-lg font-semibold text-white">{team.founded}</p>
                 </div>
 
-               {player.currentTeam.venue&&
+                {/* Stadium */}
+                {team.venue && (
+                  <div className="rounded-2xl bg-slate-900/60 p-4">
+                    <div className="mb-2 flex items-center gap-2 text-slate-400">
+                      <LandPlotIcon size={16} />
+                      <span className="text-xs uppercase tracking-wider">Stadium</span>
+                    </div>
 
-              <div className="grid grid-cols-[35%_1fr] items-center gap-4">
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <LandPlotIcon className="text-slate-500" size={16} />
-                    <span>Stadium</span>
+                    <p className="text-white">{team.venue}</p>
                   </div>
-                  <p>{player.currentTeam.venue}</p>
-                </div>
-}
-                <div className="grid grid-cols-[35%_1fr] items-center gap-4">
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <MapPin className="text-slate-500" size={16} />
-                    <span>Address</span>
+                )}
+
+                {/* Address */}
+                <div className="rounded-2xl bg-slate-900/60 p-4 sm:col-span-2">
+                  <div className="mb-2 flex items-center gap-2 text-slate-400">
+                    <MapPin size={16} />
+                    <span className="text-xs uppercase tracking-wider">Address</span>
                   </div>
-                  <p>{player.currentTeam.address}</p>
+
+                  <p className="text-white leading-relaxed">{team.address}</p>
                 </div>
 
-                <div className="grid grid-cols-[35%_1fr] items-center gap-4">
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <AppWindow className="text-slate-500" size={16} />
-                    <span>Website</span>
+                {/* Website */}
+                <div className="rounded-2xl bg-slate-900/60 p-4">
+                  <div className="mb-2 flex items-center gap-2 text-slate-400">
+                    <AppWindow size={16} />
+                    <span className="text-xs uppercase tracking-wider">Website</span>
                   </div>
+
                   <a
-                    href={player.currentTeam.website}
+                    href={team.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-slate-400 underline hover:text-blue-300 break-all"
+                    className="text-blue-400 hover:text-blue-300 transition break-all"
                   >
-                    {player.currentTeam.website}
+                    {team.website}
                   </a>
                 </div>
 
-                <div className="grid grid-cols-[35%_1fr] items-center gap-4">
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <Palette className="text-slate-500" size={16} />
-                    <span>Club Colors</span>
+                {/* Club Colors */}
+                <div className="rounded-2xl bg-slate-900/60 p-4">
+                  <div className="mb-3 flex items-center gap-2 text-slate-400">
+                    <Palette size={16} />
+                    <span className="text-xs uppercase tracking-wider">Club Colors</span>
                   </div>
 
                   <ColorBadges
                     title={team.clubColors}
                     colors={team.clubColors}
-                    titleClassName=""
-                    className='flex-col items-start'
-                    colorsWrapperClassName="gap-3 "
+                    titleClassName="text-sm text-slate-300"
+                    className="gap-3"
+                    colorsWrapperClassName="gap-3"
                     dotClassName="h-5 w-5"
                   />
                 </div>
@@ -122,9 +139,7 @@ export default function PlayerCurrectTeam({ player }: PlayerProfileCardProps) {
             </div>
           </div>
           <div className="p-2 rounded-xl bg-slate-950/90   ">
-            <h1 className="text-sm font-[400] mb-1 uppercase ">
-              Running Competitions
-            </h1>
+            <h1 className="text-sm font-[400] mb-1 uppercase ">Running Competitions</h1>
             <div className="space-y-1">
               {player.currentTeam.runningCompetitions?.map((competition) => (
                 <div
@@ -152,9 +167,7 @@ export default function PlayerCurrectTeam({ player }: PlayerProfileCardProps) {
                   <p className="border border-color py-0.5 px-2 rounded-full text-slate-500 text-xs">
                     {competition.type}
                   </p>
-
                 </div>
-
               ))}
             </div>
           </div>

@@ -27,7 +27,7 @@ export default function MatchDetailsPage({ params }: MatchDetailsPageProps) {
 
   console.log(match);
 
-  
+
   if (isLoading) {
     return <div className="h-96 animate-pulse rounded-3xl bg-slate-800/70" />;
   }
@@ -38,22 +38,30 @@ export default function MatchDetailsPage({ params }: MatchDetailsPageProps) {
 
 
   return (
-    <>
-      <div className='flex'>
-        <div className="w-[75%] space-y-2 p-2">
-          <MatchLiveScoreBanner match={match} />
-          <MatchDetails match={match} />
-          <HomeAwayTeamDetails match={match} />
-          <div className="flex gap-2">
-            <VenueCard venue={match.venue || 'TBA'} />
-            <MatchReferees match={match} />
-          </div>
-          <ScoreSummary match={match} />
-        </div>
-        <div className="w-[25%] h-fit sticky top-2 ">
-          <MiniGroupOverview />
-        </div>
+  <div className="flex flex-col lg:flex-row gap-4 p-2">
+    {/* Main Content */}
+    <div className="w-full lg:w-3/4 space-y-2">
+      <MatchLiveScoreBanner match={match} />
+      <MatchDetails match={match} />
+      <HomeAwayTeamDetails match={match} />
+
+      <div className="flex flex-row gap-2">
+
+          <VenueCard venue={match.venue || 'TBA'} />
+      
+
+
+          <MatchReferees match={match} />
+
       </div>
-    </>
-  );
+
+      <ScoreSummary match={match} />
+    </div>
+
+    {/* Sidebar */}
+    <aside className="w-full lg:w-1/4 lg:sticky lg:top-2 h-fit">
+      <MiniGroupOverview />
+    </aside>
+  </div>
+);
 }

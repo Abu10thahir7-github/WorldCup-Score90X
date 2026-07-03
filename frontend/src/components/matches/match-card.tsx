@@ -20,8 +20,26 @@ export function MatchCard({ match }: MatchCardProps) {
     minute: '2-digit',
   });
 
-  const homeScore = match.score?.fullTime?.home;
-  const awayScore = match.score?.fullTime?.away;
+  const score = match.score ?? {};
+
+  const isPenaltyShootout = score.duration === 'PENALTY_SHOOTOUT';
+
+  const displayHomeScore = isPenaltyShootout ? score.regularTime?.home : score.fullTime?.home;
+
+  const displayAwayScore = isPenaltyShootout ? score.regularTime?.away : score.fullTime?.away;
+
+  const homePens = score.penalties?.home;
+  const awayPens = score.penalties?.away;
+
+
+  const hasScore =
+  displayHomeScore !== null &&
+  displayHomeScore !== undefined &&
+  displayAwayScore !== null &&
+  displayAwayScore !== undefined;
+
+
+  
   const statusConfig = {
     TIMED: {
       label: 'Scheduled',
@@ -29,7 +47,8 @@ export function MatchCard({ match }: MatchCardProps) {
     },
     IN_PLAY: {
       label: 'Live',
-      className: 'bg-red-500/15 text-red-400 border rounded-lg text-xs border-red-500/20 animate-pulse',
+      className:
+        'bg-red-500/15 text-red-400 border rounded-lg text-xs border-red-500/20 animate-pulse',
     },
     PAUSED: {
       label: 'Half Time',
@@ -37,7 +56,8 @@ export function MatchCard({ match }: MatchCardProps) {
     },
     FINISHED: {
       label: 'Full Time',
-      className: 'bg-emerald-500/15 text-emerald-400 rounded-lg text-xs border  border-emerald-500/20',
+      className:
+        'bg-emerald-500/15 text-emerald-400 rounded-lg text-xs border  border-emerald-500/20',
     },
     POSTPONED: {
       label: 'Postponed',
@@ -94,18 +114,52 @@ export function MatchCard({ match }: MatchCardProps) {
             </div>
 
             {/* Score */}
-            <div className="text-center min-w-[70px] sm:min-w-[90px]">
-              {homeScore !== null && awayScore !== null ? (
+            <div className="text-center min-w-[90px]">
+              {hasScore ? (
                 <>
-                  <div className="text-2xl sm:text-3xl font-bold text-white">
-                    {homeScore} : {awayScore}
+                  <div className="flex items-start justify-center gap-3">
+                    {/* Home */}
+                    <div className="flex items-start">
+                      <span className="text-2xl sm:text-3xl font-bold text-white">
+                        {displayHomeScore}
+                      </span>
+
+                      {isPenaltyShootout && (
+                        <span className="-mt-1 ml-1 text-xs sm:text-sm font-bold text-sky-400">
+                          ({homePens})
+                        </span>
+                      )}
+                    </div>
+
+                    <span className="text-2xl sm:text-3xl font-bold text-slate-500">:</span>
+
+                    {/* Away */}
+                    <div className="flex items-start">
+                      <span className="text-2xl sm:text-3xl font-bold text-white">
+                        {displayAwayScore}
+                      </span>
+
+                      {isPenaltyShootout && (
+                        <span className="-mt-1 ml-1 text-xs sm:text-sm font-bold text-sky-400">
+                          ({awayPens})
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <p className={currentStatus.className}> {currentStatus?.label || match.status}</p>
+
+                  <p
+                    className={`${currentStatus?.className} mt-2 inline-flex items-center justify-center px-3 py-1 font-medium`}
+                  >
+                    {isPenaltyShootout ? 'Penalties' : currentStatus?.label || match.status}
+                  </p>
                 </>
               ) : (
                 <>
-                  <div className="text-base sm:text-sm  space-y-1 text-white">VS</div>
-                  <p className={currentStatus?.className}>
+                  <div className="text-lg font-bold text-white">VS</div>
+
+                  <p
+                    className={`${currentStatus?.className} mt-2 inline-flex items-center justify-center px-3 py-1 font-medium`}
+                  >
                     {currentStatus?.label || match.status}
                   </p>
                 </>

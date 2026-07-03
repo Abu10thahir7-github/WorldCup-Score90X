@@ -9,8 +9,8 @@ export function MatchDetails({ match }: MatchDetailsProps) {
   function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
     return (
       <div className="flex items-center justify-between border-b border-slate-800/70 p-2">
-        <span className="text-sm text-slate-400">{label}</span>
-        <span className="text-sm text-white">{value}</span>
+        <span className="text-base  text-slate-400">{label}</span>
+        <span className="text-base text-white">{value}</span>
       </div>
     );
   }
@@ -64,7 +64,10 @@ export function MatchDetails({ match }: MatchDetailsProps) {
         {/* MATCH INFO */}
         <div className="rounded-xl border border-slate-800 bg-navy-blue h-[100%]  px-2">
           <h3 className="mb-2 p-2 flex items-center gap-2 text-lg font-medium text-white">
-            <Flag size={17} />
+            <div className='flex p-2 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition'>
+
+            <Flag className='' size={17} />
+            </div>
             Match Information
           </h3>
 
@@ -88,22 +91,25 @@ export function MatchDetails({ match }: MatchDetailsProps) {
           {/* SCORE */}
           <div className="rounded-xl border border-slate-800 bg-navy-blue p-2 h-fit">
             <h3 className=" p-1 flex items-center gap-2 text-lg font-medium text-white">
-              <ClipboardPen size={17} /> Score
+              <div className='flex p-2 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition'>
+              <ClipboardPen size={17} />
+              </div>
+               Score
             </h3>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-2xl bg-slate-900 p-2 text-center">
-                <p className="text-slate-400 text-xs">Full Time</p>
+                <p className="text-white text-base">Full Time</p>
 
-                <h2 className=" text-2xl font-bold text-white">
+                <h2 className=" text-2xl font-bold text-white/70">
                   {match.score.fullTime.home ?? '-'}:{match.score.fullTime.away ?? '-'}
                 </h2>
               </div>
 
               <div className="rounded-2xl bg-slate-900 p-2 text-center">
-                <p className="text-slate-400 text-xs">Half Time</p>
+                <p className="text-white text-base">Half Time</p>
 
-                <h2 className=" text-2xl font-bold text-white">
+                <h2 className=" text-2xl font-bold text-white/70">
                   {match.score.halfTime.home ?? '-'}:{match.score.halfTime.away ?? '-'}
                 </h2>
               </div>
@@ -111,7 +117,9 @@ export function MatchDetails({ match }: MatchDetailsProps) {
           </div>
           <div className="rounded-xl border border-slate-800 bg-navy-blue p-2 h-fit">
             <h3 className=" p-1 flex items-center gap-2 text-lg font-medium text-white">
+              <div className='flex p-2 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition'>
               <Trophy size={17} />
+              </div>
               Competition Details
             </h3>
 
@@ -128,15 +136,15 @@ export function MatchDetails({ match }: MatchDetailsProps) {
               <div className="w-full">
                 <h4 className="text-lg  font-medium text-white">{match.competition.name}</h4>
 
-                <div className="text-slate-400  border-b border-slate-800/70 text-sm  flex justify-between w-full p-1 ">
+                <div className="text-slate-400  border-b border-slate-800/70 text-base  flex justify-between w-full p-1 ">
                   <p className=" "> Code:</p>
                   <p>{match.competition.code}</p>
                 </div>
-                <div className="text-slate-400  border-b border-slate-800/70 text-sm  flex justify-between w-full p-1 ">
+                <div className="text-slate-400  border-b border-slate-800/70 text-base  flex justify-between w-full p-1 ">
                   <p className=" "> Type:</p>
                   <p> {match.competition.type}</p>
                 </div>
-                <div className="text-slate-400    text-sm  flex justify-between w-full p-1 ">
+                <div className="text-slate-400    text-base  flex justify-between w-full p-1 ">
                   <p className=" "> Area:</p>
                   <p> {match.area.name}</p>
                 </div>

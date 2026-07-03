@@ -55,11 +55,11 @@ export default function ScoreSummary({ match }: MatchDetailsProps) {
       <div
         className={`grid ${
           isKnockout
-            ? 'grid-cols-[1fr_80px_80px_80px_80px_80px]'
-            : 'grid-cols-[1fr_80px_80px_80px]'
+            ? 'grid-cols-[1fr_50px_50px_50px_50px_50px]'
+            : 'grid-cols-[1fr_50px_50px_50px]'
         } border-b border-slate-800 px-5 py-3 text-[11px] uppercase tracking-wider text-slate-500`}
       >
-        <span className="text-sm font-semibold text-white">
+        <span className="text-sm font-medium text-white">
           Score Summary
         </span>
 
@@ -80,8 +80,8 @@ export default function ScoreSummary({ match }: MatchDetailsProps) {
       <div
         className={`grid ${
           isKnockout
-            ? 'grid-cols-[1fr_80px_80px_80px_80px_80px]'
-            : 'grid-cols-[1fr_80px_80px_80px]'
+            ? 'grid-cols-[1fr_50px_50px_50px_50px_50px]'
+            : 'grid-cols-[1fr_50px_50px_50px]'
         } items-center border-b border-slate-800 px-5 py-4`}
       >
         <div className="flex items-center gap-3">
@@ -98,8 +98,8 @@ export default function ScoreSummary({ match }: MatchDetailsProps) {
               {match.homeTeam.name}
             </p>
 
-            <p className="text-xs text-slate-500">
-              ({match.homeTeam.tla})
+            <p className="text-sm text-white/70">
+              {match.homeTeam.tla}
             </p>
           </div>
         </div>
@@ -129,8 +129,8 @@ export default function ScoreSummary({ match }: MatchDetailsProps) {
       <div
         className={`grid ${
           isKnockout
-            ? 'grid-cols-[1fr_80px_80px_80px_80px_80px]'
-            : 'grid-cols-[1fr_80px_80px_80px]'
+            ? 'grid-cols-[1fr_50px_50px_50px_50px_50px]'
+            : 'grid-cols-[1fr_50px_50px_50px]'
         } items-center px-5 py-4`}
       >
         <div className="flex items-center gap-3">
@@ -147,8 +147,8 @@ export default function ScoreSummary({ match }: MatchDetailsProps) {
               {match.awayTeam.name}
             </p>
 
-            <p className="text-xs text-slate-500">
-              ({match.awayTeam.tla})
+            <p className="text-sm text-white/70">
+              {match.awayTeam.tla}
             </p>
           </div>
         </div>

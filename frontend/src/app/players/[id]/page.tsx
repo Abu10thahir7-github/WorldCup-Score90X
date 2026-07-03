@@ -14,9 +14,7 @@ interface PlayerDetailsPageProps {
   }>;
 }
 
-export default function PlayerDetailsPage({
-  params,
-}: PlayerDetailsPageProps) {
+export default function PlayerDetailsPage({ params }: PlayerDetailsPageProps) {
   const { id } = React.use<{ id: string }>(params);
 
   const { data: player, isError, isLoading } = usePerson(id);
@@ -34,13 +32,13 @@ export default function PlayerDetailsPage({
   }
 
   return (
-    <div className="flex space-x-2 sp m-2">
-      <div className="w-[80%] space-y-2">
+    <div className="flex flex-col lg:flex-row gap-4 p-2 md:p-4 lg:p-5">
+      <div className="w-full lg:w-[75%] space-y-2 md:space-y-4">
         <PlayerProfileCard player={player} />
         <PlayerCurrectTeam player={player} />
         <PlayerInformation player={player} />
       </div>
-      <div className="team-info space-y-2 h-fit top-2.5 sticky w-[25%]"></div>
+      <div className="w-full lg:w-[25%] lg:sticky lg:top-4 h-fit space-y-2 md:space-y-4"></div>
     </div>
   );
 }

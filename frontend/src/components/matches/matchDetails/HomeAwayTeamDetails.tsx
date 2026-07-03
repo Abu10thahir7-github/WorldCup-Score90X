@@ -21,15 +21,15 @@ function TeamCard({
       {/* Header */}
       <div className='flex  items-center justify-between'>
 
-      <div className="mb-1 flex items-center ">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl  ">{icon}</div>
+      <div className="mb-1 gap-1 flex items-center ">
+        <div className='flex p-2 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition'>{icon}</div>
 
         <h3 className="  flex items-center gap-2 text-lg font-medium text-white">{title}</h3>
       </div>
       <Link className='text-sm flex items-center gap-1 text-indigo-700 underline' href={`/teams/${team.id}`}>View Team <ArrowUpRight size={18} /></Link>
       </div>
 
-      <div className="flex flex-col gap-2 lg:flex-row">
+      <div className="flex  gap-2 flex-row">
         {/* Logo */}
         <div className="flex p-2 ">
           <Image
@@ -44,25 +44,21 @@ function TeamCard({
 
         {/* Details */}
         <div className="flex-1">
-          <h4 className="text-xl font-bold text-white">{team.name}</h4>
+          <h4 className="text-lg font-bold text-white">{team.name}</h4>
 
-          <p className="text-xs text-slate-400">{team.shortName}</p>
 
           <div className="space-y-1 text-sm">
             <div className="flex justify-between border-b border-slate-800 pb-2">
-              <span className="text-slate-400">TLA</span>
-              <span className=" text-white">{team.tla}</span>
-            </div>
-
-            <div className="flex justify-between border-b border-slate-800 pb-2">
-              <span className="text-slate-400">Short Name</span>
+              <span className="text-slate-400">Full Name</span>
               <span className=" text-white">{team.shortName}</span>
             </div>
 
-            <div className="flex justify-between">
-              <span className="text-slate-400">Team ID</span>
-              <span className=" text-white">{team.id}</span>
+            <div className="flex justify-between  pb-2">
+              <span className="text-slate-400">Short Name</span>
+              <span className=" text-white">{team.tla}</span>
             </div>
+
+
           </div>
         </div>
       </div>

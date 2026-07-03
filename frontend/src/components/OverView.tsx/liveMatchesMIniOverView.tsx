@@ -139,26 +139,59 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
                         className="h-8 w-8"
                       />
 
-                      <span className="text-white font-medium text-xs sm:text-sm">{match.homeTeam.tla}</span>
+                      <span className="text-white font-medium text-xs sm:text-sm">
+                        {match.homeTeam.tla}
+                      </span>
                     </div>
 
                     <div className="mx-6 text-center">
                       {match.status === 'TIMED' ? (
-
-
-                          <MatchCountdown kickOff={match.utcDate} />
-
+                        <MatchCountdown kickOff={match.utcDate} />
                       ) : (
-                        <div className="text-lg font-bold text-white">
-                          {match.score?.fullTime?.home ?? 0}
-                          <span className="mx-2 text-slate-500">-</span>
-                          {match.score?.fullTime?.away ?? 0}
+                        <div className="text-center">
+                          <div className="flex items-start justify-center gap-2">
+                            {/* Home */}
+                            <div className="flex items-start">
+                              <span className="text-lg sm:text-xl font-bold text-white">
+                                {match.score?.fullTime?.home ?? 0}
+                              </span>
+
+                              {match.score?.duration === 'PENALTY_SHOOTOUT' && (
+                                <span className="-mt-1 ml-1 text-xs sm:text-sm font-bold text-sky-400">
+                                  ({match.score?.penalties?.home})
+                                </span>
+                              )}
+                            </div>
+
+                            <span className="font-bold text-slate-500">-</span>
+
+                            {/* Away */}
+                            <div className="flex items-start">
+                              <span className="text-lg sm:text-xl font-bold text-white">
+                                {match.score?.fullTime?.away ?? 0}
+                              </span>
+
+                              {match.score?.duration === 'PENALTY_SHOOTOUT' && (
+                                <span className="-mt-1 ml-1 text-xs sm:text-sm font-bold text-sky-400">
+                                  ({match.score?.penalties?.away})
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          {match.score?.duration === 'PENALTY_SHOOTOUT' && (
+                            <div className="mt-1 text-[10px] uppercase tracking-wider text-amber-400">
+                              Penalties
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
 
                     <div className="flex items-center gap-3 flex-1 justify-end">
-                      <span className="text-white font-medium text-xs sm:text-sm">{match.awayTeam.tla}</span>
+                      <span className="text-white font-medium text-xs sm:text-sm">
+                        {match.awayTeam.tla}
+                      </span>
 
                       <img
                         src={match.awayTeam.crest}
