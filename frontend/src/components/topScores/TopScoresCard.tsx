@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function TopScorerCard({ scorer, rank }: Props) {
-  const [image, setImage] = useState('/player-placeholder.png');
+  const [image, setImage] = useState('null');
 
   useEffect(() => {
     if (!scorer?.player) return;

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { Person } from '@/types';
 import { CircleAlertIcon } from 'lucide-react';
 import { getPlayerImage } from '@/services/playersImage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface PlayerProfileCardProps {
   player: Person;
@@ -35,10 +35,29 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
   const imageSrc =
     team.crest || 'https://i.pinimg.com/736x/f8/ac/88/f8ac888d041ec047923567995f7444fc.jpg';
 
-  const [image, setImage] = useState('/player-placeholder.png');
-  getPlayerImage(player.name).then((img) => {
-    if (img) setImage(img);
-  });
+  const [image, setImage] = useState<string>(imageSrc);
+
+  useEffect(() => {
+    let isActive = true;
+
+    setImage(imageSrc);
+
+    getPlayerImage(player.name)
+      .then((img) => {
+        if (isActive) {
+          setImage(img || imageSrc);
+        }
+      })
+      .catch(() => {
+        if (isActive) {
+          setImage(imageSrc);
+        }
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, [player.name, imageSrc]);
   function generatePlayerAbout(player: Person) {
     const age = player.dateOfBirth
       ? Math.floor(
@@ -105,43 +124,37 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
               </div>
             </div>
 
-           <div className="grid grid-cols-2 gap-3 rounded-2xl border border-gray-600/50 bg-white/[0.03] p-4 sm:grid-cols-4">
-  <div className="flex flex-col items-center text-center">
-    <span className="text-sm uppercase tracking-widest text-slate-400">
-      Shirt No
-    </span>
-    <span className="mt-1 text-base font-semibold text-white">
-      {player.shirtNumber ?? "-"}
-    </span>
-  </div>
+            <div className="grid grid-cols-2 gap-3 rounded-2xl border border-gray-600/50 bg-white/[0.03] p-4 sm:grid-cols-4">
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-widest text-slate-400">Shirt No</span>
+                <span className="mt-1 text-base font-semibold text-white">
+                  {player.shirtNumber ?? '-'}
+                </span>
+              </div>
 
-  <div className="flex flex-col items-center text-center">
-    <span className="text-sm uppercase tracking-widest text-slate-400">
-      Birth
-    </span>
-    <span className="mt-1 text-base font-semibold text-white">
-      {player.dateOfBirth ?? "-"}
-    </span>
-  </div>
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-widest text-slate-400">Birth</span>
+                <span className="mt-1 text-base font-semibold text-white">
+                  {player.dateOfBirth ?? '-'}
+                </span>
+              </div>
 
-  <div className="flex flex-col items-center text-center">
-    <span className="text-sm uppercase tracking-widest text-slate-400">
-      Nationality
-    </span>
-    <span className="mt-1 text-base font-semibold text-white">
-      {player.nationality ?? "-"}
-    </span>
-  </div>
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-widest text-slate-400">
+                  Nationality
+                </span>
+                <span className="mt-1 text-base font-semibold text-white">
+                  {player.nationality ?? '-'}
+                </span>
+              </div>
 
-  <div className="flex flex-col items-center text-center">
-    <span className="text-sm uppercase tracking-widest text-slate-400">
-      Position
-    </span>
-    <span className="mt-1 text-base font-semibold text-white">
-      {player.position ?? "-"}
-    </span>
-  </div>
-</div>
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-widest text-slate-400">Position</span>
+                <span className="mt-1 text-base font-semibold text-white">
+                  {player.position ?? '-'}
+                </span>
+              </div>
+            </div>
 
             <h1 className="text-base text-slate-300">{about}</h1>
             <p className="uppercase mt-5 text-slate-400 flex gap-2 text-sm">

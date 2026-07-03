@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMatchesController = getMatchesController;
 exports.getTopScorersController = getTopScorersController;
+exports.getPlayerImageController = getPlayerImageController;
 exports.getStandingsController = getStandingsController;
 exports.getTeamsController = getTeamsController;
 exports.getSingleTeamController = getSingleTeamController;
@@ -40,6 +41,28 @@ async function getTopScorersController(req, res) {
         res.status(500).json({
             success: false,
             message: getErrorMessage(error, 'Failed to fetch matches'),
+        });
+    }
+}
+async function getPlayerImageController(req, res) {
+    try {
+        const playerName = typeof req.query.name === 'string' ? req.query.name : '';
+        if (!playerName.trim()) {
+            return res.status(400).json({
+                success: false,
+                message: 'Player name is required',
+            });
+        }
+        const data = await (0, worldcup_service_1.getPlayerImageService)(playerName);
+        return res.status(200).json({
+            success: true,
+            data,
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: getErrorMessage(error, 'Failed to fetch player image'),
         });
     }
 }

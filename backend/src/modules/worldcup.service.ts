@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {
   getWorldCupMatchesRepo,
   getWorldCupStandingsRepo,
@@ -18,7 +20,7 @@ export async function getWorldCupMatchesService() {
       const matches = await getWorldCupMatchesRepo();
       return matches.map(mapMatch);
     },
-    1000 * 60 * 5 // 5 minutes
+    1000 * 60 * 5, // 5 minutes
   );
 }
 export async function getTopScorersService() {
@@ -26,9 +28,8 @@ export async function getTopScorersService() {
     'wc-top-scorers',
     async () => {
       return await getWorldCupTopScorersRepo();
-
     },
-    1000 * 60 * 5 // 5 minutes
+    1000 * 60 * 5, // 5 minutes
   );
 }
 
@@ -38,7 +39,7 @@ export async function getWorldCupStandingsService() {
     async () => {
       return await getWorldCupStandingsRepo();
     },
-    1000 * 60 * 10 // 10 minutes
+    1000 * 60 * 10, // 10 minutes
   );
 }
 
@@ -48,7 +49,7 @@ export async function getWorldCupTeamsService() {
     async () => {
       return await getWorldCupTeamsRepo();
     },
-    1000 * 60 * 60 // 1 hour
+    1000 * 60 * 60, // 1 hour
   );
 }
 
@@ -58,7 +59,7 @@ export async function getWorldCupSingleTeamsService(id: string) {
     async () => {
       return await getWorldCupSingleTeamsRepo(id);
     },
-    1000 * 60 * 60 // 1 hour
+    1000 * 60 * 60, // 1 hour
   );
 }
 
@@ -68,7 +69,7 @@ export async function getPersonService(id: string) {
     async () => {
       return await getPersonRepo(id);
     },
-    1000 * 60 * 60 // 1 hour
+    1000 * 60 * 60, // 1 hour
   );
 }
 
@@ -78,6 +79,32 @@ export async function getMatchDetailsService(id: string) {
     async () => {
       return await getMatchDetailsRepo(id);
     },
-    1000 * 60 * 5 // 5 minutes
+    1000 * 60 * 5, // 5 minutes
   );
+}
+
+export async function getPlayerImageService(playerName: string) {
+  try {
+    const response = await axios.get(
+      'https://www.thesportsdb.com/api/v1/json/3/searchplayers.php',
+      {
+        params: { p: playerName },
+        timeout: 10000,
+      },
+    );
+
+    const players = response.data?.player;
+
+    if (!Array.isArray(players) || players.length === 0) {
+      return null;
+    }
+
+    return players[0].strCutout || players[0].strThumb || players[0].strRender || null;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 429) {
+      return null;
+    }
+
+    return null;
+  }
 }

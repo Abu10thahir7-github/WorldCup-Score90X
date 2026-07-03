@@ -51,14 +51,14 @@ export default function TeamDetailsPage({ params }: TeamDetailsPageProps) {
       {isLoading ? (
         <div className="h-72 rounded-3xl bg-slate-800/80" />
       ) : (
-        <div className="flex space-x-2 sp m-2">
-          <div className="w-[80%] space-y-2">
+        <div className="m-2 flex flex-col gap-2 lg:flex-row lg:items-start lg:gap-3">
+          <div className="w-full space-y-2 lg:w-[75%]">
             <SingleTeam team={team} />
             <CoachCard coach={team.coach} />
 
             <TeamPlayers team={team} />
           </div>
-          <div className="team-info space-y-2 h-fit top-2.5 sticky w-[25%]">
+          <div className="top-2.5 h-fit w-full space-y-2 lg:sticky lg:w-[25%] lg:max-w-[320px]">
             <TeamInfo team={team} />
           </div>
         </div>
