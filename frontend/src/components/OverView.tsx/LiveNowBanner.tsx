@@ -44,8 +44,13 @@ export default function LiveNowBanner({ data }: Props) {
   console.log(match);
 
   return (
-    <div className="liveNowBanner relative min-h-[250px] sm:min-h-[360px] md:h-[40vh] overflow-hidden rounded-xl bg-gradient-to-r from-[#071120] via-[#0c1730] to-[#071120] px-2 sm:px-4">
-      <div className="my-2 flex flex-col items-center justify-center">
+    <div className="liveNowBanner relative min-h-[250px] sm:min-h-[280px] md:h-[40vh] overflow-hidden rounded-xl   ">
+
+      <div className='backdrop-blur-[4px] p-2 sm:p-4 h-full w-full'>
+
+
+
+      <div className=" flex flex-col items-center justify-center">
         <h1 className=" text-lg font-bold uppercase">Today's Matches</h1>
 
         <p className="text-sm sm:text-base md:text-lg font-bold uppercase">
@@ -92,7 +97,7 @@ export default function LiveNowBanner({ data }: Props) {
           {match.status}
         </span>
       </div>
-      <div className="flex h-fit items-center justify-center gap-2">
+      <div className="flex h-fit items-center justify-between sm:justify-center sm:gap-10">
         {/* Home Team */}
         <div className=" flex flex-col items-center text-center">
           <Image
@@ -118,7 +123,7 @@ export default function LiveNowBanner({ data }: Props) {
               </p>
 
               <p className="  text-xs text-slate-400">Kick Off</p>
-              <MatchCountdown kickOff={match.utcDate} />
+
             </>
           ) : (
             <>
@@ -152,8 +157,14 @@ export default function LiveNowBanner({ data }: Props) {
           <h2 className=" text-sm sm:text-base md:text-lg font-bold uppercase">{match.awayTeam.tla}</h2>
         </div>
       </div>
+    {match.status === 'TIMED' && (
+      <div className='flex justify-center items-center'>
+
+  <MatchCountdown kickOff={match.utcDate} />
+      </div>
+)}
       <Link
-        className="text-center top-1 right-1 absolute bg-blue-500/15 text-blue-400 border   border-blue-500/20  py-1 px-2 rounded-xl  font-medium  flex text-xs"
+        className="text-center top-3 right-3 absolute bg-blue-500/15 text-blue-400 border   border-blue-500/20  py-1 px-2 rounded-xl  font-medium  flex text-xs"
         href={`/matches/${match.id}`}
       >
         {' '}
@@ -175,6 +186,7 @@ export default function LiveNowBanner({ data }: Props) {
           />
         ))}
       </div>
+       </div>
     </div>
   );
 }

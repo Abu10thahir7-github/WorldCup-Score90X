@@ -1,24 +1,42 @@
+'use client';
 
 import { ROUTES } from '@/constants/routes';
-import { getTeams } from '@/services/teamService';
 import { ArrowRight, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { Team } from '@/types';
+import { useTeams } from '@/hooks/use-teams';
 
-export default async function MiniTeamSection() {
-  const teams = await getTeams();
+export default function MiniTeamSection() {
+  const { data: teams = [], isLoading } = useTeams();
+
+  if (isLoading) {
+    return (
+      <div className="rounded-3xl border border-slate-800 bg-navy-blue shadow-xl">
+        <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
+          <div>
+            <h3 className="text-lg font-medium text-white">Featured Teams</h3>
+            <p className="text-sm text-slate-400">FIFA World Cup 2026 Participants</p>
+          </div>
+        </div>
+        <div className="space-y-2 p-2 h-[200px]">
+          {[...Array(4)].map((_, i) => (
+            <div
+              key={i}
+              className="h-12 rounded-2xl border border-slate-800 bg-slate-800/50 animate-pulse"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="  rounded-3xl border border-slate-800 bg-navy-blue shadow-xl">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
         <div>
-          <h3 className="text-lg font-medium text-white">
-            Featured Teams
-          </h3>
-          <p className="text-sm text-slate-400">
-            FIFA World Cup 2026 Participants
-          </p>
+          <h3 className="text-lg font-medium text-white">Featured Teams</h3>
+          <p className="text-sm text-slate-400">FIFA World Cup 2026 Participants</p>
         </div>
 
         <Link
@@ -63,13 +81,9 @@ export default async function MiniTeamSection() {
 
             {/* Team Info */}
             <div className="flex-1 overflow-hidden">
-              <h4 className="truncate text-sm font-semibold text-white">
-                {team.name}
-              </h4>
+              <h4 className="truncate text-sm font-semibold text-white">{team.name}</h4>
 
-              <p className="text-sm text-slate-500">
-               {team.tla}
-              </p>
+              <p className="text-sm text-slate-500">{team.tla}</p>
             </div>
 
             {/* Arrow */}

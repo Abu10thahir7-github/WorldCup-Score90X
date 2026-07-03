@@ -60,8 +60,8 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
   const about = generatePlayerAbout(player);
   return (
     <div>
-      <div className="rounded-3x player-profile-bg border border-slate-800 rounded-xl   p-6 shadow-soft">
-        <div className="grid gap-6 lg:grid-cols-[30%_1fr]">
+      <div className="rounded-3x player-profile-bg border border-slate-800 rounded-xl    shadow-soft">
+        <div className="grid gap-6 p-6 rounded-xl backdrop-blur-[3px] lg:grid-cols-[30%_1fr]">
           <div className="    text-center">
             <Image
               src={image}
@@ -73,7 +73,7 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
           </div>
 
           <div className="space-y-2">
-            <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Player profile</p>
+            <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Player profile</p>
             <div className="flex justify-between">
               <div>
                 <h1 className=" mb-2 text-4xl font-semibold text-white">{player.name}</h1>
@@ -87,7 +87,7 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
                       img.style.display = 'none';
                     }}
                   />
-                  <p className=" text-sm  ">
+                  <p className=" text-base  ">
                     {player.nationality} •{' '}
                     <span className="text-yellow-400">{player.position}</span>
                   </p>
@@ -105,29 +105,47 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
               </div>
             </div>
 
-            <div className="border border-color bg-gray-700/10 flex justify-between rounded-xl p-4">
-              <div className="flex flex-col   items-center">
-                <p className=" uppercase text-xs text-slate-400">Shirt Number</p>
-                <p className="font-medium  text-sm">{player.shirtNumber}</p>
-              </div>
+           <div className="grid grid-cols-2 gap-3 rounded-2xl border border-gray-600/50 bg-white/[0.03] p-4 sm:grid-cols-4">
+  <div className="flex flex-col items-center text-center">
+    <span className="text-sm uppercase tracking-widest text-slate-400">
+      Shirt No
+    </span>
+    <span className="mt-1 text-base font-semibold text-white">
+      {player.shirtNumber ?? "-"}
+    </span>
+  </div>
 
-              <div className="flex flex-col   items-center">
-                <p className=" uppercase text-xs text-slate-400">Date Of Birth</p>
-                <p className="font-medium  text-sm">{player.dateOfBirth}</p>
-              </div>
-              <div className="flex flex-col   items-center">
-                <p className=" uppercase text-xs text-slate-400">Nationality</p>
-                <p className="font-medium  text-sm">{player.nationality}</p>
-              </div>
-              <div className="flex flex-col   items-center">
-                <p className=" uppercase text-xs text-slate-400">Position</p>
-                <p className="font-medium  text-sm">{player.position}</p>
-              </div>
-            </div>
+  <div className="flex flex-col items-center text-center">
+    <span className="text-sm uppercase tracking-widest text-slate-400">
+      Birth
+    </span>
+    <span className="mt-1 text-base font-semibold text-white">
+      {player.dateOfBirth ?? "-"}
+    </span>
+  </div>
 
-            <h1 className="text-[13px] text-slate-300">{about}</h1>
-            <p className="uppercase mt-5 text-slate-500 flex gap-2 text-xs">
-              <CircleAlertIcon size={15} /> Last updated: {formatLastUpdated(player.lastUpdated)}
+  <div className="flex flex-col items-center text-center">
+    <span className="text-sm uppercase tracking-widest text-slate-400">
+      Nationality
+    </span>
+    <span className="mt-1 text-base font-semibold text-white">
+      {player.nationality ?? "-"}
+    </span>
+  </div>
+
+  <div className="flex flex-col items-center text-center">
+    <span className="text-sm uppercase tracking-widest text-slate-400">
+      Position
+    </span>
+    <span className="mt-1 text-base font-semibold text-white">
+      {player.position ?? "-"}
+    </span>
+  </div>
+</div>
+
+            <h1 className="text-base text-slate-300">{about}</h1>
+            <p className="uppercase mt-5 text-slate-400 flex gap-2 text-sm">
+              <CircleAlertIcon size={17} /> Last updated: {formatLastUpdated(player.lastUpdated)}
             </p>
           </div>
         </div>

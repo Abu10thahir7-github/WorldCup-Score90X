@@ -53,9 +53,11 @@ export default function PlayerInformation({ player }: PlayerProfileCardProps) {
     },
   ];
   return (
-    <div className="flex  gap-2 ">
-      <div className="bg-navy-blue w-[50%] border overflow-hidden border-color    rounded-2xl">
-        <h1 className="text-sm font-[400]  px-5 py-3 border-b border-color uppercase">Player Details</h1>
+    <div className="flex flex-col lg:flex-row gap-2 md:gap-3 lg:gap-4">
+      <div className="bg-navy-blue w-full lg:w-[50%] border overflow-hidden border-color rounded-2xl">
+        <h1 className="text-lg font-[400] px-3 md:px-5 py-3 border-b border-color uppercase">
+          Player Details
+        </h1>
         <div>
           {details.map((item, index) => {
             const Icon = item.icon;
@@ -63,51 +65,53 @@ export default function PlayerInformation({ player }: PlayerProfileCardProps) {
             return (
               <div
                 key={item.label}
-                className={`grid grid-cols-[28px_160px_1fr] bg-slate-950/90  text-sm items-center gap-4 px-3 py-2 ${
+                className={`grid grid-cols-[24px_1fr_1fr] md:grid-cols-[28px_1fr_1fr] bg-slate-950/90 text-base md:text-base items-center gap-2 md:gap-4 px-2 md:px-3 py-2 md:py-3 ${
                   index !== details.length - 1 ? 'border-b border-slate-800/70' : ''
                 }`}
               >
-                <Icon size={18} className="text-slate-400" />
+                <Icon size={16} className="md:size-[18px] text-slate-400 flex-shrink-0" />
 
-                <span className="text-slate-300">{item.label}</span>
+                <span className="text-slate-300 truncate">{item.label}</span>
 
-                <span className="font-medium text-white">{item.value}</span>
+                <span className="font-medium text-white text-right md:text-left truncate">
+                  {item.value}
+                </span>
               </div>
             );
           })}
         </div>
       </div>
-      <div className="w-[50%]   ">
-        <div className="bg-navy-blue   p-2 rounded-2xl">
-          <h1 className="text-sm font-[400] p-2   uppercase">Contract</h1>
 
+      <div className="w-full lg:w-[50%]">
+        <div className="bg-navy-blue p-2 md:p-3 rounded-2xl h-fit">
+          <h1 className="text-lg font-[400] p-2 md:p-3 uppercase">Contract</h1>
 
-            <div className="flex items-center justify-between gap-3 rounded-2xl    bg-slate-950/90 p-2">
-              {/* Icon */}
-              <div className="flex h-15 w-15 items-center justify-center rounded-full bg-slate-800/40">
-                <CalendarDays size={25} className="text-slate-300" />
-              </div>
-
-              {/* Contract Dates */}
-              <div className="flex flex-1 items-center">
-                <div className="flex-1">
-                  <p className="text-xs uppercase tracking-wide text-slate-400">Start</p>
-                  <p className="text-sm font-bold text-white">
-                    {player.currentTeam.contract?.start || '-'}
-                  </p>
-                </div>
-
-                <div className="mx-8 h-10 w-px bg-slate-800" />
-
-                <div className="flex-1">
-                  <p className=" text-xs uppercase tracking-wide text-slate-400">Until</p>
-                  <p className="text-sm font-bold text-white">
-                    {player.currentTeam.contract?.until || '-'}
-                  </p>
-                </div>
-              </div>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl bg-slate-950/90 p-2 md:p-3">
+            {/* Icon */}
+            <div className="flex h-12 w-12 md:h-15 md:w-15 items-center justify-center rounded-full bg-slate-800/40 flex-shrink-0">
+              <CalendarDays size={20} className="md:size-[25px] text-slate-300" />
             </div>
 
+            {/* Contract Dates */}
+            <div className="flex flex-col sm:flex-row flex-1 w-full gap-4 sm:gap-0">
+              <div className="flex-1">
+                <p className="text-sm uppercase tracking-wide text-slate-400">Start</p>
+                <p className="text-base font-bold text-white break-words">
+                  {player.currentTeam.contract?.start || '-'}
+                </p>
+              </div>
+
+              <div className="hidden sm:block h-10 w-px bg-slate-800 mx-4" />
+              <div className="block sm:hidden h-px w-full bg-slate-800" />
+
+              <div className="flex-1">
+                <p className="text-sm uppercase tracking-wide text-slate-400">Until</p>
+                <p className="text-base font-bold text-white break-words">
+                  {player.currentTeam.contract?.until || '-'}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

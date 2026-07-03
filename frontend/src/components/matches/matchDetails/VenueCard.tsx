@@ -10,8 +10,8 @@ export default function VenueCard({ venue }: VenueCardProps) {
   return (
     <div className="  w-1/2 border border-slate-800 rounded-xl    p-2 bg-navy-blue">
       {/* Header */}
-      <div className=" flex items-center g">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl   p-2">
+      <div className=" flex items-center gap-1">
+        <div className='flex p-2 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition'>
           <LandPlot size={17} />
         </div>
 
@@ -29,6 +29,7 @@ export default function VenueCard({ venue }: VenueCardProps) {
             style={{
               filter: 'brightness(0) invert(1)',
             }}
+                className='h-15 w-15 sm:h-24 sm:w-24'
           />
         </div>
         {/* Content */}

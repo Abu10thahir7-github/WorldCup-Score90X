@@ -33,63 +33,84 @@ export default function TopScorerCard({ scorer, rank }: Props) {
       ? 'bg-amber-950'
       : ' bg-gray-700/50';
   return (
-    <Link href={`/players/${scorer.player.id}`} className="relative border border-slate-900 p-5">
-      {/* Rank */}
-      <div className="absolute left-4 top-4 z-20">
-        <div className={`flex h-10 w-10 items-center  justify-center rounded-xl   text-white   font-bold shadow-lg ${top3}`}>
-           {rank}
-        </div>
-      </div>
-      <div className="absolute right-4 top-4 z-20">
-        <div className=" text-center">
-          <Image
-            src={scorer.team.crest}
-            alt={scorer.team.name}
-            width={20}
-            height={20}
-            className="rounded-xl object-contain h-10 w-10"
-          />
-          <p className='text-xs'>{scorer.team.tla}</p>
-        </div>
+   <Link
+  href={`/players/${scorer.player.id}`}
+  className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-[#081226] transition-all duration-300 hover:border-blue-500/40"
+>
+  {/* Rank */}
+  <div
+    className={`absolute left-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-white ${top3}`}
+  >
+    {rank}
+  </div>
+
+  {/* Team */}
+  <div className="absolute right-4 top-4 flex items-center gap-2">
+    <Image
+      src={scorer.team.crest}
+      alt={scorer.team.name}
+      width={26}
+      height={26}
+      className="h-6 w-6 object-contain"
+      unoptimized
+    />
+
+    <span className="text-sm text-slate-400">
+      {scorer.team.tla}
+    </span>
+  </div>
+
+  {/* Player */}
+  <div className="flex justify-center pt-10 px-6">
+    <Image
+      src={image}
+      alt={scorer.player.name}
+      width={180}
+      height={180}
+      className="h-48 w-auto object-contain "
+      unoptimized
+    />
+  </div>
+
+  {/* Info */}
+  <div className="border-t border-slate-800 sm:px-5 py-4">
+    <h2 className="truncate text-center text-lg font-semibold text-white">
+      {scorer.player.name}
+    </h2>
+
+    <p className="mt-1 text-center text-sm text-slate-500">
+      {scorer.team.name}
+    </p>
+
+    <div className="mt-1 grid grid-cols-3 divide-x divide-slate-800">
+      <div className="text-center">
+        <p className="text-xl font-bold text-yellow-400">
+          {scorer.goals}
+        </p>
+        <span className="text-xs text-slate-500">
+          Goals
+        </span>
       </div>
 
-      {/* Player */}
-      <div className=" flex flex-col items-center  ">
-        <Image
-          src={image}
-          alt={scorer.player.name}
-          width={200}
-          height={200}
-          className="   "
-          unoptimized
-        />
+      <div className="text-center">
+        <p className="text-xl font-bold text-white">
+          {scorer.assists ?? 0}
+        </p>
+        <span className="text-xs text-slate-500">
+          Assists
+        </span>
       </div>
 
-      {/* Stats */}
-      <div className='absolute bottom-0 z-10 left-0 right-0 flex flex-col items-center justify-center gap-1   '>
-        {/* Player Name */}
-        <div className="  text-center">
-          <h2 className="text-xl font-bold text-white drop-shadow-lg">{scorer.player.name}</h2>
-        </div>
-        <div className="flex w-full px-5 p-2 justify-between ">
-          <div className="rounded-2xl    text-center">
-            <p className="text-xl font-bold text-yellow-400">{scorer.goals}</p>
-            <span className="text-xs text-slate-400">Goals</span>
-          </div>
-
-          <div className="rounded-2xl   text-center">
-            <p className="text-xl font-bold text-white">{scorer.assists ?? 0}</p>
-            <span className="text-xs text-slate-400">Assists</span>
-          </div>
-
-          <div className="rounded-2xl    text-center">
-            <p className="text-xl font-bold text-white">{scorer.playedMatches}</p>
-            <span className="text-xs text-slate-400">Matches</span>
-          </div>
-        </div>
-                {/* Bottom Fade */}
+      <div className="text-center">
+        <p className="text-xl font-bold text-white">
+          {scorer.playedMatches}
+        </p>
+        <span className="text-xs text-slate-500">
+          Matches
+        </span>
       </div>
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#081226] via-[#081226]/80 to-transparent" />
-    </Link>
+    </div>
+  </div>
+</Link>
   );
 }
