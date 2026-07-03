@@ -88,7 +88,6 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
               width={200}
               height={200}
               className="rounded-3xl object-contain w-full h-full"
-              
             />
           </div>
 
@@ -125,43 +124,37 @@ export default function PlayerProfileCard({ player }: PlayerProfileCardProps) {
               </div>
             </div>
 
-           <div className="grid grid-cols-2 gap-3 rounded-2xl border border-gray-600/50 bg-white/[0.03] p-4 sm:grid-cols-4">
-  <div className="flex flex-col items-center text-center">
-    <span className="text-sm uppercase tracking-widest text-slate-400">
-      Shirt No
-    </span>
-    <span className="mt-1 text-base font-semibold text-white">
-      {player.shirtNumber ?? "-"}
-    </span>
-  </div>
+            <div className="grid grid-cols-2 gap-3 rounded-2xl border border-gray-600/50 bg-white/[0.03] p-4 sm:grid-cols-4">
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-widest text-slate-400">Shirt No</span>
+                <span className="mt-1 text-base font-semibold text-white">
+                  {player.shirtNumber ?? '-'}
+                </span>
+              </div>
 
-  <div className="flex flex-col items-center text-center">
-    <span className="text-sm uppercase tracking-widest text-slate-400">
-      Birth
-    </span>
-    <span className="mt-1 text-base font-semibold text-white">
-      {player.dateOfBirth ?? "-"}
-    </span>
-  </div>
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-widest text-slate-400">Birth</span>
+                <span className="mt-1 text-base font-semibold text-white">
+                  {player.dateOfBirth ?? '-'}
+                </span>
+              </div>
 
-  <div className="flex flex-col items-center text-center">
-    <span className="text-sm uppercase tracking-widest text-slate-400">
-      Nationality
-    </span>
-    <span className="mt-1 text-base font-semibold text-white">
-      {player.nationality ?? "-"}
-    </span>
-  </div>
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-widest text-slate-400">
+                  Nationality
+                </span>
+                <span className="mt-1 text-base font-semibold text-white">
+                  {player.nationality ?? '-'}
+                </span>
+              </div>
 
-  <div className="flex flex-col items-center text-center">
-    <span className="text-sm uppercase tracking-widest text-slate-400">
-      Position
-    </span>
-    <span className="mt-1 text-base font-semibold text-white">
-      {player.position ?? "-"}
-    </span>
-  </div>
-</div>
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-widest text-slate-400">Position</span>
+                <span className="mt-1 text-base font-semibold text-white">
+                  {player.position ?? '-'}
+                </span>
+              </div>
+            </div>
 
             <h1 className="text-base text-slate-300">{about}</h1>
             <p className="uppercase mt-5 text-slate-400 flex gap-2 text-sm">

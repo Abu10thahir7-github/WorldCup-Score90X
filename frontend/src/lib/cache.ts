@@ -14,11 +14,7 @@ export const getCache = (key: string) => {
   return item.data;
 };
 
-export const setCache = (
-  key: string,
-  data: any,
-  ttl = 1000 * 60 * 30
-) => {
+export const setCache = (key: string, data: any, ttl = 1000 * 60 * 30) => {
   cache.set(key, {
     data,
     expiry: Date.now() + ttl,

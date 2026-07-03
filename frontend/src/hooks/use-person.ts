@@ -7,7 +7,7 @@ export function usePerson(personId: string) {
     queryKey: ['person', personId],
     queryFn: () => worldcupApi.getPersonById(personId),
     enabled: Boolean(personId),
-      // Cache settings
+    // Cache settings
     staleTime: 1000 * 60 * 60, // 1 hour
     gcTime: 1000 * 60 * 60 * 24, // 24 hours
 
