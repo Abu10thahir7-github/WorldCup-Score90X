@@ -6,8 +6,7 @@
 
 A full-stack, cinematic sports dashboard delivering live scores, standings, team & player profiles, a knockout bracket, and a top-scorer leaderboard for the 2026 FIFA World Cup.
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/) 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Express](https://img.shields.io/badge/Express-5-lightgrey?logo=express)](https://expressjs.com/)
