@@ -15,7 +15,19 @@ A full-stack, cinematic sports dashboard delivering live scores, standings, team
 [Live Demo](#) · [Report Bug](../../issues) · [Request Feature](../../issues)
 
 </div>
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+
+![License](https://img.shields.io/badge/license-MIT-green)
+
+![Status](https://img.shields.io/badge/status-Active-success)
+
+![World Cup](https://img.shields.io/badge/FIFA-World%20Cup%202026-blue)
+
+![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success)
 ---
 
 ## 📖 Overview
