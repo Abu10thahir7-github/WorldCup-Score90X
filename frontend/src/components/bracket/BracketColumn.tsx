@@ -1,32 +1,29 @@
+'use client';
+
 import { BracketMatch } from '@/types/bracket';
 import BracketMatchCard from './MatchCard';
-import Connector from './Connector';
+import { PositionedMatch, MATCH_HEIGHT } from '@/utils/bracketLayout';
+import Link from 'next/link';
 
 interface Props {
   title: string;
-  matches: BracketMatch[];
-  gap: number;
-  offset?: number;
+  positioned: PositionedMatch<BracketMatch>[];
+  height: number;
 }
-export default function BracketColumn({ title, matches, gap, offset = 0 }: Props) {
+
+export default function BracketColumn({ title, positioned, height }: Props) {
   return (
-    <div
-      className="flex flex-col"
-      style={{
-        
-        rowGap: gap,
-        width: 260,
-      }}
-    >
-      <h2 className="text-white font-bold mb-4 text-center">{title}</h2>
-
-      {matches.map((match, index) => (
-        <div key={match.id} className="relative">
-          <BracketMatchCard match={match} />
-
-          {index !== matches.length - 1 && <Connector side="right" />}
-        </div>
-      ))}
+    <div className="relative" style={{ width: 260, height: height + 40 }}>
+      <h2 className="text-white font-bold mb-4 text-center absolute -top-10 left-0 right-0">
+        {title}
+      </h2>
+      <div className="relative" style={{ height }}>
+        {positioned.map(({ match, top }) => (
+          <Link href={`/matches/${match.id}`} key={match.id} className="absolute left-0 w-full" style={{ top, height: MATCH_HEIGHT }}>
+            <BracketMatchCard match={match} />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

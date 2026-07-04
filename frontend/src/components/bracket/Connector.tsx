@@ -1,55 +1,22 @@
 'use client';
 
-interface ConnectorProps {
-  side: 'left' | 'right';
-  height?: number;
+interface Props {
+  paths: { key: string; d: string }[];
+  width: number;
+  height: number;
 }
 
-export default function Connector({
-  side,
-  height = 120,
-}: ConnectorProps) {
-  if (side === 'left') {
-    return (
-      <svg
-        className="absolute -right-12 top-1/2 -translate-y-1/2"
-        width="50"
-        height={height}
-        viewBox={`0 0 50 ${height}`}
-      >
-        <path
-          d={`
-            M0 ${height / 2}
-            H25
-            V${height}
-            H50
-          `}
-          fill="none"
-          stroke="#5A6475"
-          strokeWidth="2"
-        />
-      </svg>
-    );
-  }
-
+export default function BracketConnectors({ paths, width, height }: Props) {
   return (
     <svg
-      className="absolute -left-12 top-1/2 -translate-y-1/2"
-      width="50"
+      className="absolute left-0 top-0 pointer-events-none"
+      width={width}
       height={height}
-      viewBox={`0 0 50 ${height}`}
+      viewBox={`0 0 ${width} ${height}`}
     >
-      <path
-        d={`
-          M50 ${height / 2}
-          H25
-          V${height}
-          H0
-        `}
-        fill="none"
-        stroke="#5A6475"
-        strokeWidth="2"
-      />
+      {paths.map((p) => (
+        <path key={p.key} d={p.d} fill="none" stroke="#5A6475" strokeWidth={2} />
+      ))}
     </svg>
   );
 }
