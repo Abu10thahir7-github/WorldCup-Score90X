@@ -7,27 +7,26 @@
 A full-stack, cinematic sports dashboard delivering live scores, standings, team & player profiles, a knockout bracket, and a top-scorer leaderboard for the 2026 FIFA World Cup.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Express](https://img.shields.io/badge/Express-5-lightgrey?logo=express)](https://expressjs.com/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/license-MIT-green)](#license)
-
-[Live Demo](#) · [Report Bug](../../issues) · [Request Feature](../../issues)
-
-</div>
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
-
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
-
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
-
-![License](https://img.shields.io/badge/license-MIT-green)
-
 ![Status](https://img.shields.io/badge/status-Active-success)
 
 ![World Cup](https://img.shields.io/badge/FIFA-World%20Cup%202026-blue)
 
 ![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success)
+
+[Live Demo](#) · [Report Bug](../../issues) · [Request Feature](../../issues)
+
+</div>
+
+
+ 
+ 
+
 ---
 
 ## 📖 Overview
