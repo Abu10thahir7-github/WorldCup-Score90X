@@ -42,11 +42,11 @@ const navLinks = [
     href: "/teams",
     icon: <Users size={18} />,
   },
-  // {
-  //   label: "Bracket",
-  //   href: "/bracket",
-  //   icon: <Trophy size={18} />,
-  // },
+  {
+    label: "Bracket",
+    href: "/bracket",
+    icon: <Trophy size={18} />,
+  },
   {
     label: "Table Standings",
     href: "/table-standing",
