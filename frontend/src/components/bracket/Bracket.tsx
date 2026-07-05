@@ -57,7 +57,7 @@ export default function Bracket() {
 
 
       <div className="overflow-x-auto">
-        <div className="relative flex min-w-max items-start justify-center px-20 py-16">
+        <div className="relative flex min-w-max items-start justify-center   py-16">
           {round32.length > 0 && (
             <>
               <BracketColumn title="Round of 32" positioned={round32} height={totalHeight} />
@@ -95,7 +95,7 @@ export default function Bracket() {
           )}
 
           <div className="flex flex-col items-center justify-center gap-8 " style={{ height: totalHeight }}>
-            
+
             {finalMatch && <FinalCard match={finalMatch} />}
             {/* {thirdPlaceMatch && (
               <div className="flex flex-col items-center gap-2">
