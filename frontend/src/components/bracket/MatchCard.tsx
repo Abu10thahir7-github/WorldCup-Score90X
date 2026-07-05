@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { ChevronRight } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { BracketMatch, BracketTeam } from '@/types/bracket';
 
 function formatDate(utcDate: string): string {
@@ -71,7 +71,7 @@ function TeamRow({
             <span className="ml-1 text-xs text-slate-500">({penaltyScore})</span>
           )}
         </span>
-        {isWinner && <ChevronRight size={14} className="text-slate-500" />}
+        {isWinner && <ChevronLeft size={14} className="  absolute  -right-[1px]" />}
       </div>
     </div>
   );
@@ -94,7 +94,7 @@ export default function BracketMatchCard({ match }: { match: BracketMatch }) {
   const { label, tone } = statusLabel(match);
 
   return (
-    <div className="w-full h-full rounded-2xl border border-slate-800 bg-[#131A2C] px-4 py-3 shadow-sm">
+    <div className="w-full h-full rounded-2xl border border-slate-800 bg-[#131A2C] px-4 py-3 shadow-sm relative">
       {/* Header: date + status */}
       <div className="flex items-center justify-between mb-2">
         <span className="text-sm text-slate-200">{formatDate(match.utcDate)}</span>
