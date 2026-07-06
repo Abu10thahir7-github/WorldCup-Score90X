@@ -1,6 +1,7 @@
 import MatchCountdown from '@/components/ui/CountDown';
 import { Calendar, Clock, Trophy, Flag, Users, MapPin, ClipboardPen } from 'lucide-react';
 import Image from 'next/image';
+import ScoreSummary from './ScoreSummary';
 interface MatchDetailsProps {
   match: any;
 }
@@ -89,32 +90,7 @@ export function MatchDetails({ match }: MatchDetailsProps) {
 
         <div className="rounded-xl space-y-1  ">
           {/* SCORE */}
-          <div className="rounded-xl border border-slate-800 bg-navy-blue p-2 h-fit">
-            <h3 className=" p-1 flex items-center gap-2 text-lg font-medium text-white">
-              <div className='flex p-2 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition'>
-              <ClipboardPen size={17} />
-              </div>
-               Score
-            </h3>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-slate-900 p-2 text-center">
-                <p className="text-white text-base">Full Time</p>
-
-                <h2 className=" text-2xl font-bold text-white/70">
-                  {match.score.fullTime.home ?? '-'}:{match.score.fullTime.away ?? '-'}
-                </h2>
-              </div>
-
-              <div className="rounded-2xl bg-slate-900 p-2 text-center">
-                <p className="text-white text-base">Half Time</p>
-
-                <h2 className=" text-2xl font-bold text-white/70">
-                  {match.score.halfTime.home ?? '-'}:{match.score.halfTime.away ?? '-'}
-                </h2>
-              </div>
-            </div>
-          </div>
+        <ScoreSummary match={match} />
           <div className="rounded-xl border border-slate-800 bg-navy-blue p-2 h-fit">
             <h3 className=" p-1 flex items-center gap-2 text-lg font-medium text-white">
               <div className='flex p-2 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition'>

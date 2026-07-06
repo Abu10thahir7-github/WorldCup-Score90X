@@ -48,14 +48,14 @@ export default function MatchDetailsPage({ params }: MatchDetailsPageProps) {
       <div className="flex flex-row gap-2">
 
           <VenueCard venue={match.venue || 'TBA'} />
-      
+
 
 
           <MatchReferees match={match} />
 
       </div>
 
-      <ScoreSummary match={match} />
+      
     </div>
 
     {/* Sidebar */}
