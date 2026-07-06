@@ -111,7 +111,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
                 key={match.id}
                 className="group border border-slate-700/20  rounded-xl px-3 py-2"
               >
-                <div className="flex items-center justify-between gap-4">
+                <Link href={`/matches/${match.id}`} className="flex items-center justify-between gap-4">
                   {/* Status */}
                   <div className="min-w-fit">
                     <div
@@ -200,7 +200,7 @@ export default function LiveMatchesMiniOverView({ data }: Props) {
                       />
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
             ))
           )}
