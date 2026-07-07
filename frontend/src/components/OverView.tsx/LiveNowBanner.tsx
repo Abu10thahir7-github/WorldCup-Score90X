@@ -106,10 +106,10 @@ export default function LiveNowBanner({ data }: Props) {
             width={120}
             height={120}
             unoptimized
-            className="w-[100px] h-[70px] object-cover"
+            className="w-[100px] h-[70px] md:w-[200px] md:h-[120px] object-cover"
           />
 
-          <h2 className="  text-sm sm:text-base md:text-lg font-bold uppercase">{match.homeTeam.tla}</h2>
+          <h2 className="  text-sm sm:text-base md:text-xl mt-1 font-bold   uppercase">{match.homeTeam.tla}</h2>
         </div>
 
         <div className="text-center">
@@ -127,13 +127,13 @@ export default function LiveNowBanner({ data }: Props) {
             </>
           ) : (
             <>
-              <div className="text-4xl font-semibold text-white">
+              <div className="text-3xl md:text-5xl font-semibold text-white">
                 {match.score?.fullTime?.home}
                 <span className="mx-6 text-blue-500">-</span>
                 {match.score?.fullTime?.away}
               </div>
 
-              <p className="text-sm   text-white">
+              <p className="text-base   text-white">
                 {new Date(match.utcDate).toLocaleTimeString([], {
                   hour: 'numeric',
                   minute: '2-digit',
@@ -151,10 +151,10 @@ export default function LiveNowBanner({ data }: Props) {
             width={120}
             height={120}
             unoptimized
-            className="w-[100px] h-[70px] object-cover"
+            className="w-[100px] h-[70px] md:w-[200px] md:h-[120px]   object-cover"
           />
 
-          <h2 className=" text-sm sm:text-base md:text-lg font-bold uppercase">{match.awayTeam.tla}</h2>
+          <h2 className=" text-sm sm:text-base md:text-xl mt-1  font-bold uppercase">{match.awayTeam.tla}</h2>
         </div>
       </div>
     {match.status === 'TIMED' && (

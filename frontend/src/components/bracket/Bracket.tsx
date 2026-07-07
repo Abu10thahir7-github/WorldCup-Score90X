@@ -7,12 +7,17 @@ import { organizeBracket } from '@/utils/groupBracket';
 import { reorderByNextRound } from '@/utils/bracketPairing';
 import { layoutRound, buildConnectors, bracketHeight, COLUMN_GAP, MATCH_HEIGHT } from '@/utils/bracketLayout';
 import FinalCard from './FinalCard';
-import BracketSkeleton from './BarcketSkeleton';
+
 import BracketConnectors from './Connector';
 
 export default function Bracket() {
   const { data = [], isLoading } = useBracket();
-  if (isLoading) return <BracketSkeleton />;
+if (isLoading)
+  return (
+    <div className="flex min-h-screen w-full items-center justify-center">
+      <div className="h-14 w-14 animate-spin rounded-full border-4 border-slate-800 border-t-[#fff]" />
+    </div>
+  );
 
   const rounds = organizeBracket(data);
 

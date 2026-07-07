@@ -1,6 +1,6 @@
 'use client';
 
-import { useDeferredValue, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import TeamCard from './TeamCard';
 import Banner from './banner';
 import TeamBanner from '@/public/assets/Images/2026banner.png';
@@ -8,14 +8,30 @@ import { Search } from 'lucide-react';
 import type { Team } from '@/types';
 import MiniTeamSection from '../ui/MiniTeamSection';
 import MinNewsUpdates from '../OverView.tsx/minNewsUpdates';
+import { LoadingSkeleton } from '../shared/loading-skeleton';
 
 interface Props {
   teams: Team[];
 }
 
+function TeamCardSkeleton() {
+  return (
+    <div className="rounded-2xl border border-slate-800 bg-[#081226] p-4 space-y-3">
+      <div className="flex items-center gap-3">
+        <LoadingSkeleton className="h-12 w-12 rounded-full" />
+        <div className="space-y-2 flex-1">
+          <LoadingSkeleton className="h-3 w-20 rounded-md" />
+          <LoadingSkeleton className="h-2 w-14 rounded-md" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function TeamsClient({ teams }: Props) {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
+  const isSearching = search !== debouncedSearch;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -73,12 +89,14 @@ export default function TeamsClient({ teams }: Props) {
             />
           </div>
 
-          <div className="text-sm text-slate-400">Showing {filteredTeams.length} teams</div>
+          <div className="text-sm text-slate-400">
+            {isSearching ? 'Searching...' : `Showing ${filteredTeams.length} teams`}
+          </div>
 
           <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
-            {filteredTeams.map((team) => (
-              <TeamCard key={team.id} team={team} />
-            ))}
+            {isSearching
+              ? Array.from({ length: 8 }).map((_, i) => <TeamCardSkeleton key={i} />)
+              : filteredTeams.map((team) => <TeamCard key={team.id} team={team} />)}
           </div>
         </div>
 
