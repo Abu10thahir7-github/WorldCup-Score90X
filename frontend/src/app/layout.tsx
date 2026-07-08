@@ -135,7 +135,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="dark">
       <head>
-        <meta name="google-site-verification" content="3dIQc71LilzTDca03IrQf_pJ_nQEi8tJtlOLjyxvV_M" />
+       
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
