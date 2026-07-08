@@ -1,5 +1,4 @@
 import { Analytics } from '@vercel/analytics/next';
-import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import './global.css';
 import { QueryProvider } from '@/providers/query-provider';
@@ -7,7 +6,6 @@ import { ThemeProvider } from '@/providers/theme-provider';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import SideNavBar from '@/components/layout/sidenavbar';
-import { motion } from 'framer-motion';
 
 export const metadata = {
   title: "Score90X | FIFA World Cup 2026 Live Score",
