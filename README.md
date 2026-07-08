@@ -97,7 +97,7 @@ WorldCup-Score90X/
     └── package.json
 ```
 
-> 📘 See [`DEVELOPER_GUIDE.md`](./DEVELOPER_GUIDE.md) for a full breakdown of code organization and conventions.
+> 📘 See [`DEVELOPER_GUIDE.md`](./Score90X_Developer_Guide.docx)) for a full breakdown of code organization and conventions.
 
 ---
 
