@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import './global.css';
@@ -49,7 +50,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
                 {/* Content Area */}
                 <div className="flex-1 overflow-y-auto">{children}
-
+                <Analytics />
                 <Footer />
                 </div>
               </div>
